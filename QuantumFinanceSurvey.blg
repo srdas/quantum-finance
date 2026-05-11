@@ -1,0 +1,53 @@
+This is BibTeX, Version 0.99e (TeX Live 2026)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: QuantumFinanceSurvey.aux
+The style file: plainnat.bst
+Database file #1: Quantum.bib
+Warning--to sort, need author or key in noauthor_quantum_nodate-1
+Warning--empty year in noauthor_quantum_nodate-1
+Warning--empty year in hollebeek_impact_nodate
+Warning--empty year in huang_nus-frontiers--fintech-and-quantum-computing-2022part_nodate
+Warning--empty year in reznikov_how_nodate
+Warning--empty year in soller_quantum_nodate
+You've used 31 entries,
+            2773 wiz_defined-function locations,
+            823 strings with 14504 characters,
+and the built_in function-call counts, 15589 in all, are:
+= -- 1366
+> -- 1130
+< -- 13
++ -- 385
+- -- 354
+* -- 1390
+:= -- 2493
+add.period$ -- 147
+call.type$ -- 31
+change.case$ -- 211
+chr.to.int$ -- 31
+cite$ -- 69
+duplicate$ -- 560
+empty$ -- 1095
+format.name$ -- 388
+if$ -- 3181
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 16
+newline$ -- 217
+num.names$ -- 120
+pop$ -- 412
+preamble$ -- 1
+purify$ -- 180
+quote$ -- 0
+skip$ -- 480
+stack$ -- 0
+substring$ -- 311
+swap$ -- 53
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 341
+warning$ -- 6
+while$ -- 109
+width$ -- 0
+write$ -- 497
+(There were 6 warnings)
