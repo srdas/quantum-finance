@@ -1,0 +1,3 @@
+\contentsline {chapter}{List of figures}{3}{chapter*.2}%
+\contentsline {chapter}{Foreword}{4}{chapter*.4}%
+\contentsline {chapter}{\chapternumberline {1}What does quantum computing mean for finance?}{5}{chapter.5}%

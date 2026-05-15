@@ -2,7 +2,7 @@ This is BibTeX, Version 0.99e (TeX Live 2026)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: QuantumFinanceSurvey.aux
 The style file: plainnat.bst
-Database file #1: Quantum.bib
+Database file #1: ../qbook/Quantum.bib
 Warning--to sort, need author or key in noauthor_quantum_nodate-1
 Warning--empty year in noauthor_quantum_nodate-1
 Warning--empty year in hollebeek_impact_nodate
@@ -11,7 +11,7 @@ Warning--empty year in reznikov_how_nodate
 Warning--empty year in soller_quantum_nodate
 You've used 31 entries,
             2773 wiz_defined-function locations,
-            823 strings with 14504 characters,
+            824 strings with 14520 characters,
 and the built_in function-call counts, 15589 in all, are:
 = -- 1366
 > -- 1130

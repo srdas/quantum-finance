@@ -1,0 +1,171 @@
+% -*- mode: latex; mode: reftex; mode: auto-fill; mode: flyspell; coding: utf-8; tex-command: "pdflatex.sh" -*-
+
+\documentclass[oneside,11pt]{memoir}
+
+\input{layout.tex}
+\usepackage[utf8]{inputenc}
+
+\usepackage{textcase} % Recommended for robust all-caps handling
+\newcommand{\chapterSubhead}[1]{
+    \par\noindent\vspace{1em} % Space above
+    \begin{center}
+        \normalsize\MakeTextUppercase{#1}
+    \end{center}
+    \par\vspace{1em} % Space below
+}
+
+
+\usepackage{lipsum}
+\usepackage{listings}
+% \usepackage{markdown}
+\usepackage{setspace}
+\usepackage{endnotes}
+\let\footnote=\endnote
+\renewcommand{\notesname}{Notes}
+\renewcommand{\makeenmark}{%
+  \hyperlink{endnote.\thechapter.\theenmark}{\textcolor{links}{\textsuperscript{\theenmark}}}%
+}
+\makeatletter
+\def\enoteformat{%
+  \rightskip\z@ \leftskip\z@ \parindent=1.8em
+  \leavevmode\llap{\hypertarget{endnote.\thechapter.\@theenmark}{}\makeenmark}%
+}
+\makeatother
+
+\hypersetup{
+  pdfauthor={Sanjiv Ranjan Das},
+  pdftitle={Quantum Phynance},
+  pdfsubject={},
+  pdfkeywords={},
+  pdfproducer={LaTeX and TikZ},
+  pdfcreator={pdflatex},
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\begin{center}
+
+\vspace*{\stretch{1}}
+
+{\huge Quantum Phynance}
+
+\vspace*{4ex}
+
+Sanjiv Ranjan Das
+
+\vspace*{\stretch{1}}
+
+\end{center}
+
+% \newpage
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \vspace*{\stretch{1.25}}
+
+% This ebook is formatted to fit on a phone screen.
+
+% \vspace*{\stretch{1}}
+
+\begin{flushright}
+\footnotesize \dotdate\today
+\end{flushright}
+
+\vspace*{-3ex}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Table of contents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+{
+\everymath{\color{black}}
+\tableofcontents* % Prints the table of contents
+%\addcontentsline{toc}{chapter}{Contents}
+}
+
+\clearpage
+
+\listoffigures*
+\addcontentsline{toc}{chapter}{List of figures}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{Foreword}
+\addcontentsline{toc}{chapter}{Foreword}
+
+Thanks to Alex Zecevic for letting me sit in on his quantum computing course, which motivated me to work on this project, after Brian Granger introduced me to quantum computing. 
+
+More to come. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \part{Foundations}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{intro_quantum_finance.tex}
+% \input{classical_vs_quantum.tex}
+% \input{quantum_computing.tex}
+% \input{qubit.tex}
+% \input{braket.tex}
+% \input{hilbert_space.tex}
+% \input{schrodinger_wave.tex}
+% \input{superposition.tex}
+% \input{entanglement.tex}
+% \input{interference.tex}
+% \input{rsa.tex}
+% \input{elliptic_curves.tex}
+% \input{shor.tex}
+% \input{quantum_hardware.tex}
+% \input{error_correction.tex}
+% \input{decoherence.tex}
+% \input{qiskit.tex}
+% \input{nisq.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliography{Quantum}
+
+%% If there is an index, it should follow the bibliography (see the
+%% Manual, 14.62). Bibliography entries are listed in one alphabetical
+%% sequence arranged by the surname of the first author or by title if
+%% there is no author.25 Nov 2022
+%%
+%% Bibliography - Chicago Citation Style, 17th Edition - Library
+
+\printindex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \newpage
+
+% \vspace*{\stretch{1}}
+
+% \ifdefined\draft
+% \begin{center}
+%   {\color{red} (draft, do not circulate)}
+% \end{center}
+% \else
+% This book is licensed under the
+% \href{https://creativecommons.org/licenses/by-nc-sa/4.0/}{Creative
+%   Commons BY-NC-SA 4.0 International License.}
+% \fi
+
+% Template by \href{https://fleuret.org/francois/}{François Fleuret}.
+
+% \vspace*{\stretch{1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\checknbdrafts
+
+\end{document}
