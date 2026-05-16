@@ -1,0 +1,479 @@
+\chapter{Mathematical Preliminaries}
+
+This chapter reviews the core mathematical structures used throughout the book. We proceed from the foundational notion of a vector space through inner products, linear operators, and spectral theory, culminating in tensor products and the Jordan canonical form. The mathematical topics covered here are essential for understanding the algebraic and geometric aspects of quantum information theory, including state spaces, quantum channels, and the behavior of quantum systems under various transformations. This is a minimal set of math I learned in the course I took on quantum and parallel computing by Alex Zecevic, as I ploughed through his book for many hours, see \cite{zecevic_quantum_2022}.
+
+%------------------------------------------------------------------
+\section{Vector Spaces}
+%------------------------------------------------------------------
+
+A \emph{vector space} over a field $\mathbb{F}$ (typically $\mathbb{R}$ or $\mathbb{C}$) is a set $V$ equipped with two operations---vector addition and scalar multiplication---satisfying the standard axioms of commutativity, associativity, distributivity, and the existence of an additive identity $\mathbf{0}$ and additive inverses.
+
+\begin{example}
+$\mathbb{R}^n$ with component-wise addition and scalar multiplication is the canonical real vector space. $\mathbb{C}^n$ is its complex analogue, central to quantum mechanics.
+\end{example}
+
+\begin{example}
+The set of $m\times n$ real matrices $\mathbb{R}^{m\times n}$ forms a vector space of dimension $mn$.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Span and Linear Independence}
+%------------------------------------------------------------------
+
+Given vectors $\{v_1,\ldots,v_k\}\subset V$, their \emph{span} is
+\[
+  \operatorname{span}\{v_1,\ldots,v_k\} = \left\{\sum_{i=1}^k \alpha_i v_i \;\middle|\; \alpha_i\in\mathbb{F}\right\}.
+\]
+
+The set $\{v_1,\ldots,v_k\}$ is \emph{linearly independent} if
+\[
+  \sum_{i=1}^k \alpha_i v_i = \mathbf{0} \implies \alpha_i = 0 \;\forall\, i.
+\]
+Otherwise it is linearly dependent.
+
+\begin{example}
+In $\mathbb{R}^3$, the vectors $(1,0,0)$, $(0,1,0)$, $(0,0,1)$ are linearly independent. Adding $(1,1,0)$ makes the set dependent since $(1,1,0)=(1,0,0)+(0,1,0)$.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Basis and Dimension}
+%------------------------------------------------------------------
+
+A \emph{basis} of $V$ is a linearly independent set that spans $V$. Every basis of a finite-dimensional space has the same cardinality, called the \emph{dimension} $\dim V$.
+
+Every vector $v\in V$ has a unique representation $v = \sum_i \alpha_i e_i$ with respect to a basis $\{e_i\}$; the scalars $\alpha_i$ are its \emph{coordinates}.
+
+\begin{example}
+The standard basis of $\mathbb{C}^2$ is $\{e_1=(1,0)^\top,\, e_2=(0,1)^\top\}$. In quantum information these are denoted $|0\rangle$ and $|1\rangle$.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Inner (Scalar) Product}
+%------------------------------------------------------------------
+
+An \emph{inner product} on $V$ is a map $\langle\cdot,\cdot\rangle: V\times V\to\mathbb{F}$ satisfying:
+\begin{enumerate}
+  \item \textbf{Conjugate symmetry:} $\langle u,v\rangle = \overline{\langle v,u\rangle}$.
+  \item \textbf{Linearity in second argument:} $\langle u,\alpha v+\beta w\rangle = \alpha\langle u,v\rangle+\beta\langle u,w\rangle$.
+  \item \textbf{Positive definiteness:} $\langle v,v\rangle \geq 0$, with equality iff $v=\mathbf{0}$.
+\end{enumerate}
+
+A vector space equipped with an inner product is called an \emph{inner product space} (or \emph{pre-Hilbert space}).
+
+\begin{example}
+On $\mathbb{C}^n$: $\langle u,v\rangle = u^\dagger v = \sum_{i=1}^n \bar{u}_i v_i$, where $u^\dagger$ denotes the conjugate transpose (Dirac notation: $\langle u|v\rangle$).
+\end{example}
+
+%------------------------------------------------------------------
+\section{Norms}
+\label{sec:norms}
+%------------------------------------------------------------------
+
+The inner product induces the \emph{Euclidean} (or $\ell^2$) \emph{norm}
+\[
+  \|v\|_2 = \sqrt{\langle v,v\rangle}.
+\]
+More generally, for $v=(v_1,\ldots,v_n)\in\mathbb{R}^n$:
+
+\begin{itemize}
+  \item \textbf{$\ell^p$ norm:} $\displaystyle\|v\|_p = \left(\sum_{i=1}^n |v_i|^p\right)^{1/p}$, $p\geq 1$.
+  \item \textbf{Infinity (supremum) norm:} $\displaystyle\|v\|_\infty = \max_{1\leq i\leq n}|v_i|$.
+  \item \textbf{Weighted infinity norm:} $\displaystyle\|v\|_{w,\infty} = \max_{1\leq i\leq n} \frac{|v_i|}{w_i}$, with weights $w_i>0$.
+\end{itemize}
+
+\begin{example}
+For $v=(3,-4,1)\in\mathbb{R}^3$: $\|v\|_2=\sqrt{26}$, $\|v\|_\infty=4$. With weights $w=(1,2,1)$: $\|v\|_{w,\infty}=\max\!\left\{\tfrac{3}{1},\tfrac{4}{2},\tfrac{1}{1}\right\}=3$.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Hilbert Spaces}
+\label{sec:hilbert}
+%------------------------------------------------------------------
+
+An inner product space $(\mathcal{H},\langle\cdot,\cdot\rangle)$ is a \emph{Hilbert space} if it is \emph{complete}: every Cauchy sequence $\{v_n\}\subset\mathcal{H}$ (satisfying $\|v_m-v_n\|\to0$ as $m,n\to\infty$) converges to a limit in $\mathcal{H}$. Completeness ensures that limits of convergent infinite series remain in the space, which is essential for spectral expansions and Fourier analysis.
+
+The inner product induces the norm $\|v\|=\sqrt{\langle v,v\rangle}$ (Section~\ref{sec:norms}), and the following two inequalities hold in every inner product space:
+\begin{itemize}
+  \item \textbf{Cauchy--Schwarz:} $|\langle u,v\rangle|\le\|u\|\,\|v\|$, with equality iff $u$ and $v$ are linearly dependent.
+  \item \textbf{Parallelogram law:} $\|u+v\|^2+\|u-v\|^2 = 2(\|u\|^2+\|v\|^2)$.
+\end{itemize}
+
+A Hilbert space is \emph{separable} if it admits a countable orthonormal basis $\{e_i\}$ such that every $v\in\mathcal{H}$ has the expansion $v=\sum_i\langle e_i,v\rangle\,e_i$. All Hilbert spaces arising in quantum mechanics and this book are separable. The \emph{Riesz representation theorem} states that every bounded linear functional $\varphi:\mathcal{H}\to\mathbb{F}$ has the form $\varphi(v)=\langle u,v\rangle$ for a unique $u\in\mathcal{H}$ (in Dirac notation: every bra $\langle u|$ corresponds to a unique ket $|u\rangle$).
+
+\begin{example}
+$\mathbb{C}^n$ with inner product $\langle u,v\rangle=u^\dagger v$ is a finite-dimensional Hilbert space; completeness is automatic in finite dimensions. The state space of an $n$-level quantum system is $\mathbb{C}^n$.
+\end{example}
+
+\begin{example}
+$L^2[a,b]$ (square-integrable functions with $\langle f,g\rangle=\int_a^b f^*(x)\,g(x)\,dx$) is an infinite-dimensional separable Hilbert space. It is the natural setting for wave functions and Fourier analysis; see Section~\ref{sec:l2}.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Orthogonality and Orthonormal Bases}
+%------------------------------------------------------------------
+
+Two vectors $u,v$ are \emph{orthogonal}, written $u\perp v$, if $\langle u,v\rangle=0$. A set $\{e_1,\ldots,e_n\}$ is \emph{orthonormal} if
+\[
+  \langle e_i, e_j\rangle = \delta_{ij} = \begin{cases}1 & i=j,\\ 0 & i\neq j.\end{cases}
+\]
+An orthonormal basis (ONB) simplifies coordinate extraction: $\alpha_i = \langle e_i, v\rangle$.
+
+\begin{example}
+The standard basis $\{e_i\}$ of $\mathbb{R}^n$ is orthonormal under the Euclidean inner product. The \emph{Bell basis} $\{|\Phi^\pm\rangle,|\Psi^\pm\rangle\}$ is an ONB for $\mathbb{C}^4$ used in quantum information.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Gram--Schmidt Orthogonalization}
+%------------------------------------------------------------------
+
+Given a linearly independent set $\{v_1,\ldots,v_k\}$, the \emph{Gram--Schmidt process} produces an orthonormal set $\{e_1,\ldots,e_k\}$ spanning the same subspace:
+\[
+  u_j = v_j - \sum_{i=1}^{j-1}\langle e_i, v_j\rangle\, e_i, \qquad e_j = \frac{u_j}{\|u_j\|}.
+\]
+
+\begin{example}
+Starting from $v_1=(1,1,0)^\top$, $v_2=(1,0,1)^\top$ in $\mathbb{R}^3$:
+\[
+  e_1 = \frac{v_1}{\|v_1\|} = \tfrac{1}{\sqrt{2}}(1,1,0)^\top,\quad
+  u_2 = v_2 - \langle e_1,v_2\rangle e_1 = \tfrac{1}{2}(1,-1,2)^\top,\quad
+  e_2 = \frac{u_2}{\|u_2\|}.
+\]
+\end{example}
+
+%------------------------------------------------------------------
+\section{Linear Operators}
+%------------------------------------------------------------------
+
+A map $A: V\to W$ is a \emph{linear operator} if $A(\alpha u+\beta v)=\alpha Au+\beta Av$. When $V=W$ we call $A$ a \emph{linear operator on} $V$. With respect to bases, $A$ is represented by a matrix; composition of operators corresponds to matrix multiplication.
+
+Key properties:
+\begin{itemize}
+  \item \textbf{Kernel:} $\ker A = \{v\in V \mid Av=\mathbf{0}\}$.
+  \item \textbf{Image:} $\operatorname{im} A = \{Av \mid v\in V\}$.
+  \item \textbf{Rank--nullity theorem:} $\dim\ker A + \dim\operatorname{im} A = \dim V$.
+\end{itemize}
+
+%------------------------------------------------------------------
+\section{Eigenvalues and Eigenvectors}
+%------------------------------------------------------------------
+
+A scalar $\lambda\in\mathbb{F}$ is an \emph{eigenvalue} of $A$ if there exists a nonzero $v\in V$ such that
+\[
+  Av = \lambda v.
+\]
+Such $v$ is an \emph{eigenvector}. Eigenvalues are roots of the \emph{characteristic polynomial} $p(\lambda)=\det(A-\lambda I)$.
+
+\begin{example}
+For $A=\begin{pmatrix}2&1\\0&3\end{pmatrix}$, $p(\lambda)=(\lambda-2)(\lambda-3)$, giving eigenvalues $\lambda_1=2$, $\lambda_2=3$ with eigenvectors $(1,0)^\top$ and $(1,1)^\top$ respectively.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Nonsingular Matrices}
+%------------------------------------------------------------------
+
+A square matrix $A\in\mathbb{F}^{n\times n}$ is \emph{nonsingular} (invertible) if any of the following equivalent conditions hold:
+\begin{itemize}
+  \item $\det A \neq 0$.
+  \item $\ker A = \{\mathbf{0}\}$ (zero is not an eigenvalue).
+  \item $A$ has full rank $n$.
+  \item There exists $A^{-1}$ such that $AA^{-1}=A^{-1}A=I$.
+\end{itemize}
+
+%------------------------------------------------------------------
+\section{Similar Matrices}
+%------------------------------------------------------------------
+
+Matrices $A$ and $B$ are \emph{similar} if there exists a nonsingular $P$ such that $B=P^{-1}AP$. Similar matrices represent the same linear operator in different bases and share eigenvalues, determinant, trace, and characteristic polynomial.
+
+\begin{example}
+If $A$ is diagonalizable with eigenvalues $\lambda_i$ and eigenvector matrix $P$, then $P^{-1}AP = \operatorname{diag}(\lambda_1,\ldots,\lambda_n)$.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Hermitian Operators}
+\label{sec:hermitian-ops}
+%------------------------------------------------------------------
+
+An operator $A$ on an inner product space is \emph{Hermitian} (self-adjoint) if $A=A^\dagger$, i.e., $\langle u,Av\rangle = \langle Au,v\rangle$ for all $u,v$. Key properties:
+\begin{itemize}
+  \item All eigenvalues are real.
+  \item Eigenvectors for distinct eigenvalues are orthogonal.
+  \item Every Hermitian operator is diagonalizable by a unitary matrix.
+\end{itemize}
+
+\begin{example}
+The Pauli matrices $\sigma_x=\begin{pmatrix}0&1\\1&0\end{pmatrix}$, $\sigma_y=\begin{pmatrix}0&-i\\i&0\end{pmatrix}$, $\sigma_z=\begin{pmatrix}1&0\\0&-1\end{pmatrix}$ are Hermitian with eigenvalues $\pm1$.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Unitary Operators}
+\label{sec:unitary-ops}
+%------------------------------------------------------------------
+
+An operator $U$ is \emph{unitary} if $U^\dagger U = UU^\dagger = I$, equivalently if it preserves inner products: $\langle Uu, Uv\rangle=\langle u,v\rangle$. Unitary operators map ONBs to ONBs, have $|\det U|=1$, and all eigenvalues lie on the unit circle in $\mathbb{C}$.
+
+\begin{example}
+The Hadamard gate $H=\frac{1}{\sqrt{2}}\begin{pmatrix}1&1\\1&-1\end{pmatrix}$ is unitary and Hermitian ($H=H^\dagger=H^{-1}$), and maps the computational basis to an equal superposition.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Spectral Decomposition}
+\label{sec:spectral}
+%------------------------------------------------------------------
+
+The \emph{spectral theorem} states that every Hermitian (or, over $\mathbb{C}$, every normal: $AA^\dagger=A^\dagger A$) operator $A$ admits the decomposition
+\[
+  A = \sum_i \lambda_i\, |e_i\rangle\langle e_i| = \sum_i \lambda_i\, P_i,
+\]
+where $\lambda_i$ are eigenvalues, $|e_i\rangle$ are corresponding orthonormal eigenvectors, and $P_i=|e_i\rangle\langle e_i|$ are rank-1 orthogonal projectors satisfying $P_iP_j=\delta_{ij}P_i$ and $\sum_i P_i=I$.
+
+This decomposition allows the definition of functions of operators: $f(A)=\sum_i f(\lambda_i)P_i$.
+
+\begin{example}
+For $A=\sigma_z$ with eigenvalues $\pm1$ and eigenvectors $|0\rangle,|1\rangle$:
+\[
+  \sigma_z = |0\rangle\langle 0| - |1\rangle\langle 1|, \qquad e^{i\theta\sigma_z} = e^{i\theta}|0\rangle\langle 0| + e^{-i\theta}|1\rangle\langle 1|.
+\]
+\end{example}
+
+%------------------------------------------------------------------
+\section{Tensor Product of Vector Spaces}
+%------------------------------------------------------------------
+
+Given vector spaces $V$ (dim $m$) and $W$ (dim $n$), their \emph{tensor product} $V\otimes W$ is a vector space of dimension $mn$ whose elements are (equivalence classes of) formal sums of \emph{simple tensors} $v\otimes w$, with bilinearity:
+\[
+  (\alpha v)\otimes w = v\otimes(\alpha w) = \alpha(v\otimes w), \qquad (v_1+v_2)\otimes w = v_1\otimes w + v_2\otimes w.
+\]
+If $\{e_i\}$ is a basis of $V$ and $\{f_j\}$ is a basis of $W$, then $\{e_i\otimes f_j\}$ is a basis of $V\otimes W$.
+
+\begin{example}
+For $\mathbb{C}^2\otimes\mathbb{C}^2 \cong \mathbb{C}^4$, the computational basis is $\{|00\rangle, |01\rangle, |10\rangle, |11\rangle\}$ where $|ij\rangle = |i\rangle\otimes|j\rangle$. An entangled state such as $\frac{1}{\sqrt{2}}(|00\rangle+|11\rangle)$ cannot be written as a simple tensor $v\otimes w$.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Tensor Product of Operators}
+%------------------------------------------------------------------
+
+Given $A: V\to V$ and $B: W\to W$, their tensor product $A\otimes B: V\otimes W\to V\otimes W$ is defined by
+\[
+  (A\otimes B)(v\otimes w) = (Av)\otimes(Bw),
+\]
+extended by linearity. In matrix form, $A\otimes B$ is the \emph{Kronecker product}: if $A=(a_{ij})$, then
+\[
+  A\otimes B = \begin{pmatrix}a_{11}B & \cdots & a_{1n}B\\ \vdots & \ddots & \vdots\\ a_{m1}B & \cdots & a_{mn}B\end{pmatrix}.
+\]
+
+\begin{example}
+$\sigma_z\otimes I_2 = \begin{pmatrix}1&0&0&0\\0&1&0&0\\0&0&-1&0\\0&0&0&-1\end{pmatrix}$ measures the $z$-spin of the first qubit in a two-qubit system.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Jordan Canonical Form}
+%------------------------------------------------------------------
+
+Not every matrix is diagonalizable. Every $A\in\mathbb{C}^{n\times n}$ is similar to its \emph{Jordan canonical form}
+\[
+  J = P^{-1}AP = \operatorname{diag}(J_{n_1}(\lambda_1),\ldots,J_{n_k}(\lambda_k)),
+\]
+where each \emph{Jordan block} is
+\[
+  J_m(\lambda) = \begin{pmatrix}\lambda & 1 & & \\ & \lambda & \ddots & \\ & & \ddots & 1 \\ & & & \lambda\end{pmatrix} \in \mathbb{C}^{m\times m}.
+\]
+The number and sizes of Jordan blocks for eigenvalue $\lambda$ are determined by the dimensions of $\ker(A-\lambda I)^k$ for $k=1,2,\ldots$ The Jordan form is unique up to reordering of blocks.
+
+\begin{example}
+The matrix $A=\begin{pmatrix}3&1\\0&3\end{pmatrix}$ is already in Jordan form with a single $2\times2$ block $J_2(3)$. It has eigenvalue $\lambda=3$ (algebraic multiplicity 2, geometric multiplicity 1) and is not diagonalizable.
+\end{example}
+
+The Jordan form is essential for computing matrix exponentials and analyzing the long-run behavior of non-diagonalizable systems, relevant in the study of quantum channels and decoherence.
+
+%------------------------------------------------------------------
+\section{Matrix Norms}
+%------------------------------------------------------------------
+
+Every matrix $A\in\mathbb{F}^{m\times n}$ induces an \emph{operator norm} $\|A\|_{\mathrm{op}} = \max_{\|x\|=1}\|Ax\|$. The induced norms most relevant here are:
+\begin{itemize}
+  \item \textbf{Spectral (2-)norm:} $\displaystyle\|A\|_2 = \sqrt{\rho(A^\top A)}$, where $\rho(A^\top A) = \max_i\lambda_i(A^\top A)$ is the \emph{spectral radius} of $A^\top A$.
+  \item \textbf{Induced infinity norm:} $\displaystyle\|A\|_\infty = \max_{1\le i\le m}\sum_{j=1}^n |a_{ij}|$ (maximum absolute row sum).
+  \item \textbf{Weighted infinity norm:} $\displaystyle\|A\|_{\omega,\infty} = \max_{1\le i\le m}\frac{1}{\omega_i}\sum_{j=1}^n |a_{ij}|\,\omega_j$, with weights $\omega_j>0$.
+\end{itemize}
+
+All matrix norms satisfy $\|A\|\ge0$, $\|cA\|=|c|\|A\|$, the triangle inequality, and submultiplicativity $\|AB\|\le\|A\|\|B\|$.
+
+\begin{example}
+For $A=\begin{pmatrix}1&0&2\\0&4&5\\1&2&3\end{pmatrix}$, the eigenvalues of $A^\top A$ are approximately $0.310$, $13.776$, $45.914$, giving $\|A\|_2 = \sqrt{45.914}\approx 6.776$. The induced infinity norm is $\|A\|_\infty = \max\{3,\,9,\,6\}=9$. With weights $\omega=(1,\,0.5,\,0.4)$:
+\[
+  \|A\|_{\omega,\infty} = \max\!\left\{\tfrac{1{\cdot}1+0{\cdot}0.5+2{\cdot}0.4}{1},\;
+  \tfrac{0{\cdot}1+4{\cdot}0.5+5{\cdot}0.4}{0.5},\;
+  \tfrac{1{\cdot}1+2{\cdot}0.5+3{\cdot}0.4}{0.4}\right\} = \max\{1.8,\,8,\,8\}=8.
+\]
+\end{example}
+
+%------------------------------------------------------------------
+\section{Quadratic Forms}
+%------------------------------------------------------------------
+
+Given a symmetric matrix $A\in\mathbb{R}^{n\times n}$, the associated \emph{quadratic form} is $q(x) = x^\top Ax$. The matrix $A$ is \emph{positive definite} if $q(x)>0$ for all $x\neq\mathbf{0}$, and \emph{positive semi-definite} if $q(x)\ge0$ for all $x$.
+
+Via the spectral decomposition $A=T\Lambda T^\top$ (with $T$ orthogonal), the substitution $y=T^\top x$ gives
+\[
+  q(x) = x^\top Ax = y^\top\Lambda y = \sum_{i=1}^n \lambda_i\,y_i^2.
+\]
+Hence $A$ is positive definite if and only if all eigenvalues $\lambda_i>0$. Choosing $x=x_k$ (the $k$-th eigenvector) gives $q(x_k)=\lambda_k\|x_k\|_2^2$, so any $\lambda_k\le0$ immediately violates positive definiteness.
+
+\begin{example}
+$A=\begin{pmatrix}2&1\\1&3\end{pmatrix}$ has characteristic polynomial $\lambda^2-5\lambda+5=0$, giving $\lambda_{1,2}=\frac{5\mp\sqrt{5}}{2}\approx1.382,\,3.618$. Both are positive, confirming $q(x)=2x_1^2+2x_1x_2+3x_2^2>0$ for all $x\neq\mathbf{0}$.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Functions of Matrices}
+\label{sec:matrix-functions}
+%------------------------------------------------------------------
+
+For $f$ with Taylor series $f(x)=\sum_{k=0}^\infty \frac{f^{(k)}(0)}{k!}x^k$, the \emph{matrix function} $f(A)$ is defined by
+\[
+  f(A) = \sum_{k=0}^\infty \frac{f^{(k)}(0)}{k!}\,A^k.
+\]
+For a diagonalizable $A=T\Lambda T^{-1}$, this simplifies to
+\[
+  f(A) = T\,f(\Lambda)\,T^{-1}, \qquad
+  f(\Lambda) = \operatorname{diag}\!\bigl(f(\lambda_1),\ldots,f(\lambda_n)\bigr),
+\]
+since $A^k x_i=\lambda_i^k x_i$ implies $f(A)x_i=f(\lambda_i)x_i$ for each eigenvector $x_i$. For a Hermitian $A=\sum_i\lambda_i P_i$, the spectral form is $f(A)=\sum_i f(\lambda_i)P_i$, consistent with Section \ref{sec:spectral}.
+
+\begin{example}
+Let $A=\begin{pmatrix}2&2\\2&4\end{pmatrix}$ and $f(x)=e^{-x}\cos x$. The eigenvalues are $\lambda_{1,2}=3\mp\sqrt{5}$ ($\approx0.764,\;5.236$). Computing:
+\[
+  f(\Lambda)\approx\begin{pmatrix}0.336&0\\0&0.003\end{pmatrix},
+  \qquad
+  f(A)=Tf(\Lambda)T^{-1}\approx\begin{pmatrix}0.244&0.149\\0.149&0.095\end{pmatrix}.
+\]
+\end{example}
+
+%------------------------------------------------------------------
+\section{$L^2$ Function Spaces}
+\label{sec:l2}
+%------------------------------------------------------------------
+
+The space $L^2[a,b]$ consists of complex-valued functions $f:[a,b]\to\mathbb{C}$ that are square-integrable, $\int_a^b|f(x)|^2\,dx<\infty$. It is an infinite-dimensional \emph{Hilbert space} with inner product
+\[
+  \langle f,g\rangle = \int_a^b f^*(x)\,g(x)\,dx,
+\]
+satisfying the same axioms as the finite-dimensional case: conjugate symmetry $\langle f,g\rangle=\overline{\langle g,f\rangle}$, linearity in the second argument, and positive definiteness. A countable set $\{\phi_i\}$ is an \emph{orthonormal system} if $\langle\phi_i,\phi_j\rangle=\delta_{ij}$. When it spans $L^2[a,b]$, every $f$ has the expansion
+\[
+  f = \sum_{i=1}^\infty \langle\phi_i,f\rangle\,\phi_i,
+\]
+the infinite-dimensional analogue of coordinate extraction via an ONB.
+
+%------------------------------------------------------------------
+\section{Fourier Series}
+%------------------------------------------------------------------
+
+A $T$-periodic function satisfies $f(t+T)=f(t)$. With $\omega=2\pi/T$, the \emph{Fourier series} is
+\[
+  f(t) = a_0 + \sum_{n=1}^\infty a_n\cos(n\omega t) + \sum_{n=1}^\infty b_n\sin(n\omega t).
+\]
+The functions $\{1,\cos(n\omega t),\sin(n\omega t)\}_{n\ge1}$ are orthogonal in $L^2[0,T]$, giving
+\[
+  a_0 = \frac{1}{T}\int_0^T f(t)\,dt,\qquad
+  a_n = \frac{2}{T}\int_0^T f(t)\cos(n\omega t)\,dt,\qquad
+  b_n = \frac{2}{T}\int_0^T f(t)\sin(n\omega t)\,dt.
+\]
+For even functions ($f(t)=f(-t)$), all $b_n=0$. The Fourier basis plays the same structural role in $L^2[0,T]$ as the monomial basis $\{1,x,x^2,\ldots\}$ in a Taylor expansion, but orthogonality makes coefficient extraction direct.
+
+%------------------------------------------------------------------
+\section{Eigenfunctions}
+%------------------------------------------------------------------
+
+A linear operator $\hat{A}$ on a Hilbert space has an \emph{eigenfunction} $\phi_i$ with \emph{eigenvalue} $\lambda_i$ if $\hat{A}\phi_i=\lambda_i\phi_i$. When $\hat{A}$ possesses an orthonormal set of eigenfunctions $\{\phi_i\}$ spanning the space, the action on any $f=\sum_i\beta_i\phi_i$ is computed term-by-term:
+\[
+  \hat{A}f = \sum_i \lambda_i\beta_i\,\phi_i, \qquad \beta_i=\langle\phi_i,f\rangle.
+\]
+
+\begin{example}
+Let $\{\psi_0,\psi_1\}$ be an orthonormal basis and define the \emph{bit-flip operator} $\hat{X}$ by $\hat{X}\psi_0=\psi_1$, $\hat{X}\psi_1=\psi_0$. For $\psi=\alpha_0\psi_0+\alpha_1\psi_1$, the eigenfunction equation $\hat{X}\psi=\lambda\psi$ gives $\lambda^2=1$, so $\lambda_1=1$ and $\lambda_2=-1$. The normalized eigenfunctions are
+\[
+  \psi_A = \tfrac{1}{\sqrt{2}}(\psi_0+\psi_1),\qquad \psi_B = \tfrac{1}{\sqrt{2}}(\psi_0-\psi_1).
+\]
+\end{example}
+
+%------------------------------------------------------------------
+\section{Hadamard Operator}
+%------------------------------------------------------------------
+
+The \emph{Hadamard operator} $\hat{H}$ acts on the orthonormal basis $\{\psi_0,\psi_1\}$ by
+\[
+  \hat{H}\psi_0 = \tfrac{1}{\sqrt{2}}(\psi_0+\psi_1),\qquad
+  \hat{H}\psi_1 = \tfrac{1}{\sqrt{2}}(\psi_0-\psi_1).
+\]
+It is both self-adjoint and unitary ($\hat{H}=\hat{H}^\dagger=\hat{H}^{-1}$). The characteristic equation is $\lambda^2-1=0$, giving $\lambda_1=1$ and $\lambda_2=-1$, with normalized eigenfunctions
+\[
+  \psi_A = \cos\tfrac{\pi}{8}\,\psi_0+\sin\tfrac{\pi}{8}\,\psi_1
+         \approx 0.9239\,\psi_0+0.3827\,\psi_1,\qquad
+  \psi_B = -\sin\tfrac{\pi}{8}\,\psi_0+\cos\tfrac{\pi}{8}\,\psi_1
+         \approx -0.3827\,\psi_0+0.9239\,\psi_1.
+\]
+
+%------------------------------------------------------------------
+\section{Adjoint, Self-Adjoint, and Unitary Operators on Function Spaces}
+\label{sec:func-adjoint}
+%------------------------------------------------------------------
+
+For a linear operator $\hat{A}$ on a Hilbert space $\mathcal{H}$, the \emph{adjoint} $\hat{A}^\dagger$ is the unique operator satisfying
+\[
+  \langle\hat{A}f,\,g\rangle = \langle f,\,\hat{A}^\dagger g\rangle \quad \forall\,f,g\in\mathcal{H}.
+\]
+\begin{itemize}
+  \item $\hat{A}$ is \emph{self-adjoint} (Hermitian) if $\hat{A}=\hat{A}^\dagger$: eigenvalues are real and eigenfunctions for distinct eigenvalues are orthogonal.
+  \item $\hat{U}$ is \emph{unitary} if $\hat{U}^\dagger\hat{U}=\hat{U}\hat{U}^\dagger=\hat{I}$, equivalently $\langle\hat{U}f,\hat{U}g\rangle=\langle f,g\rangle$. All eigenvalues satisfy $|\lambda_k|=1$.
+\end{itemize}
+
+The unit-circle property follows directly: if $\hat{U}\xi_k=\lambda_k\xi_k$, then
+\[
+  \langle\xi_k,\xi_k\rangle = \langle\hat{U}\xi_k,\hat{U}\xi_k\rangle = |\lambda_k|^2\langle\xi_k,\xi_k\rangle
+  \implies |\lambda_k|=1.
+\]
+These properties mirror exactly those of Hermitian and unitary matrices, confirming that the matrix and functional-space theories are instances of the same abstract framework.
+
+%------------------------------------------------------------------
+\section{Matrix Representations of Operators}
+\label{sec:matrix-rep}
+%------------------------------------------------------------------
+
+Given operator $\hat{A}$ on a space with orthonormal basis $\{\psi_j\}_{j=0}^{n-1}$, its \emph{matrix representation} $A$ has entries
+\[
+  A_{jk} = \langle\psi_j,\,\hat{A}\psi_k\rangle,
+\]
+so that $\hat{A}\psi_k=\sum_j A_{jk}\,\psi_j$. The coordinates transform as $\rho=A\alpha$: if $f=\sum_k\alpha_k\psi_k$ then $\hat{A}f=\sum_j\rho_j\psi_j$ with $\rho_j=\sum_k A_{jk}\alpha_k$.
+
+\begin{example}
+In basis $\{\psi_0,\psi_1\}$, the operators $\hat{X}$ and $\hat{H}$ have matrix representations
+\[
+  X = \begin{pmatrix}0&1\\1&0\end{pmatrix} = \sigma_x,\qquad
+  H = \frac{1}{\sqrt{2}}\begin{pmatrix}1&1\\1&-1\end{pmatrix},
+\]
+matching the Pauli matrix $\sigma_x$ and the Hadamard gate from Sections \ref{sec:hermitian-ops} and \ref{sec:unitary-ops}.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Coordinate Transformations}
+%------------------------------------------------------------------
+
+Let $\{\psi_j\}$ and $\{\xi_k\}$ be two orthonormal bases. The \emph{change-of-basis matrix} $S$ with entries
+\[
+  S_{jk} = \langle\psi_j,\,\xi_k\rangle
+\]
+encodes the $\psi$-coordinates of each new basis vector as columns. If $f$ has coordinates $\alpha$ in the $\psi$-basis and $\beta$ in the $\xi$-basis, then $\alpha=S\beta$. Since both bases are orthonormal, $S$ is unitary ($S^{-1}=S^\dagger$), and the matrix representation of $\hat{A}$ transforms as
+\[
+  A_\xi = S^{-1}A_\psi S = S^\dagger A_\psi S,
+\]
+making $A_\xi$ and $A_\psi$ similar matrices with identical eigenvalues.
+
+\begin{example}
+The Hadamard operator has matrix $H=\frac{1}{\sqrt{2}}\begin{pmatrix}1&1\\1&-1\end{pmatrix}$ in the $\{\psi_0,\psi_1\}$ basis. In its eigenbasis $\{\psi_A,\psi_B\}$ the representation is $H_{\mathrm{eig}}=\operatorname{diag}(1,-1)$. The change-of-basis matrix $S$ with columns equal to the $\psi$-coordinates of $\psi_A$ and $\psi_B$ satisfies $S^\dagger H S=\operatorname{diag}(1,-1)$:
+\[
+  S = \begin{pmatrix}\cos\frac{\pi}{8} & -\sin\frac{\pi}{8}\\[4pt]\sin\frac{\pi}{8} & \cos\frac{\pi}{8}\end{pmatrix}
+    \approx\begin{pmatrix}0.9239 & -0.3827\\0.3827 & 0.9239\end{pmatrix}.
+\]
+\end{example}
+

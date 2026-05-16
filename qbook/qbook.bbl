@@ -1,0 +1,14 @@
+\begin{thebibliography}{1}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Zecevic(2022)]{zecevic_quantum_2022}
+A.~Zecevic.
+\newblock \textit{Quantum and {Parallel} {Computing}: {A} {Tale} of {Two} {Paradigms}}.
+\newblock Independently published, 2022.
+\newblock ISBN 979-8-7885-0405-6.
+
+\end{thebibliography}

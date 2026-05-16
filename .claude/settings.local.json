@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pdftotext /Users/srdas/CODE/quantum-finance/notes/Week1.pdf -)"
+    ]
+  }
+}
