@@ -1,19 +1,19 @@
 # Fdb version 4
-["bibtex qbook"] 1779005676.41007 "qbook.aux" "qbook.bbl" "qbook" 1779005678.0549 0
-  "./Quantum.bib" 1779005568.13626 54672 5037c34263ebd9c6841f17269ca3af90 ""
+["bibtex qbook"] 1779010235.86554 "qbook.aux" "qbook.bbl" "qbook" 1779010235.99853 2
+  "./Quantum.bib" 1779009916.51758 54667 4b6e43798c8577174c97347580a652f0 ""
   "./plainnatmodified.bst" 1779005568.13626 27132 d71571a0fd1ec08c950311da1e06a42e ""
-  "qbook.aux" 1779005677.61024 5234 0ec7a88e72b4659ff945b75c39cc3834 "pdflatex"
+  "qbook.aux" 1779010235.86167 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
   (generated)
   "qbook.bbl"
   "qbook.blg"
   (rewritten before read)
-["makeindex qbook.idx"] 1778925399.67938 "qbook.idx" "qbook.ind" "qbook" 1779005678.05481 0
-  "qbook.idx" 1779005676.79423 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex qbook.idx"] 1779010233.76888 "qbook.idx" "qbook.ind" "qbook" 1779010235.99784 0
+  "qbook.idx" 0 -1 0 "pdflatex"
   (generated)
   "qbook.ilg"
   "qbook.ind"
   (rewritten before read)
-["pdflatex"] 1779005676.52414 "/home/srdas/CODE/quantum-finance/qbook/qbook.tex" "qbook.pdf" "qbook" 1779005678.05497 0
+["pdflatex"] 1779010234.02977 "/home/srdas/CODE/quantum-finance/qbook/qbook.tex" "qbook.pdf" "qbook" 1779010235.73965 2
   "/etc/texmf/web2c/texmf.cnf" 1774504824.61751 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/srdas/CODE/quantum-finance/qbook/qbook.tex" 1779005568.13826 4239 1bd89a35144b96c965e8d33d0508875c ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertine/lbtn_hj4mhx.enc" 1490131464 3054 2e6125dc18a1bec951174c2ecee703d1 ""
@@ -175,6 +175,7 @@
   "/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex" 1673816307 4385 510565c2f07998c8a0e14f0ec07ff23c ""
   "/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex" 1673816307 29239 22e8c7516012992a49873eff0d868fed ""
   "/usr/share/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def" 1673816307 6950 8524a062d82b7afdc4a88a57cb377784 ""
+  "/usr/share/texlive/texmf-dist/tex/generic/pgfornament/vectorian/vectorian82.pgf" 1586645177 1861 98c5ed9ede4827bd680f248030555e25 ""
   "/usr/share/texlive/texmf-dist/tex/generic/pgfplots/libs/pgflibrarypgfplots.surfshading.code.tex" 1452211337 22701 5fab7b8ebb90b053dc067d1bd37e43c2 ""
   "/usr/share/texlive/texmf-dist/tex/generic/pgfplots/libs/pgfplotslibrary.code.tex" 1422740226 3047 aa82404aec57311271f4991c44bd71dc ""
   "/usr/share/texlive/texmf-dist/tex/generic/pgfplots/libs/tikzlibrarypgfplots.colormaps.code.tex" 1452211337 17447 1206d421f876f6cfae45aa2412d04dcb ""
@@ -340,17 +341,17 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1774505600.86018 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1774505620 8215010 97b6597f71aea4a4f48572407b456f19 ""
-  "intro_quantum_finance.tex" 1779005568.13626 57 a0919b24ce513cd53dea752f3ddb4109 ""
+  "intro_quantum_finance.tex" 1779010233.57364 26626 bff71e311f84aad30828595a5da09361 ""
   "layout.tex" 1779005568.13626 17939 7644cb925c63b89c5e7add94fcea54ce ""
   "math.tex" 1779005568.13626 27453 5b1e6360a5de9ae953346dc63f579edd ""
-  "qbook.aux" 1779005677.61024 5234 0ec7a88e72b4659ff945b75c39cc3834 "pdflatex"
-  "qbook.bbl" 1779005676.51823 497 13659814e949515fb532361035f90c0a "bibtex qbook"
-  "qbook.brf" 1779005677.61124 52 2468f937abf60576e490b94eefdeb5d6 "pdflatex"
-  "qbook.ind" 1779005677.60824 0 d41d8cd98f00b204e9800998ecf8427e "makeindex qbook.idx"
-  "qbook.lof" 1779005677.61124 36 bf1f51005632a981b43ab6ac29ade236 "pdflatex"
-  "qbook.out" 1779005677.61124 5422 8755caef7505d159e4cd3b9624a51fb0 "pdflatex"
+  "qbook.aux" 1779010235.86167 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "qbook.bbl" 1779010235.99567 0 d41d8cd98f00b204e9800998ecf8427e "bibtex qbook"
+  "qbook.brf" 1779010235.41366 2838 b816309009425245b1a9eb7e8ae0709e "pdflatex"
+  "qbook.ind" 0 -1 0 "makeindex qbook.idx"
+  "qbook.lof" 0 -1 0 "pdflatex"
+  "qbook.out" 0 -1 0 "pdflatex"
   "qbook.tex" 1779005568.13826 4239 1bd89a35144b96c965e8d33d0508875c ""
-  "qbook.toc" 1779005677.61124 2619 d9ac9851dabc5cd0ccf7ef84bb623b78 "pdflatex"
+  "qbook.toc" 0 -1 0 "pdflatex"
   (generated)
   "qbook.aux"
   "qbook.brf"

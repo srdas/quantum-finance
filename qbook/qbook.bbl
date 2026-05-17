@@ -1,14 +1,236 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{29}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
+\bibitem[noa()]{noauthor_quantum_nodate-1}
+Quantum {Portfolio} {Optimizer} - {A} {Qiskit} {Function} by {Global} {Data}
+  {Quantum}.
+
+\bibitem[Auer et~al.(2024)Auer, Dupont, Gambacorta, Park, Takahashi, and
+  Valko]{auer_quantum_2024}
+R.~Auer, A.~Dupont, L.~Gambacorta, et~al.
+\newblock Quantum computing and the financial system: opportunities and risks.
+\newblock \textit{BIS Papers}, 2024.
+
+\bibitem[Biamonte et~al.(2017)Biamonte, Wittek, Pancotti, Rebentrost, Wiebe,
+  and Lloyd]{biamonte_quantum_2017}
+J.~Biamonte, P.~Wittek, N.~Pancotti, et~al.
+\newblock Quantum machine learning.
+\newblock \textit{Nature}, 549\penalty0 (7671):\penalty0 195--202, September
+  2017.
+\newblock ISSN 1476-4687.
+\newblock \doi{10.1038/nature23474}.
+\newblock Bandiera\_abtest: a Cg\_type: Nature Research Journals Number: 7671
+  Primary\_atype: Reviews Subject\_term: Computer science;Quantum
+  information;Quantum simulation Subject\_term\_id:
+  computer-science;quantum-information;quantum-simulation.
+
+\bibitem[Blanchet et~al.(2025)Blanchet, Squillante, Szegedy, and
+  Wang]{blanchet_connecting_2025}
+J.~Blanchet, M.~S. Squillante, M.~Szegedy, and G.~Wang.
+\newblock Connecting {Quantum} {Computing} with {Classical} {Stochastic}
+  {Simulation}, September 2025.
+\newblock arXiv:2509.18614 [quant-ph].
+
+\bibitem[Bunescu and V{\^a}rtei(2024)]{bunescu_modern_2024}
+L.~Bunescu and A.~M. V{\^a}rtei.
+\newblock Modern finance through quantum computing—{A} systematic literature
+  review.
+\newblock \textit{PLOS ONE}, 19\penalty0 (7):\penalty0 e0304317, July 2024.
+\newblock ISSN 1932-6203.
+\newblock \doi{10.1371/journal.pone.0304317}.
+
+\bibitem[Chen et~al.(2025)Chen, Li, and Neufeld]{chen_quantum_2025}
+J.~Chen, Y.~Li, and A.~Neufeld.
+\newblock Quantum {Monte} {Carlo} algorithm for solving {Black}-{Scholes}
+  {PDEs} for high-dimensional option pricing in finance and its complexity
+  analysis, November 2025.
+\newblock arXiv:2301.09241 [quant-ph].
+
+\bibitem[Chou et~al.(2026)Chou, Lai, Jiang, Kuo, and
+  Kung]{chou_quantum-inspired_2026}
+Y.~H. Chou, Y.~T. Lai, Y.~C. Jiang, et~al.
+\newblock Quantum-inspired {Financial} {Optimization} for {Dynamic} {G7}
+  {Portfolio} {Management} [{Feature}].
+\newblock \textit{IEEE Nanotechnology Magazine}, 20\penalty0 (1):\penalty0
+  22--31, 2026.
+\newblock ISSN 1932-4510.
+\newblock \doi{10.1109/MNANO.2025.3638485}.
+
+\bibitem[Ciceri et~al.(2025)Ciceri, Cottrell, Freeland, Fry, Hirai, Intallura,
+  Kang, Lee, Mitra, Ohno, Pemmaraju, Proissl, Quanz, Rajan, Shimada, and
+  Yograj]{ciceri_enhanced_2025}
+A.~Ciceri, A.~Cottrell, J.~Freeland, et~al.
+\newblock Enhanced fill probability estimates in institutional algorithmic bond
+  trading using statistical learning algorithms with quantum computers,
+  September 2025.
+\newblock arXiv:2509.17715 [quant-ph] version: 1.
+
+\bibitem[Dri et~al.(2022)Dri, Giusto, Aita, and Montrucchio]{dri_towards_2022}
+E.~Dri, E.~Giusto, A.~Aita, and B.~Montrucchio.
+\newblock Towards practical {Quantum} {Credit} {Risk} {Analysis}.
+\newblock \textit{Journal of Physics: Conference Series}, 2416\penalty0
+  (1):\penalty0 012002, December 2022.
+\newblock ISSN 1742-6588, 1742-6596.
+\newblock \doi{10.1088/1742-6596/2416/1/012002}.
+\newblock arXiv:2212.07125 [cs].
+
+\bibitem[Egger et~al.(2020)Egger, Gambella, Marecek, McFaddin, Mevissen,
+  Raymond, Simonetto, Woerner, and Yndurain]{egger_quantum_2020}
+D.~J. Egger, C.~Gambella, J.~Marecek, et~al.
+\newblock Quantum {Computing} for {Finance}: {State} of the {Art} and {Future}
+  {Prospects}.
+\newblock \textit{IEEE Transactions on Quantum Engineering}, 1:\penalty0 1--24,
+  2020.
+\newblock ISSN 2689-1808.
+\newblock \doi{10.1109/TQE.2020.3030314}.
+\newblock arXiv:2006.14510 [quant-ph].
+
+\bibitem[Gong et~al.(2026)Gong, Sedai, Schroeder, and
+  Medda]{gong_quantum_2026-1}
+H.~Gong, A.~Sedai, T.~Schroeder, and F.~Medda.
+\newblock Quantum {Computing} for {Financial} {Transformation}: {A} {Review} of
+  {Optimisation}, {Pricing}, {Risk}, {Machine} {Learning}, and {Post}-{Quantum}
+  {Security}, April 2026.
+\newblock arXiv:2604.08180 [q-fin].
+
+\bibitem[Herman et~al.(2022)Herman, Googin, Liu, Galda, Safro, Sun, Pistoia,
+  and Alexeev]{herman_survey_2022}
+D.~Herman, C.~Googin, X.~Liu, et~al.
+\newblock A {Survey} of {Quantum} {Computing} for {Finance}.
+\newblock January 2022.
+\newblock \_eprint: 2201.02773.
+
+\bibitem[Herman et~al.(2023)Herman, Googin, Liu, Sun, Galda, Safro, Pistoia,
+  and Alexeev]{herman_quantum_2023}
+D.~Herman, C.~Googin, X.~Liu, et~al.
+\newblock Quantum computing for finance.
+\newblock \textit{Nature Reviews Physics}, 5\penalty0 (8), July 2023.
+\newblock ISSN 2522-5820.
+\newblock \doi{10.1038/s42254-023-00603-1}.
+
+\bibitem[Huang()]{huang_nus-frontiers--fintech-and-quantum-computing-2022part_nodate}
+J.~Huang.
+\newblock {NUS}-{Frontiers}-in-{Fintech}-and-{Quantum}-{Computing}-2022/{Part}
+  2 {Quantum} {Finance}/{Part} 2 {Quantum} {Finance} - {Hands}-on.ipynb at main
+  ·
+  {HuangJunye}/{NUS}-{Frontiers}-in-{Fintech}-and-{Quantum}-{Computing}-2022.
+
+\bibitem[Martin et~al.(2021)Martin, Candelas, Rodr{\'{\i}}guez-Rozas,
+  Mart{\'{\i}}n-Guerrero, Chen, Lamata, Or{\'u}s, Solano, and
+  Sanz]{martin_toward_2021}
+A.~Martin, B.~Candelas, {\'A}.~Rodr{\'{\i}}guez-Rozas, et~al.
+\newblock Toward pricing financial derivatives with an {IBM} quantum computer.
+\newblock \textit{Physical Review Research}, 3\penalty0 (1):\penalty0 013167,
+  February 2021.
+\newblock \doi{10.1103/PhysRevResearch.3.013167}.
+
+\bibitem[Matsakos and Nield(2024)]{matsakos_quantum_2024}
+T.~Matsakos and S.~Nield.
+\newblock Quantum {Monte} {Carlo} simulations for financial risk analytics:
+  scenario generation for equity, rate, and credit risk factors.
+\newblock \textit{Quantum}, 8:\penalty0 1306, April 2024.
+\newblock \doi{10.22331/q-2024-04-04-1306}.
+
+\bibitem[Morapakula et~al.(2026)Morapakula, Deshpande, Yata, Ubale, Wad, and
+  Ikeda]{morapakula_end--end_2026}
+S.~N. Morapakula, S.~Deshpande, R.~Yata, et~al.
+\newblock End-to-{End} {Portfolio} {Optimization} with {Hybrid} {Quantum}
+  {Annealing}.
+\newblock \textit{Advanced Quantum Technologies}, 9\penalty0 (4):\penalty0
+  e00753, 2026.
+\newblock \doi{https://doi.org/10.1002/qute.202500753}.
+\newblock \_eprint:
+  https://advanced.onlinelibrary.wiley.com/doi/pdf/10.1002/qute.202500753.
+
+\bibitem[Or{\'u}s et~al.(2019)Or{\'u}s, Mugel, and Lizaso]{orus_quantum_2019}
+R.~Or{\'u}s, S.~Mugel, and E.~Lizaso.
+\newblock Quantum computing for finance: {Overview} and prospects.
+\newblock \textit{Reviews in Physics}, 4:\penalty0 100028, November 2019.
+\newblock ISSN 24054283.
+\newblock \doi{10.1016/j.revip.2019.100028}.
+
+\bibitem[Pathak et~al.(2025)Pathak, Tarakeshwar, Ali, Devendrababu, and
+  Ganesan]{pathak_evolution_2025}
+P.~Pathak, K.~Tarakeshwar, S.~S. Ali, et~al.
+\newblock The {Evolution} of {IBM}'s {Quantum} {Information} {Software} {Kit}
+  ({Qiskit}): {A} {Review} of its {Applications}, August 2025.
+\newblock arXiv:2508.12245 [quant-ph].
+
+\bibitem[Preskill(2018)]{preskill_quantum_2018}
+J.~Preskill.
+\newblock Quantum {Computing} in the {NISQ} era and beyond.
+\newblock \textit{Quantum}, 2:\penalty0 79, August 2018.
+\newblock ISSN 2521-327X.
+\newblock \doi{10.22331/q-2018-08-06-79}.
+\newblock arXiv: 1801.00862.
+
+\bibitem[Samal(2024)]{samal_quantum_2024}
+B.~V. Samal.
+\newblock Quantum {Computing} for {Finance}: {In}-{Depth} {Overview} and
+  {Bayesian} {Prospects}, October 2024.
+
+\bibitem[Schaden(2002)]{schaden_quantum_2002}
+M.~Schaden.
+\newblock Quantum finance.
+\newblock \textit{Physica A: Statistical Mechanics and its Applications},
+  316\penalty0 (1):\penalty0 511--538, December 2002.
+\newblock ISSN 0378-4371.
+\newblock \doi{10.1016/S0378-4371(02)01200-1}.
+
+\bibitem[Soller()]{soller_quantum_nodate-1}
+H.~Soller.
+\newblock Quantum computing in finance: {Redefining} banking {\textbar}
+  {McKinsey}.
+
+\bibitem[Soller et~al.()Soller, Smit, and Heid]{soller_quantum_nodate}
+H.~Soller, S.~Smit, and A.~Heid.
+\newblock Quantum computing business applications and benefits {\textbar}
+  {McKinsey}.
+
+\bibitem[Stamatopoulos et~al.(2020)Stamatopoulos, Egger, Sun, Zoufal, Iten,
+  Shen, and Woerner]{stamatopoulos_option_2020}
+N.~Stamatopoulos, D.~J. Egger, Y.~Sun, et~al.
+\newblock Option {Pricing} using {Quantum} {Computers}.
+\newblock \textit{Quantum}, 4:\penalty0 291, July 2020.
+\newblock \doi{10.22331/q-2020-07-06-291}.
+
+\bibitem[Thomassin et~al.(2025)Thomassin, Guerard, Djebali, and
+  Lambert]{thomassin_quantum_2025}
+P.~Thomassin, G.~Guerard, S.~Djebali, and V.~M. Lambert.
+\newblock A {Quantum} {Model} for {Constrained} {Markowitz} {Modern}
+  {Portfolio} {Using} {Slack} {Variables} to {Process} {Mixed}-{Binary}
+  {Optimization} under {QAOA}.
+\newblock \textit{Quantum Machine Intelligence}, 7\penalty0 (2):\penalty0 102,
+  December 2025.
+\newblock ISSN 2524-4906, 2524-4914.
+\newblock \doi{10.1007/s42484-025-00330-z}.
+\newblock arXiv:2601.03278 [math].
+
+\bibitem[Zaman et~al.(2024)Zaman, Marchisio, Kashif, and
+  Shafique]{zaman_po-qa_2024}
+K.~Zaman, A.~Marchisio, M.~Kashif, and M.~Shafique.
+\newblock {PO}-{QA}: {A} {Framework} for {Portfolio} {Optimization} using
+  {Quantum} {Algorithms}, July 2024.
+\newblock arXiv:2407.19857 [quant-ph].
+
 \bibitem[Zecevic(2022)]{zecevic_quantum_2022}
 A.~Zecevic.
-\newblock \textit{Quantum and {Parallel} {Computing}: {A} {Tale} of {Two} {Paradigms}}.
+\newblock \textit{Quantum and {Parallel} {Computing}: {A} {Tale} of {Two}
+  {Paradigms}}.
 \newblock Independently published, 2022.
 \newblock ISBN 979-8-7885-0405-6.
+
+\bibitem[Zhou(2026)]{zhou_quantum_2026}
+J.~Zhou.
+\newblock Quantum {Finance}: {Exploring} the {Implications} of {Quantum}
+  {Computing} on {Financial} {Models}.
+\newblock \textit{Computational Economics}, 67\penalty0 (2):\penalty0
+  1043--1072, February 2026.
+\newblock ISSN 1572-9974.
+\newblock \doi{10.1007/s10614-025-10894-4}.
 
 \end{thebibliography}

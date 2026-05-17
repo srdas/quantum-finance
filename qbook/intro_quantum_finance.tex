@@ -1,2 +1,162 @@
 \chapter{What does quantum computing mean for finance?}
 
+\chapterSubhead{A survey of opportunities, algorithms, and the road ahead}
+
+Finance has always been hungry for computation. From the Black--Scholes formula to modern Monte Carlo risk engines, the history of quantitative finance is largely a story of harnessing more computing power to solve harder problems. Quantum computing represents a potential step-change in that story---not a modest acceleration, but a qualitatively different kind of computation that may unlock problems currently beyond practical reach.
+
+This chapter surveys what quantum computing means for finance practitioners, theorists, and regulators. We draw on a growing body of literature spanning quantum algorithms, financial applications, and empirical demonstrations on real quantum hardware. Our aim is to give the reader a clear-eyed picture: what quantum advantage means and where it genuinely applies, what the current state of hardware permits, and what the promising directions are for the decade ahead.
+
+%------------------------------------------------------------------
+\section{Why quantum computing, and why now?}
+%------------------------------------------------------------------
+
+Classical computers process information as bits---binary digits that are either 0 or 1. Quantum computers exploit the principles of quantum mechanics to process \keyterm{qubits}, which can exist in superpositions of 0 and 1 simultaneously. Combined with \keyterm{entanglement}---correlations between qubits with no classical analogue---and \keyterm{interference} (the ability to amplify correct answers and suppress wrong ones), quantum computers can in principle solve certain classes of problems exponentially faster than any classical machine.
+
+The key word is \emph{certain}. Quantum speedups are not universal. They arise for specific algorithmic structures: unstructured search (Grover's algorithm gives a quadratic speedup), linear systems (the HHL algorithm), quantum simulation of physical systems, and---critically for finance---sampling and Monte Carlo integration. Most financial bottlenecks fall squarely into the problems where quantum advantage has been theoretically established \citep{egger_quantum_2020,herman_quantum_2023,orus_quantum_2019}.
+
+Why now? The answer is Preskill's \keyterm{NISQ era} \citep{preskill_quantum_2018}. Noisy Intermediate-Scale Quantum (NISQ) devices---quantum processors with 50 to a few hundred qubits, subject to noise and without full error correction---are already available through cloud platforms from IBM, Google, and others. These machines cannot yet tackle large-scale financial problems with proven quantum advantage, but they are large enough to run proof-of-concept demonstrations, to benchmark quantum algorithms against classical baselines, and to identify where quantum techniques will first become practically relevant. The financial sector has accordingly begun sustained investment in quantum research \citep{auer_quantum_2024,soller_quantum_nodate,soller_quantum_nodate-1}.
+
+%------------------------------------------------------------------
+\section{The landscape of quantum finance}
+%------------------------------------------------------------------
+
+The literature on quantum computing for finance has expanded rapidly. Comprehensive surveys \citep{herman_survey_2022,herman_quantum_2023,orus_quantum_2019,egger_quantum_2020,bunescu_modern_2024,gong_quantum_2026-1,zhou_quantum_2026} identify three main domains where quantum techniques offer the strongest theoretical case for advantage: \keyterm{simulation and sampling} (quantum Monte Carlo), \keyterm{optimization} (portfolio construction, resource allocation), and \keyterm{machine learning} (pattern recognition, prediction). These three pillars map directly onto the core computational problems of the financial industry.
+
+\begin{remark}
+The survey by \citet{herman_quantum_2023} in \emph{Nature Reviews Physics} provides an especially clear roadmap. It is deliberately addressed to physicists---describing both the classical financial techniques and the quantum alternatives---and is a recommended starting point for readers new to the field.
+\end{remark}
+
+Alongside these opportunities, quantum computing introduces a significant risk: the ability of future quantum computers to break widely-used public-key cryptography. Financial systems rely on cryptographic protocols to secure transactions, authenticate identities, and protect sensitive data. The \keyterm{harvest now, decrypt later} threat---in which adversaries collect encrypted data today to decrypt it once quantum computers arrive---means that post-quantum security is already a strategic necessity, not a distant concern \citep{auer_quantum_2024,gong_quantum_2026-1}.
+
+We treat these topics in turn.
+
+%------------------------------------------------------------------
+\section{Quantum Monte Carlo and derivative pricing}
+%------------------------------------------------------------------
+
+Monte Carlo simulation is the backbone of computational finance. Pricing over-the-counter derivatives, computing value-at-risk (VaR), running scenario analyses for stress testing, and calibrating stochastic models all rely on drawing large numbers of random samples and averaging a payoff or loss function. Classical Monte Carlo converges at a rate proportional to $1/\sqrt{N}$, where $N$ is the number of samples. Doubling precision requires quadrupling the sample count---an expensive proposition for complex, high-dimensional problems.
+
+\keyterm{Quantum amplitude estimation} \citep{egger_quantum_2020}, which underlies quantum Monte Carlo, achieves a quadratic speedup: it achieves the same precision with $\sqrt{N}$ samples, or equivalently, it squares the convergence rate. For financial applications that spend significant compute budget on Monte Carlo, this is potentially transformative. The catch is that quantum amplitude estimation requires coherent quantum circuits of substantial depth, which is difficult on current NISQ hardware.
+
+\citet{stamatopoulos_option_2020} demonstrated a complete methodology for pricing options on a gate-based quantum computer. Using quantum amplitude estimation, they priced European calls and Asian options, constructing quantum circuits that encode the payoff distribution and estimate the expected payoff directly. The method provides a quadratic speedup over classical Monte Carlo in the number of oracle calls.
+
+For interest-rate derivatives, \citet{martin_toward_2021} adapted the quantum principal component analysis algorithm to the Heath--Jarrow--Morton framework. The HJM model describes forward rate dynamics through volatility factors; in its multifactor version, the number of stochastic factors drives computational cost. Quantum principal component analysis can reduce the effective dimensionality, and the authors demonstrated this on IBM's five-qubit quantum computer for $2\times 2$ and $3\times 3$ covariance matrices estimated from historical data.
+
+\citet{chen_quantum_2025} provided a rigorous complexity analysis of a quantum Monte Carlo algorithm for high-dimensional Black--Scholes PDEs. For payoff functions that are continuous and piecewise affine (covering most practical payoffs), the computational complexity is bounded polynomially in both the dimension $d$ of the PDE and the reciprocal of the prescribed accuracy $\varepsilon$. This establishes that quantum Monte Carlo can escape the curse of dimensionality for a broad class of option pricing problems.
+
+\citet{matsakos_quantum_2024} applied quantum Monte Carlo to financial risk analytics at a broader scale, addressing scenario generation for equity, rate, and credit risk factors simultaneously. Their work targets the computationally expensive risk measurement workflows used in regulatory capital calculations and risk management, where hundreds of thousands of Monte Carlo paths are routinely needed.
+
+\citet{blanchet_connecting_2025} provide a particularly accessible bridge between classical stochastic simulation and its quantum counterpart. Starting from Grover's algorithm for unstructured search, they build intuition through amplitude estimation toward Monte Carlo integration in finance, with hands-on Python/Qiskit implementations.
+
+%------------------------------------------------------------------
+\section{Portfolio optimization}
+%------------------------------------------------------------------
+
+Portfolio optimization is one of the most natural applications of quantum computing to finance. Markowitz mean--variance optimization is a quadratic program with linear constraints. At the scale of institutional portfolios---thousands of assets, cardinality constraints, transaction cost penalties, regulatory requirements---the problem becomes \keyterm[combinatorial optimization]{combinatorial}, entering the territory of NP-hard problems for which quantum annealers and variational quantum algorithms offer potential advantages.
+
+The standard quantum approach maps portfolio selection to a \keyterm{Quadratic Unconstrained Binary Optimization} (QUBO) problem \citep{orus_quantum_2019,egger_quantum_2020}. Each asset is represented by a binary variable indicating inclusion or exclusion. The objective and constraints are encoded in a Hamiltonian, and the ground state of that Hamiltonian corresponds to the optimal portfolio. Two main quantum approaches then apply: \keyterm{quantum annealing} (used by D-Wave hardware) and \keyterm{QAOA} (Quantum Approximate Optimization Algorithm), a gate-based variational method.
+
+\citet{morapakula_end--end_2026} present an end-to-end portfolio optimization pipeline combining continuous mean-variance and Sharpe-ratio formulations with a QUBO-based discrete asset selection stage solved on D-Wave's hybrid quantum annealing solver, followed by classical convex optimization for portfolio weights and quarterly rebalancing. Tested on Indian equity markets, the hybrid pipeline achieves competitive returns relative to benchmark indices. They are careful to frame the contribution as demonstrating feasibility and integration rather than claiming quantum advantage---an important distinction at the current stage of hardware maturity.
+
+\citet{thomassin_quantum_2025} address a fundamental challenge in quantum portfolio optimization: how to handle inequality constraints within a QAOA framework. Their approach embeds \keyterm{slack variables} directly into the problem Hamiltonian as ancilla qubits, converting inequality constraints into a QUBO formulation. This slack-ancilla scheme enables QAOA to find the optimal portfolio consistently in simulation, whereas standard penalty-based QAOA fails. They also derive a quantum uncertainty principle for the simultaneous precision of portfolio risk and return---a striking formal analogy between quantum mechanics and financial optimization.
+
+\citet{zaman_po-qa_2024} propose a scalable framework, PO-QA, for systematically studying how quantum circuit parameters (rotation blocks, repetition depth, entanglement patterns) affect QAOA and VQE (Variational Quantum Eigensolver) performance on portfolio optimization. Convergence to the classical eigensolver solution is used as the benchmark, providing practical guidance on circuit design for finance. The framework was accepted at the 2024 IEEE International Conference on Quantum Computing and Engineering.
+
+\citet{chou_quantum-inspired_2026} take a different approach: \keyterm{quantum-inspired} algorithms, classical algorithms that borrow ideas from quantum mechanics (tensor networks, quantum-like state evolution) without requiring quantum hardware. Applied to G7 currency portfolio management, they demonstrate that quantum-inspired optimization can already outperform standard classical methods on real financial data, offering a near-term path to value even before fault-tolerant quantum computers arrive.
+
+%------------------------------------------------------------------
+\section{Risk management and credit risk}
+%------------------------------------------------------------------
+
+Risk management encompasses a broad set of computational challenges: credit risk modeling, value-at-risk estimation, conditional value-at-risk, counterparty exposure, and stress testing. Many of these reduce to tail-probability estimation problems, which are notoriously expensive classically because the rare events that matter most require enormous simulation samples.
+
+\citet{dri_towards_2022} address credit risk analysis directly. A quantum algorithm for credit risk with quadratic speedup over classical methods had been established in prior work; they extend it to handle more realistic credit models. Their contributions include: a richer default probability model that accounts for multiple systemic risk factors (not just a single factor), and a flexible \keyterm{loss given default} parameter that accepts real-valued inputs rather than integers. The latter is critical for using real financial data in benchmarking. While the enhanced circuits are deeper and wider than the original, they map a path toward a practically useful quantum credit risk tool as hardware matures.
+
+\citet{matsakos_quantum_2024} address the same domain from a simulation angle. Their quantum Monte Carlo framework for financial risk analytics generates scenarios jointly for equity prices, interest rates, and credit spreads, enabling holistic risk measurement. This is relevant for derivative counterparty risk, regulatory stress testing, and internal model validation.
+
+\citet{zhou_quantum_2026} review the evidence that quantum Monte Carlo algorithms can reduce sample-size requirements by up to a factor of four compared to classical methods, with applications specifically to VaR and CVaR. They also survey the challenges: scalability, data quality, integration with legacy classical systems, and regulatory compliance---all of which must be solved before quantum risk tools can be deployed in production.
+
+%------------------------------------------------------------------
+\section{Quantum machine learning in finance}
+%------------------------------------------------------------------
+
+Machine learning has transformed quantitative finance over the past decade, and \keyterm{quantum machine learning} (QML) promises to extend that transformation by encoding data in quantum states that classical computers cannot efficiently represent \citep{biamonte_quantum_2017}. The key intuition is that quantum systems naturally generate probability distributions that are hard to sample classically; if financial data has a similar complex structure, quantum models may learn it more efficiently.
+
+\citet{biamonte_quantum_2017} provide the foundational survey of QML. They identify building blocks including quantum principal component analysis, quantum support vector machines, and quantum neural networks, all of which have potential speedups over their classical counterparts under specific conditions on the data-loading problem. The caveat---sometimes called the \keyterm{input problem}---is that efficiently loading classical data into quantum states is itself non-trivial and may limit practical speedups.
+
+In finance, QML applications include return prediction, volatility forecasting, fraud detection, and portfolio construction using quantum-enhanced feature spaces. \citet{herman_quantum_2023} provide a careful assessment: while the theoretical case for QML speedups is strong, the practical advantage on financial data depends heavily on the structure of that data and the efficiency of quantum data encoding.
+
+\citet{samal_quantum_2024} focus specifically on the intersection of quantum computing and Bayesian machine learning in finance. Bayesian methods are natural for financial modeling---they handle uncertainty explicitly and update beliefs as new data arrives---but Bayesian inference is computationally expensive. Quantum approaches to Bayesian inference may offer speedups for posterior sampling, relevant to risk model calibration and regime detection.
+
+%------------------------------------------------------------------
+\section{Algorithmic trading and market microstructure}
+%------------------------------------------------------------------
+
+The use of quantum computing in trading represents one of the most commercially sensitive application areas. \citet{ciceri_enhanced_2025} provide a rare empirical demonstration using real production-scale data. They study fill probability estimation for institutional algorithmic bond trading---the problem of predicting, for a given trade inquiry in the corporate bond market, the probability that the trade will actually execute at the quoted price.
+
+
+Using IBM Heron quantum processors, they apply quantum feature transformations to intraday trade event data, then feed these transformed features into classical machine learning models. The striking finding is a relative gain of up to 34\% in out-of-sample test scores for models with access to quantum hardware-transformed data compared to models using either the original data or noiseless quantum simulation. They conjecture that the inherent noise in current quantum hardware contributes to this improvement---the hardware noise acts as a form of stochastic regularization that improves generalization. This empirical result is both intriguing and controversial, and invites further study.
+
+\citet{huang_nus-frontiers--fintech-and-quantum-computing-2022part_nodate} provides a hands-on introduction to quantum finance through the lens of financial technology education, covering amplitude estimation, option pricing circuits, and portfolio optimization with Qiskit.
+
+%------------------------------------------------------------------
+\section{Post-quantum cryptography and financial security}
+%------------------------------------------------------------------
+
+The threat quantum computing poses to financial security is distinct from the opportunity it offers for financial computation. Shor's algorithm can factor large integers and solve the discrete logarithm problem in polynomial time, breaking RSA and elliptic-curve cryptography---the protocols that secure interbank settlements, electronic payments, digital signatures on securities, and encrypted communications throughout the financial system.
+
+This threat is not immediate: Shor's algorithm requires thousands of error-corrected logical qubits, which will take years or decades to achieve. However, the \emph{harvest now, decrypt later} attack vector is operational today. Adversaries can record encrypted financial communications now and decrypt them once powerful quantum computers arrive. For data that must remain confidential for years---strategic positions, client information, regulatory filings---this is an active risk.
+
+\citet{auer_quantum_2024}, writing for the Bank for International Settlements, lay out both the opportunities and risks of quantum computing for the financial system. They note that central banks, including the Banque de France, Deutsche Bundesbank, and the BIS Innovation Hub, have launched Project Leap to address post-quantum migration. The National Institute of Standards and Technology (NIST) has standardized post-quantum cryptographic algorithms, and financial regulators are increasingly requiring institutions to assess their cryptographic exposure.
+
+\citet{gong_quantum_2026-1} make the point directly: ``Post-quantum cryptography is already strategically necessary because financial infrastructures must migrate before fault-tolerant attacks arrive.'' The migration challenge is substantial---it requires identifying all cryptographic dependencies across complex IT infrastructure, updating protocols, and coordinating with counterparties and market infrastructure operators.
+
+%------------------------------------------------------------------
+\section{Current hardware, limitations, and the NISQ constraint}
+%------------------------------------------------------------------
+
+Every practical claim about quantum advantage in finance must be assessed against the reality of current hardware. NISQ devices suffer from:
+
+\begin{itemize}
+\item \textbf{Qubit noise.} Gate errors, measurement errors, and decoherence limit the depth of circuits that can execute reliably. Typical two-qubit gate error rates are on the order of $0.1\%$--$1\%$, which means circuits with thousands of gates accumulate significant error.
+\item \textbf{Limited qubit count.} Current devices have tens to a few hundred qubits. Financial problems of practical size---pricing a realistic exotic option, optimizing a large portfolio---require far more qubits than are available today.
+\item \textbf{Connectivity constraints.} Qubits are not all directly connected; two-qubit gates can only be applied to physically adjacent qubits, requiring costly SWAP operations for non-adjacent interactions.
+\item \textbf{No quantum memory.} Unlike classical RAM, quantum states cannot be easily stored and retrieved. All computation must happen within a single coherence time.
+\end{itemize}
+
+\citet{preskill_quantum_2018} was prescient in describing this era: NISQ devices ``will be useful tools for exploring many-body quantum physics, and may have other useful applications, but the 100-qubit quantum computer will not change the world right away.'' Seven years later, that assessment remains accurate. The 1000+ qubit devices now available are still far from the millions of physical qubits needed for fault-tolerant operation at the scale required for transformative financial applications.
+
+The implication is that near-term quantum finance must be pursued through \keyterm{hybrid quantum-classical} workflows \citep{morapakula_end--end_2026,gong_quantum_2026-1}. In these architectures, a classical optimizer drives the quantum circuit parameters, the quantum device evaluates a cost function or generates samples, and the result is fed back classically. This division of labor plays to the strengths of both paradigms while mitigating the limitations of current quantum hardware.
+
+The IBM Quantum platform and Qiskit framework \citep{pathak_evolution_2025,noauthor_quantum_nodate-1} have been central to financial demonstrations. Qiskit provides circuit design, simulation, error mitigation, and access to real hardware, making it the dominant toolkit for quantum finance research. IBM's Qiskit Finance module includes implementations of quantum amplitude estimation for option pricing, QAOA for portfolio optimization, and quantum data loading utilities.
+
+%------------------------------------------------------------------
+\section{Schaden's quantum finance: a different tradition}
+%------------------------------------------------------------------
+
+The term ``quantum finance'' predates the quantum computing era. \citet{schaden_quantum_2002} used quantum \emph{theory}---not quantum \emph{computing}---to model financial markets. In Schaden's formulation, the Hilbert space of market states consists of all possible configurations of investor holdings; the temporal evolution of an isolated market is unitary; and quantum operators represent basic financial transactions. The lognormal price distribution of classical finance emerges as the equilibrium of this quantum market model.
+
+This tradition of applying quantum \emph{formalism} to finance (path integrals for option pricing, Feynman--Kac formula interpretations, quantum field theory models of volatility) is distinct from the quantum \emph{computing} approach. Both traditions use the mathematics of quantum mechanics, but for different purposes: one to model market dynamics, the other to speed up computation. This book is primarily concerned with the latter---quantum computing for finance---but the former tradition provides useful conceptual tools and is worth knowing.
+
+\section{Prospects and the road ahead}
+
+The consensus emerging from the literature is carefully optimistic. Quantum computing for finance is neither imminent revolution nor distant fantasy---it is a maturing research area with credible near-term applications and compelling long-term prospects.
+
+The strongest near-term cases are \citep{gong_quantum_2026-1,herman_quantum_2023,egger_quantum_2020}:
+
+\begin{itemize}
+\item \textbf{Hybrid optimization} for portfolio selection with cardinality or combinatorial constraints, where quantum annealing or QAOA provides meaningful advantages on NISQ hardware for moderate-size problems.
+\item \textbf{Quantum amplitude estimation} for Monte Carlo integration, once circuit depth and qubit count allow reliable execution of the required circuits. Error mitigation techniques are making this practical at small scales today.
+\item \textbf{Quantum feature transformations} for machine learning, where quantum hardware noise may actually help by providing a richer feature space than noiseless simulation---as suggested by the bond trading results of \citet{ciceri_enhanced_2025}.
+\item \textbf{Post-quantum security migration}, which is already underway in the financial sector and does not wait for quantum advantage.
+\end{itemize}
+
+Longer-term, fault-tolerant quantum computers will enable the full theoretical speedups of quantum amplitude estimation (quadratic over Monte Carlo), quantum linear algebra (potentially exponential for structured linear systems), and quantum simulation of financial stochastic processes. The timeline is uncertain---perhaps 10--20 years for systems large enough to demonstrate unambiguous advantage on production-scale financial problems---but the trajectory of hardware improvement makes the direction clear.
+
+\begin{remark}
+For finance professionals, the actionable near-term steps are: (1) build internal quantum computing expertise, (2) audit cryptographic infrastructure for post-quantum migration, (3) partner with quantum hardware providers to run proof-of-concept experiments on actual business problems, and (4) track the literature---the field is moving quickly and the competitive landscape will shift as hardware matures.
+\end{remark}
+
+The remaining chapters of this book develop the mathematical and algorithmic foundations needed to understand quantum finance at a technical level. We begin with the mathematical preliminaries---vector spaces, Hilbert spaces, linear operators---that underlie quantum mechanics and quantum information. From there we build toward quantum circuits, quantum algorithms, and their financial applications. The goal is to equip the reader to read the primary literature, implement quantum finance algorithms in Qiskit, and evaluate claims of quantum advantage with appropriate rigor.
+
+\textsep

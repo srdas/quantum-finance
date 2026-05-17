@@ -1,32 +1,43 @@
-\contentsline {chapter}{List of figures}{4}{section*.2}%
-\contentsline {chapter}{Foreword}{5}{chapter*.3}%
-\contentsline {chapter}{\chapternumberline {1}What does quantum computing mean for finance?}{6}{chapter.4}%
-\contentsline {chapter}{\chapternumberline {2}Mathematical Preliminaries}{7}{chapter.5}%
-\contentsline {section}{\numberline {2.1}Vector Spaces}{8}{section.6}%
-\contentsline {section}{\numberline {2.2}Span and Linear Independence}{8}{section.9}%
-\contentsline {section}{\numberline {2.3}Basis and Dimension}{9}{section.11}%
-\contentsline {section}{\numberline {2.4}Inner (Scalar) Product}{9}{section.13}%
-\contentsline {section}{\numberline {2.5}Norms}{10}{section.18}%
-\contentsline {section}{\numberline {2.6}Hilbert Spaces}{10}{section.20}%
-\contentsline {section}{\numberline {2.7}Orthogonality and Orthonormal Bases}{12}{section.23}%
-\contentsline {section}{\numberline {2.8}Gram--Schmidt Orthogonalization}{12}{section.25}%
-\contentsline {section}{\numberline {2.9}Linear Operators}{13}{section.27}%
-\contentsline {section}{\numberline {2.10}Eigenvalues and Eigenvectors}{13}{section.28}%
-\contentsline {section}{\numberline {2.11}Nonsingular Matrices}{14}{section.30}%
-\contentsline {section}{\numberline {2.12}Similar Matrices}{14}{section.31}%
-\contentsline {section}{\numberline {2.13}Hermitian Operators}{14}{section.33}%
-\contentsline {section}{\numberline {2.14}Unitary Operators}{15}{section.35}%
-\contentsline {section}{\numberline {2.15}Spectral Decomposition}{15}{section.37}%
-\contentsline {section}{\numberline {2.16}Tensor Product of Vector Spaces}{16}{section.39}%
-\contentsline {section}{\numberline {2.17}Tensor Product of Operators}{17}{section.41}%
-\contentsline {section}{\numberline {2.18}Jordan Canonical Form}{17}{section.43}%
-\contentsline {section}{\numberline {2.19}Matrix Norms}{18}{section.45}%
-\contentsline {section}{\numberline {2.20}Quadratic Forms}{19}{section.47}%
-\contentsline {section}{\numberline {2.21}Functions of Matrices}{20}{section.49}%
-\contentsline {section}{\numberline {2.22}$L^2$ Function Spaces}{21}{section.51}%
-\contentsline {section}{\numberline {2.23}Fourier Series}{22}{section.52}%
-\contentsline {section}{\numberline {2.24}Eigenfunctions}{22}{section.53}%
-\contentsline {section}{\numberline {2.25}Hadamard Operator}{23}{section.55}%
-\contentsline {section}{\numberline {2.26}Adjoint, Self-Adjoint, and Unitary Operators on Function Spaces}{23}{section.56}%
-\contentsline {section}{\numberline {2.27}Matrix Representations of Operators}{24}{section.57}%
-\contentsline {section}{\numberline {2.28}Coordinate Transformations}{25}{section.59}%
+\contentsline {chapter}{List of figures}{5}{section*.2}%
+\contentsline {chapter}{Foreword}{6}{chapter*.3}%
+\contentsline {chapter}{\chapternumberline {1}What does quantum computing mean for finance?}{7}{chapter.4}%
+\contentsline {section}{\numberline {1.1}Why quantum computing, and why now?}{8}{section.5}%
+\contentsline {section}{\numberline {1.2}The landscape of quantum finance}{9}{section.6}%
+\contentsline {section}{\numberline {1.3}Quantum Monte Carlo and derivative pricing}{10}{section.8}%
+\contentsline {section}{\numberline {1.4}Portfolio optimization}{13}{section.9}%
+\contentsline {section}{\numberline {1.5}Risk management and credit risk}{15}{section.10}%
+\contentsline {section}{\numberline {1.6}Quantum machine learning in finance}{16}{section.11}%
+\contentsline {section}{\numberline {1.7}Algorithmic trading and market microstructure}{18}{section.12}%
+\contentsline {section}{\numberline {1.8}Post-quantum cryptography and financial security}{19}{section.13}%
+\contentsline {section}{\numberline {1.9}Current hardware, limitations, and the NISQ constraint}{20}{section.14}%
+\contentsline {section}{\numberline {1.10}Schaden's quantum finance: a different tradition}{22}{section.15}%
+\contentsline {section}{\numberline {1.11}Prospects and the road ahead}{23}{section.16}%
+\contentsline {chapter}{\chapternumberline {2}Mathematical Preliminaries}{25}{chapter.18}%
+\contentsline {section}{\numberline {2.1}Vector Spaces}{26}{section.19}%
+\contentsline {section}{\numberline {2.2}Span and Linear Independence}{26}{section.22}%
+\contentsline {section}{\numberline {2.3}Basis and Dimension}{27}{section.24}%
+\contentsline {section}{\numberline {2.4}Inner (Scalar) Product}{27}{section.26}%
+\contentsline {section}{\numberline {2.5}Norms}{28}{section.31}%
+\contentsline {section}{\numberline {2.6}Hilbert Spaces}{28}{section.33}%
+\contentsline {section}{\numberline {2.7}Orthogonality and Orthonormal Bases}{30}{section.36}%
+\contentsline {section}{\numberline {2.8}Gram--Schmidt Orthogonalization}{30}{section.38}%
+\contentsline {section}{\numberline {2.9}Linear Operators}{31}{section.40}%
+\contentsline {section}{\numberline {2.10}Eigenvalues and Eigenvectors}{31}{section.41}%
+\contentsline {section}{\numberline {2.11}Nonsingular Matrices}{32}{section.43}%
+\contentsline {section}{\numberline {2.12}Similar Matrices}{32}{section.44}%
+\contentsline {section}{\numberline {2.13}Hermitian Operators}{32}{section.46}%
+\contentsline {section}{\numberline {2.14}Unitary Operators}{33}{section.48}%
+\contentsline {section}{\numberline {2.15}Spectral Decomposition}{33}{section.50}%
+\contentsline {section}{\numberline {2.16}Tensor Product of Vector Spaces}{34}{section.52}%
+\contentsline {section}{\numberline {2.17}Tensor Product of Operators}{35}{section.54}%
+\contentsline {section}{\numberline {2.18}Jordan Canonical Form}{35}{section.56}%
+\contentsline {section}{\numberline {2.19}Matrix Norms}{36}{section.58}%
+\contentsline {section}{\numberline {2.20}Quadratic Forms}{37}{section.60}%
+\contentsline {section}{\numberline {2.21}Functions of Matrices}{38}{section.62}%
+\contentsline {section}{\numberline {2.22}$L^2$ Function Spaces}{39}{section.64}%
+\contentsline {section}{\numberline {2.23}Fourier Series}{40}{section.65}%
+\contentsline {section}{\numberline {2.24}Eigenfunctions}{40}{section.66}%
+\contentsline {section}{\numberline {2.25}Hadamard Operator}{41}{section.68}%
+\contentsline {section}{\numberline {2.26}Adjoint, Self-Adjoint, and Unitary Operators on Function Spaces}{41}{section.69}%
+\contentsline {section}{\numberline {2.27}Matrix Representations of Operators}{42}{section.70}%
+\contentsline {section}{\numberline {2.28}Coordinate Transformations}{43}{section.72}%

@@ -1,7 +1,17 @@
 {
   "permissions": {
     "allow": [
-      "Bash(pdftotext /Users/srdas/CODE/quantum-finance/notes/Week1.pdf -)"
+      "Bash(pdftotext /Users/srdas/CODE/quantum-finance/notes/Week1.pdf -)",
+      "Bash(pdflatex -interaction=nonstopmode qbook.tex)",
+      "Bash(bibtex qbook *)",
+      "Bash(python3 -c ' *)",
+      "Bash(sed -n '126,132p' /home/srdas/CODE/quantum-finance/qbook/qbook.bbl)",
+      "Bash(grep -v \"^$\")",
+      "Bash(python3 -)",
+      "Bash(rm -f qbook.bbl qbook.aux && pdflatex -interaction=nonstopmode qbook.tex 2>/dev/null | tail -1 && bibtex qbook 2>&1 | grep -i \"error\\\\|Error\" | head -5)"
+    ],
+    "additionalDirectories": [
+      "/home/srdas/CODE/quantum-finance/qbook"
     ]
   }
 }

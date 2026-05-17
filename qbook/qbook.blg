@@ -3,44 +3,51 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: qbook.aux
 The style file: plainnatmodified.bst
 Database file #1: Quantum.bib
-You've used 1 entry,
+Warning--to sort, need author or key in noauthor_quantum_nodate-1
+Warning--empty year in noauthor_quantum_nodate-1
+Warning--empty journal in herman_survey_2022
+Warning--empty year in huang_nus-frontiers--fintech-and-quantum-computing-2022part_nodate
+Warning--empty year in soller_quantum_nodate-1
+Warning--empty year in soller_quantum_nodate
+You've used 29 entries,
             2812 wiz_defined-function locations,
-            604 strings with 5013 characters,
-and the built_in function-call counts, 338 in all, are:
-= -- 25
-> -- 10
-< -- 1
-+ -- 4
-- -- 3
-* -- 18
-:= -- 61
-add.period$ -- 4
-call.type$ -- 1
-change.case$ -- 3
-chr.to.int$ -- 1
-cite$ -- 2
-duplicate$ -- 20
-empty$ -- 33
-format.name$ -- 4
-if$ -- 65
+            790 strings with 12376 characters,
+and the built_in function-call counts, 15038 in all, are:
+= -- 1340
+> -- 1128
+< -- 9
++ -- 419
+- -- 334
+* -- 1278
+:= -- 2312
+add.period$ -- 115
+call.type$ -- 29
+change.case$ -- 183
+chr.to.int$ -- 29
+cite$ -- 65
+duplicate$ -- 562
+empty$ -- 1031
+format.name$ -- 387
+if$ -- 3110
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 2
-newline$ -- 14
-num.names$ -- 4
-pop$ -- 11
+missing$ -- 19
+newline$ -- 181
+num.names$ -- 112
+pop$ -- 469
 preamble$ -- 1
-purify$ -- 3
+purify$ -- 183
 quote$ -- 0
-skip$ -- 13
+skip$ -- 541
 stack$ -- 0
-substring$ -- 2
-swap$ -- 1
+substring$ -- 307
+swap$ -- 48
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 6
-warning$ -- 0
-while$ -- 3
+type$ -- 314
+warning$ -- 6
+while$ -- 103
 width$ -- 0
-write$ -- 21
+write$ -- 421
+(There were 6 warnings)
