@@ -8,10 +8,14 @@
       "Bash(sed -n '126,132p' /home/srdas/CODE/quantum-finance/qbook/qbook.bbl)",
       "Bash(grep -v \"^$\")",
       "Bash(python3 -)",
-      "Bash(rm -f qbook.bbl qbook.aux && pdflatex -interaction=nonstopmode qbook.tex 2>/dev/null | tail -1 && bibtex qbook 2>&1 | grep -i \"error\\\\|Error\" | head -5)"
+      "Bash(rm -f qbook.bbl qbook.aux && pdflatex -interaction=nonstopmode qbook.tex 2>/dev/null | tail -1 && bibtex qbook 2>&1 | grep -i \"error\\\\|Error\" | head -5)",
+      "Bash(pdflatex --version)",
+      "Bash(pdflatex -interaction=nonstopmode -halt-on-error qbook.tex)",
+      "Bash(rm -f qbook.aux qbook.bbl qbook.blg qbook.brf qbook.idx qbook.ilg qbook.ind qbook.log qbook.out qbook.toc qbook.lof qbook.fdb_latexmk qbook.fls qbook.synctex.gz)"
     ],
     "additionalDirectories": [
-      "/home/srdas/CODE/quantum-finance/qbook"
+      "/home/srdas/CODE/quantum-finance/qbook",
+      "/Users/srdas/CODE/quantum-finance/qbook"
     ]
   }
 }

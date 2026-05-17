@@ -1,0 +1,134 @@
+\chapter{Saving Qubits from Themselves}
+
+\chapterSubhead{Quantum error correction and the road to fault tolerance}
+
+Classical computers are robust: a stray cosmic ray flips a bit, ECC memory catches it, the user never knows. Quantum computers are fragile: noise corrupts the very superposition that the computation depends on, and you cannot simply read the qubit to check it, because reading collapses the state. \keyterm{Quantum error correction} (QEC) solves this seemingly impossible problem by encoding a single logical qubit in many physical qubits and using clever syndrome measurements that detect errors without disturbing the encoded information. This chapter sketches the central ideas \citep{nielsen_quantum_2010,fowler_surface_2012}.
+
+%------------------------------------------------------------------
+\section{Why classical strategies don't work}
+%------------------------------------------------------------------
+
+The obvious classical strategy for error correction is repetition: store each bit as three copies, decode by majority vote. For qubits this fails for three reasons.
+
+\textbf{No cloning.} The \keyterm{no-cloning theorem} (Chapter on the Qubit) forbids copying an unknown qubit. We cannot make three identical replicas of $|\psi\rangle$ to vote on.
+
+\textbf{Continuous errors.} A classical bit flips or doesn't. A qubit can experience small rotations through angle $\epsilon$, errors of any continuous magnitude. We must somehow turn continuous error processes into a discrete error to correct.
+
+\textbf{Measurement collapse.} Measuring a qubit to check its value destroys the superposition. We need a way to detect errors without learning the encoded information.
+
+Each of these obstacles has a quantum solution, and together they yield the QEC framework.
+
+%------------------------------------------------------------------
+\section{The three-qubit codes}
+%------------------------------------------------------------------
+
+The simplest illustrative codes correct only bit-flip ($X$) or only phase-flip ($Z$) errors. The \keyterm{three-qubit bit-flip code} encodes a logical qubit as
+\[
+  |0_L\rangle = |000\rangle, \qquad |1_L\rangle = |111\rangle.
+\]
+A logical state $\alpha|0_L\rangle + \beta|1_L\rangle = \alpha|000\rangle + \beta|111\rangle$ is created from $\alpha|0\rangle + \beta|1\rangle$ by two CNOTs (cloning the basis but not the amplitudes). If one of the three qubits suffers a bit-flip, syndrome measurements of $Z_1 Z_2$ and $Z_2 Z_3$ identify which qubit flipped without measuring the logical state, and an $X$ gate on that qubit restores the code. Similar logic, with Hadamards inserted, gives the three-qubit phase-flip code.
+
+These codes are pedagogically essential but not practical: they correct only one type of error. The first code that corrects an arbitrary single-qubit error---bit-flip, phase-flip, both, or any small continuous rotation thereof---was Shor's nine-qubit code \citep{shor_scheme_1995}.
+
+%------------------------------------------------------------------
+\section{Shor's nine-qubit code}
+%------------------------------------------------------------------
+
+\citet{shor_scheme_1995} constructed the first code that corrects an arbitrary single-qubit error by concatenating the phase-flip and bit-flip codes:
+\[
+  |0_L\rangle = \tfrac{1}{\sqrt 8}(|000\rangle+|111\rangle)(|000\rangle+|111\rangle)(|000\rangle+|111\rangle),
+\]
+\[
+  |1_L\rangle = \tfrac{1}{\sqrt 8}(|000\rangle-|111\rangle)(|000\rangle-|111\rangle)(|000\rangle-|111\rangle).
+\]
+Nine physical qubits encode one logical qubit. Syndrome measurements identify which qubit was struck by which error type, allowing correction.
+
+The crucial structural insight is \keyterm{discretization of continuous errors}. A small rotation $e^{i\epsilon X}|\psi\rangle = \cos\epsilon\,|\psi\rangle + i\sin\epsilon\,X|\psi\rangle$ is a superposition of ``no error'' and ``bit flip on this qubit.'' The syndrome measurement collapses this superposition into one of the two outcomes; if it collapses to ``bit flip,'' the correction is applied, and if to ``no error,'' nothing is done. Either way the state is restored. The continuous error has been converted to a discrete one by the measurement.
+
+%------------------------------------------------------------------
+\section{Stabilizer formalism and CSS codes}
+%------------------------------------------------------------------
+
+The general framework that made QEC tractable is the \keyterm{stabilizer formalism}. A stabilizer code is defined by a set of commuting Pauli operators (the stabilizers), whose common $+1$ eigenspace forms the code subspace. Errors are detected by measuring the stabilizers and looking for syndromes (which stabilizers report $-1$).
+
+The \keyterm{CSS} construction \citep{calderbank_good_1996,steane_error_1996} produces quantum codes from pairs of classical linear codes satisfying a duality condition. The Steane $[[7,1,3]]$ code encodes one logical qubit in seven physical qubits and corrects any single-qubit error; it is one of the smallest practical CSS codes and remains a standard pedagogical example.
+
+CSS codes have the operational advantage that logical Clifford gates can be implemented \emph{transversally}: a Clifford gate on the logical qubit is obtained by applying the same gate to each physical qubit independently. Transversal gates do not propagate errors within an encoded block, which is essential for fault tolerance.
+
+\begin{remark}
+Not every desired logical gate is transversal. The $T$-gate, needed for universality, is not transversal in CSS codes; it must be implemented via \keyterm{magic state distillation}, an expensive procedure that prepares high-fidelity ancillary states and consumes them to implement $T$-gates. Magic state overhead is a significant practical concern in fault-tolerant cost estimates.
+\end{remark}
+
+%------------------------------------------------------------------
+\section{The surface code}
+%------------------------------------------------------------------
+
+The dominant code for near-term fault-tolerant proposals is the \keyterm{surface code} \citep{kitaev_fault-tolerant_2003,fowler_surface_2012}. It is a CSS code defined on a 2D grid of physical qubits, with stabilizers measured by local four-qubit syndrome checks involving only nearest-neighbour qubits. The surface code's strengths:
+
+\begin{itemize}
+\item \textbf{Locality.} All operations are nearest-neighbour, well-matched to chip layouts.
+\item \textbf{High threshold.} The error correction threshold---the physical error rate below which logical errors can be made arbitrarily small by increasing code distance---is around $1\%$ for the surface code, the highest of any practical code family.
+\item \textbf{Scalability.} The code distance $d$ scales with the linear size of the grid; the logical error rate decays exponentially as $\sim p^{d/2}$ where $p$ is the physical error rate.
+\end{itemize}
+
+The cost is that one logical qubit requires $O(d^2)$ physical qubits. For a target logical error rate $10^{-12}$ at physical error rate $10^{-3}$, the code distance might be $d = 15$ or higher, demanding several hundred physical qubits per logical qubit. For Shor's algorithm on a 2048-bit RSA key, current estimates put the resource requirement at millions of physical qubits running for hours \citep{nielsen_quantum_2010}.
+
+\begin{example}
+A distance-3 surface code encodes one logical qubit in 17 physical qubits (9 data, 8 ancilla). A distance-5 code uses 49 physical qubits. The footprint grows quadratically with distance. Current hardware has produced distance-3 and distance-5 demonstrations, with logical error rates approaching but not yet beating the threshold.
+\end{example}
+
+%------------------------------------------------------------------
+\section{The threshold theorem and fault tolerance}
+%------------------------------------------------------------------
+
+The \keyterm{threshold theorem} \citep{aharonov_fault-tolerant_2008,shor_fault-tolerant_1996} states that if the physical error rate per gate is below some threshold $p_{\text{th}}$, then arbitrarily long quantum computations can be performed with arbitrarily high reliability by encoding qubits in a sufficiently large code. The theorem's existence makes fault-tolerant quantum computing in principle possible. The practical question is what $p_{\text{th}}$ is in real hardware and how much overhead the encoding costs.
+
+For surface codes, the threshold is $\sim 1\%$. Current superconducting two-qubit gate fidelities are $\sim 99.5\%$ or better on the best platforms, putting hardware just below threshold. This is what makes fault tolerance suddenly feel near at hand rather than decades away.
+
+The threshold theorem includes important fine print:
+\begin{itemize}
+\item Errors must be local and approximately uncorrelated (correlated bursts violate the assumptions).
+\item The overhead grows polynomially in the inverse logical error rate (modest, but not free).
+\item The threshold value depends on the code, decoder, and noise model.
+\end{itemize}
+
+\begin{remark}
+A subtle point: ``below threshold'' is not a yes/no statement. Different operations (state preparation, gates, measurement) may have different effective error rates. Demonstrating that a logical qubit has \emph{lower error rate} than a physical qubit at the same noise level---genuine sub-threshold behavior---is the milestone the field has been chasing. Recent surface code demonstrations are achieving it for the first time.
+\end{remark}
+
+%------------------------------------------------------------------
+\section{Where the field stands in 2026}
+%------------------------------------------------------------------
+
+As of 2026, several groups have demonstrated logical qubits with surface codes at distance 3 and 5, with logical error rates that just beat the corresponding physical error rates. These are first-of-their-kind demonstrations: small numbers of logical qubits, short execution times, but conceptually full QEC operating below threshold. Roadmaps from IBM, Google, Quantinuum, and others target tens to hundreds of logical qubits in the second half of the 2020s.
+
+What this means for finance:
+\begin{itemize}
+\item Cryptographically relevant Shor's algorithm runs (Chapter on Shor) still require thousands of logical qubits and trillions of $T$-gates---likely a decade or more away.
+\item Smaller logical-qubit demonstrations of useful financial algorithms (e.g., 20 logical qubits running amplitude estimation) may arrive within five years.
+\item In the meantime, the NISQ era continues, and error mitigation (Chapter on NISQ) is the bridge to fault tolerance.
+\end{itemize}
+
+%------------------------------------------------------------------
+\section{Beyond surface codes: high-rate codes and biased noise}
+%------------------------------------------------------------------
+
+The surface code's $O(d^2)$ overhead is expensive. Research on alternative codes seeks to reduce this overhead while preserving the surface code's locality and high threshold. Some promising directions:
+
+\textbf{Color codes.} Three-dimensional CSS codes with all single-qubit Clifford gates transversal, including $T$-gates in three dimensions. The 2D version has the same overhead as the surface code; the 3D version gains some transversality at the cost of harder fabrication.
+
+\textbf{Quantum LDPC codes.} Low-density parity-check codes with constant rate (linear in the number of physical qubits), substantially more efficient than the surface code's vanishing rate. Long-range syndrome connections are required, which is an obstacle for planar architectures.
+
+\textbf{Biased-noise codes.} Codes optimized for noise channels where one error type dominates (e.g., $T_1$-dominated relaxation in superconducting qubits). The Kitaev cat-state code and the dual-rail encoding can achieve much lower thresholds for biased noise.
+
+The bottom line: surface codes are the leading near-term choice, but the long-run code landscape is more diverse, and the choice of code may eventually be platform-dependent.
+
+%------------------------------------------------------------------
+\section{The QEC takeaway}
+%------------------------------------------------------------------
+
+Quantum error correction is the bridge from NISQ to scale. The conceptual content is profound: encode information so that no measurement reveals the encoded state, then measure only \emph{differences} between code configurations to detect errors. The mathematical machinery is intricate but mature, and the engineering challenge is now squarely about reducing physical error rates below threshold and managing the overhead of code distance.
+
+For finance applications, QEC is not a near-term concern but a long-term enabler. The transformative quantum-finance use cases---factoring RSA at scale, computing exact derivative prices on a high-dimensional model---are gated on fault-tolerant computation. The chapters on RSA, Elliptic Curves, and Shor's algorithm assume fault tolerance has arrived. The NISQ chapter, by contrast, assumes it hasn't.
+
+\textsep

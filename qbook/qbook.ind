@@ -1,50 +1,205 @@
 \begin{theindex}
 
-  \item combinatorial optimization, \hyperpage{13}
+  \item 1/f noise, \hyperpage{144}
 
   \indexspace
 
-  \item entanglement, \hyperpage{8}
+  \item amplitude encoding, \hyperpage{98}
+  \item amplitudes, \hyperpage{52}, \hyperpage{86}
+  \item AND, \hyperpage{51}
+  \item asymmetric, \hyperpage{180}
 
   \indexspace
 
-  \item harvest now, decrypt later, \hyperpage{10}
-  \item hybrid quantum-classical, \hyperpage{21}
+  \item Bell states, \hyperpage{103}
+  \item bilinear pairings, \hyperpage{195}
+  \item Bloch sphere, \hyperpage{88}
+  \item Born rule, \hyperpage{71}
+  \item bra, \hyperpage{78}
+  \item Bra--ket, \hyperpage{77}
+  \item bra--ket, \hyperpage{76}
 
   \indexspace
 
-  \item input problem, \hyperpage{17}
-  \item interference, \hyperpage{8}
+  \item Cauchy--Schwarz inequality, \hyperpage{79}
+  \item Church--Turing--Deutsch, \hyperpage{63}
+  \item circuit layer operations per second, \hyperpage{137}
+  \item classical bit, \hyperpage{51}
+  \item Clifford+T, \hyperpage{89}
+  \item CNOT, \hyperpage{61}
+  \item coherences, \hyperpage{100}
+  \item coherent, \hyperpage{114}
+  \item coherent superposition, \hyperpage{99}
+  \item combinatorial optimization, \hyperpage{19}
+  \item completeness relation, \hyperpage{81}
+  \item computational basis, \hyperpage{86}
+  \item cross terms, \hyperpage{112}
+  \item crypto-agility, \hyperpage{208}
+  \item CSS, \hyperpage{152}
 
   \indexspace
 
-  \item loss given default, \hyperpage{15}
+  \item Decoherence, \hyperpage{140}
+  \item decoherence, \hyperpage{115}
+  \item density operator, \hyperpage{73}
+  \item discrete logarithm problem, \hyperpage{204}
+  \item discretization of continuous errors, \hyperpage{152}
 
   \indexspace
 
-  \item machine learning, \hyperpage{9}
+  \item ECC, \hyperpage{209}
+  \item elliptic curve, \hyperpage{189}
+  \item elliptic curve discrete logarithm problem, \hyperpage{190}
+  \item elliptic curves, \hyperpage{187}
+  \item elliptic-curve cryptography, \hyperpage{188}
+  \item entangled, \hyperpage{72}, \hyperpage{103}
+  \item entanglement, \hyperpage{14}, \hyperpage{101, 102}, 
+		\hyperpage{208}
+  \item entanglement-based, \hyperpage{108}
+  \item entropy of entanglement, \hyperpage{105}
+  \item EPR paradox, \hyperpage{104}
+  \item error correction, \hyperpage{115}
+  \item Error mitigation, \hyperpage{146}
+  \item error mitigation, \hyperpage{162}
+  \item expectation value, \hyperpage{71}
 
   \indexspace
 
-  \item NISQ era, \hyperpage{9}
+  \item fault-tolerant, \hyperpage{209}
+  \item Feynman--Kac, \hyperpage{125}
+  \item fidelity, \hyperpage{74}
 
   \indexspace
 
-  \item optimization, \hyperpage{9}
+  \item Hamiltonian, \hyperpage{121}
+  \item harvest now, decrypt later, \hyperpage{16}, \hyperpage{186}
+  \item hybrid quantum--classical, \hyperpage{57}
+  \item hybrid quantum-classical, \hyperpage{27}
 
   \indexspace
 
-  \item QAOA, \hyperpage{13}
-  \item Quadratic Unconstrained Binary Optimization, \hyperpage{13}
-  \item Quantum amplitude estimation, \hyperpage{11}
-  \item quantum annealing, \hyperpage{13}
-  \item quantum machine learning, \hyperpage{16}
-  \item quantum-inspired, \hyperpage{15}
-  \item qubits, \hyperpage{8}
+  \item input problem, \hyperpage{23}, \hyperpage{98}
+  \item integer factorization, \hyperpage{181}
+  \item interference, \hyperpage{14}, \hyperpage{97}, \hyperpage{101}, 
+		\hyperpage{109}, \hyperpage{111}, \hyperpage{208}
 
   \indexspace
 
-  \item simulation and sampling, \hyperpage{9}
-  \item slack variables, \hyperpage{14}
+  \item jump operators, \hyperpage{127}, \hyperpage{144}
+
+  \indexspace
+
+  \item ket, \hyperpage{78}
+  \item Kraus representation, \hyperpage{143}
+
+  \indexspace
+
+  \item Larmor precession, \hyperpage{122}
+  \item Lindblad master equation, \hyperpage{144}
+  \item loss given default, \hyperpage{21}
+
+  \indexspace
+
+  \item machine learning, \hyperpage{15}
+  \item magic state distillation, \hyperpage{153}
+  \item measurement, \hyperpage{208}
+
+  \indexspace
+
+  \item NAND, \hyperpage{51}
+  \item NISQ, \hyperpage{159}
+  \item NISQ era, \hyperpage{15}
+  \item no-cloning theorem, \hyperpage{74}, \hyperpage{90}, 
+		\hyperpage{150}
+  \item no-signalling theorem, \hyperpage{105}
+  \item NOT, \hyperpage{51}
+  \item number field sieve, \hyperpage{182}
+
+  \indexspace
+
+  \item open quantum systems, \hyperpage{127}
+  \item optimization, \hyperpage{15}
+  \item OR, \hyperpage{51}
+  \item order, \hyperpage{200}
+  \item outer product, \hyperpage{80}
+
+  \indexspace
+
+  \item period, \hyperpage{200}
+  \item phase kickback, \hyperpage{115}
+  \item post-quantum cryptography, \hyperpage{187}
+  \item primitives, \hyperpage{172}
+  \item projector, \hyperpage{80}
+  \item public-key, \hyperpage{180}
+
+  \indexspace
+
+  \item QAOA, \hyperpage{19}
+  \item Qiskit, \hyperpage{167, 168}, \hyperpage{209}
+  \item Quadratic Unconstrained Binary Optimization, \hyperpage{19}
+  \item Quantum amplitude estimation, \hyperpage{17}
+  \item quantum amplitude estimation, \hyperpage{98}
+  \item quantum annealing, \hyperpage{19}
+  \item quantum channel, \hyperpage{143}
+  \item quantum circuit, \hyperpage{61}
+  \item Quantum error correction, \hyperpage{149}
+  \item quantum error correction, \hyperpage{65}, \hyperpage{148}
+  \item quantum gate, \hyperpage{61}
+  \item quantum machine learning, \hyperpage{22}
+  \item quantum operation, \hyperpage{143}
+  \item quantum parallelism, \hyperpage{97}
+  \item quantum supremacy, \hyperpage{131}
+  \item quantum-inspired, \hyperpage{21}
+  \item qubit, \hyperpage{52}, \hyperpage{60}, \hyperpage{85}, 
+		\hyperpage{208}
+  \item qubits, \hyperpage{14}
+
+  \indexspace
+
+  \item ray, \hyperpage{70}
+  \item resolution of the identity, \hyperpage{81}
+  \item RSA, \hyperpage{179}, \hyperpage{209}
+  \item Rydberg interactions, \hyperpage{133}
+
+  \indexspace
+
+  \item scalar multiplication, \hyperpage{190}
+  \item Schmidt decomposition, \hyperpage{105}
+  \item Schmidt rank, \hyperpage{106}
+  \item Schr\"odinger equation, \hyperpage{120}
+  \item separable, \hyperpage{103}
+  \item shallow amplitude estimation, \hyperpage{117}
+  \item shallow ansatz, \hyperpage{108}
+  \item Shor's algorithm, \hyperpage{164}, \hyperpage{187}
+  \item simulation and sampling, \hyperpage{15}
+  \item slack variables, \hyperpage{20}
+  \item stabilizer formalism, \hyperpage{152}
+  \item stationary states, \hyperpage{122}
+  \item statistical mixture, \hyperpage{99}
+  \item superposition, \hyperpage{69}, \hyperpage{208}
+  \item superposition principle, \hyperpage{94}
+  \item surface code, \hyperpage{153}
+
+  \indexspace
+
+  \item tensor product, \hyperpage{72}
+  \item three-qubit bit-flip code, \hyperpage{150}
+  \item threshold theorem, \hyperpage{154}
+  \item time-independent Schr\"odinger equation, \hyperpage{121}
+  \item Toffoli gate, \hyperpage{55}
+  \item trace distance, \hyperpage{74}
+  \item transmon, \hyperpage{131}
+  \item Transpilation, \hyperpage{171}
+  \item trapdoor function, \hyperpage{180}
+
+  \indexspace
+
+  \item uniform superposition, \hyperpage{96}
+  \item unitary, \hyperpage{55}
+  \item universal gate set, \hyperpage{61}
+
+  \indexspace
+
+  \item variational quantum algorithm, \hyperpage{160}
 
 \end{theindex}

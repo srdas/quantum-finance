@@ -1,0 +1,127 @@
+\chapter{Where Quantum States Live}
+
+\chapterSubhead{Hilbert space as the stage of quantum mechanics}
+
+Hilbert space is the mathematical home of quantum mechanics. Section~\ref{sec:hilbert} introduced it formally; this chapter walks around the same object from a physics-and-computing point of view. The aim is to translate definitions into intuition: which vectors count as states, what counts as an observable, how composite systems are assembled, and why the geometry of unit vectors is the right setting for quantum probability.
+
+%------------------------------------------------------------------
+\section{Why a complex Hilbert space?}
+%------------------------------------------------------------------
+
+The motivation for choosing a complex Hilbert space as the state space of a quantum system goes back to \citet{dirac_principles_1958} and \citet{schrodinger_undulatory_1926}. Three properties are essential.
+
+\begin{itemize}
+  \item \textbf{Linearity.} Quantum dynamics is linear: if $|\psi_1\rangle$ and $|\psi_2\rangle$ are valid states, so is any linear combination. This linearity is what makes \keyterm{superposition} possible.
+  \item \textbf{Complex amplitudes.} Real numbers cannot account for interference of wave functions with relative phase. Complex amplitudes are the minimal extension that supports both the magnitude (probability) and the phase (interference) of quantum states.
+  \item \textbf{Inner product.} An inner product allows us to measure angles, compute overlaps, and define orthogonality. These notions become \emph{probabilities}, \emph{transition amplitudes}, and \emph{distinguishability of states}.
+\end{itemize}
+
+A Hilbert space $\mathcal{H}$ is thus a complex vector space equipped with a positive-definite inner product, complete with respect to the induced norm. For quantum computing we work almost exclusively in finite-dimensional spaces $\mathbb{C}^d$, where the completeness condition is automatic. The infinite-dimensional case ($L^2$, Section~\ref{sec:l2}) arises only for continuous-variable systems such as a particle's position--momentum space.
+
+%------------------------------------------------------------------
+\section{States as rays, not vectors}
+%------------------------------------------------------------------
+
+Strictly speaking, a quantum state is not a unit vector but a \keyterm{ray}: an equivalence class of vectors differing by a global phase, $|\psi\rangle \sim e^{i\theta}|\psi\rangle$. A global phase is physically unobservable because the Born rule depends only on $|\langle\phi|\psi\rangle|^2$ for any reference $|\phi\rangle$. The global phase is invisible.
+
+Relative phases are very visible. The states
+\[
+  \tfrac{1}{\sqrt 2}(|0\rangle + |1\rangle) \quad \text{and} \quad \tfrac{1}{\sqrt 2}(|0\rangle - |1\rangle)
+\]
+differ by a relative sign and are orthogonal: $\langle +|-\rangle = 0$. Measuring in the $|0\rangle,|1\rangle$ basis gives identical statistics (probability $\tfrac12$ each), but measuring after a Hadamard gate distinguishes them with certainty. Quantum information is encoded in relative, not absolute, phases.
+
+\begin{remark}
+In practice we work with unit vectors and remember that physically meaningful operations preserve normalization. The space of physical pure states is the complex projective space $\mathbb{CP}^{d-1}$, but the linear formalism of $\mathcal{H}$ is what we compute with.
+\end{remark}
+
+%------------------------------------------------------------------
+\section{Observables as Hermitian operators}
+%------------------------------------------------------------------
+
+Every measurable quantity (energy, spin component, position) corresponds to a Hermitian operator $A$ on $\mathcal{H}$ (Section~\ref{sec:hermitian-ops}). The possible outcomes of measuring $A$ are its eigenvalues $\{\lambda_i\}$, which are real by Hermiticity. The spectral decomposition (Section~\ref{sec:spectral})
+\[
+  A = \sum_i \lambda_i P_i, \qquad P_i = |\lambda_i\rangle\langle\lambda_i|
+\]
+gives the probability rule: the probability of obtaining $\lambda_i$ in state $|\psi\rangle$ is
+\[
+  p(\lambda_i) = \langle\psi|P_i|\psi\rangle = |\langle\lambda_i|\psi\rangle|^2.
+\]
+This is the \keyterm{Born rule} \citep{born_zur_1926} in operator form, and it is the bridge between Hilbert-space geometry and laboratory statistics.
+
+\begin{example}
+The Pauli $\sigma_z$ operator measures the third spin component. Its eigenvalues are $\pm 1$ with eigenstates $|0\rangle, |1\rangle$. For a qubit in state $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$, the probabilities of obtaining $\pm 1$ are $|\alpha|^2, |\beta|^2$, respectively. After measurement, the state collapses to $|0\rangle$ or $|1\rangle$ accordingly.
+\end{example}
+
+The \keyterm{expectation value} of $A$ in state $|\psi\rangle$ is
+\[
+  \langle A\rangle_\psi = \langle\psi|A|\psi\rangle = \sum_i \lambda_i\,p(\lambda_i).
+\]
+This is the quantum analogue of the classical expected value $\mathbb{E}[X]$. In finance, expectations are the central quantity computed by Monte Carlo simulation; the quantum analogue is computed by amplitude estimation, which works directly with $\langle A\rangle_\psi$ encoded as an amplitude.
+
+%------------------------------------------------------------------
+\section{Composite systems and tensor products}
+%------------------------------------------------------------------
+
+The state space of a composite system is the \keyterm{tensor product} of the components' state spaces. If subsystems $A$ and $B$ have spaces $\mathcal{H}_A$ and $\mathcal{H}_B$, the composite space is $\mathcal{H}_A \otimes \mathcal{H}_B$, with dimension $\dim(\mathcal{H}_A)\cdot\dim(\mathcal{H}_B)$.
+
+This is the source of quantum's exponential scaling. For $n$ qubits, the joint space is $(\mathbb{C}^2)^{\otimes n} = \mathbb{C}^{2^n}$. A general state is
+\[
+  |\Psi\rangle = \sum_{x \in \{0,1\}^n} c_x |x\rangle,
+\]
+where $|x\rangle = |x_1 x_2 \cdots x_n\rangle$ runs over all $2^n$ classical bit-strings and $\sum_x |c_x|^2 = 1$. The number of complex amplitudes needed to specify the state grows exponentially in the number of qubits.
+
+Importantly, not every state in $\mathcal{H}_A \otimes \mathcal{H}_B$ factorizes as a product $|\phi\rangle_A \otimes |\chi\rangle_B$. States that fail to factorize are \keyterm{entangled} (Chapter on Entanglement). The existence of non-factorizable states is the formal underpinning of every distinctive quantum phenomenon, from EPR correlations to teleportation to algorithmic speedup.
+
+\begin{example}
+The Bell state $|\Phi^+\rangle = \frac{1}{\sqrt 2}(|00\rangle+|11\rangle)$ is entangled: there are no $\alpha_0, \alpha_1, \beta_0, \beta_1$ such that $|\Phi^+\rangle = (\alpha_0|0\rangle+\alpha_1|1\rangle)\otimes(\beta_0|0\rangle+\beta_1|1\rangle)$. By contrast, $\frac{1}{\sqrt 2}(|00\rangle+|10\rangle) = \frac{1}{\sqrt 2}(|0\rangle+|1\rangle)\otimes|0\rangle$ factorizes; it is a product state.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Density operators and mixed states}
+%------------------------------------------------------------------
+
+Pure states ($|\psi\rangle$) describe systems with complete quantum information. When information is incomplete---because the system has interacted with an environment, or because we are studying a subsystem of a larger entangled state---we use a \keyterm{density operator} $\rho$:
+\[
+  \rho = \sum_i p_i\,|\psi_i\rangle\langle\psi_i|, \qquad p_i \geq 0, \quad \sum_i p_i = 1.
+\]
+This is a positive semi-definite Hermitian operator of unit trace. Pure states correspond to rank-1 density operators; mixed states have rank greater than one. The Born rule generalizes: $\mathrm{Tr}(P_i\,\rho)$ is the probability of outcome $i$, and $\mathrm{Tr}(A\,\rho)$ is the expectation value of observable $A$.
+
+Density operators are essential for treating decoherence (Chapter on Decoherence) and for tracking the state of a subsystem within a larger entangled state via the partial trace. They will appear again whenever we discuss noise, error channels, or open-system dynamics.
+
+%------------------------------------------------------------------
+\section{The geometry of distinguishability}
+%------------------------------------------------------------------
+
+Two quantum states are perfectly distinguishable by some measurement if and only if they are orthogonal, $\langle\phi|\psi\rangle = 0$. States that are not orthogonal cannot be perfectly distinguished by any single measurement: no procedure can decide with certainty which of two non-orthogonal states a single copy was prepared in. This is the formal core of the \keyterm{no-cloning theorem}---an unknown quantum state cannot be copied---and of the security guarantees of quantum cryptography \citep{bennett_quantum_2014}.
+
+For mixed states, the natural distinguishability measure is the \keyterm{trace distance}
+\[
+  D(\rho,\sigma) = \tfrac{1}{2}\,\mathrm{Tr}|\rho - \sigma|,
+\]
+which equals the maximum total-variation distance of measurement outcome distributions over all possible measurements. The closely related \keyterm{fidelity} is $F(\rho,\sigma) = \mathrm{Tr}\bigl(\sqrt{\sqrt\rho\,\sigma\,\sqrt\rho}\bigr)$, with $F=1$ exactly when $\rho = \sigma$. These quantities are the standard yardsticks for benchmarking how closely a noisy quantum device implements an intended pure state---a notion we will use repeatedly when discussing hardware fidelity.
+
+%------------------------------------------------------------------
+\section{Why finite-dimensional Hilbert spaces suffice for computing}
+%------------------------------------------------------------------
+
+Quantum mechanics writ large requires infinite-dimensional Hilbert spaces---a particle's position has a continuum of values, an oscillator has countably many energy levels. Quantum \emph{computing}, by contrast, deals almost exclusively with $\mathbb{C}^{2^n}$. The reason is pragmatic: digital quantum computation discretises every degree of freedom into two-level systems (qubits) for the same reason classical computation reduces every signal to bits. The exponentially large but \emph{finite} space $\mathbb{C}^{2^n}$ already contains enough room to encode universal computation.
+
+Continuous-variable quantum computing---using infinite-dimensional bosonic modes as the basic unit---exists and is interesting, particularly for quantum simulation of physics. But for finance applications and the algorithms in this book, finite-dimensional Hilbert spaces are the natural and sufficient setting.
+
+%------------------------------------------------------------------
+\section{What to carry into the next chapters}
+%------------------------------------------------------------------
+
+The take-aways from this chapter, used everywhere from here on:
+
+\begin{itemize}
+  \item Quantum states are unit vectors (or rays) in a complex Hilbert space; global phase is unobservable, relative phase is everything.
+  \item Observables are Hermitian operators; possible outcomes are eigenvalues, probabilities follow the Born rule.
+  \item Composite systems live in tensor products; entanglement is the failure of factorization.
+  \item Density operators describe mixed states and partial information.
+  \item Distinguishability is geometric: orthogonal states are perfectly distinguishable, non-orthogonal ones are not.
+\end{itemize}
+
+The next chapter introduces \keyterm{bra--ket} notation---Dirac's compact symbolic language for everything we have just written down---which makes quantum calculations remarkably readable once the eye is trained.
+
+\textsep

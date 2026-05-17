@@ -1,0 +1,167 @@
+\chapter{The Qubit}
+
+\chapterSubhead{Information's quantum atom and its Bloch-sphere geometry}
+
+If the classical bit is a coin lying flat on a table---heads or tails---the \keyterm{qubit} is a coin spinning in the air, described by a direction in three-dimensional space. This chapter develops the qubit carefully: its mathematical state, its geometric picture on the Bloch sphere, the gates that move it around, and the measurement that pins it down. Everything afterwards---multi-qubit registers, entanglement, algorithms---is built from this one object.
+
+%------------------------------------------------------------------
+\section{What a qubit is}
+%------------------------------------------------------------------
+
+A qubit is a quantum system with a two-dimensional Hilbert space $\mathcal{H} = \mathbb{C}^2$. Its standard basis vectors are
+\[
+  |0\rangle = \begin{pmatrix}1\\0\end{pmatrix}, \qquad |1\rangle = \begin{pmatrix}0\\1\end{pmatrix},
+\]
+called the \keyterm{computational basis}. A general qubit state is
+\[
+  |\psi\rangle = \alpha|0\rangle + \beta|1\rangle, \qquad \alpha,\beta\in\mathbb{C}, \quad |\alpha|^2+|\beta|^2 = 1.
+\]
+The complex numbers $\alpha,\beta$ are the \keyterm{amplitudes}. By the Born rule, measuring in the computational basis returns $0$ with probability $|\alpha|^2$ and $1$ with probability $|\beta|^2$, after which the state collapses to $|0\rangle$ or $|1\rangle$ accordingly.
+
+\begin{example}
+Three useful single-qubit states appear repeatedly:
+\[
+  |+\rangle = \tfrac{1}{\sqrt 2}(|0\rangle+|1\rangle), \quad
+  |-\rangle = \tfrac{1}{\sqrt 2}(|0\rangle-|1\rangle), \quad
+  |i\rangle = \tfrac{1}{\sqrt 2}(|0\rangle+i|1\rangle).
+\]
+Each is a uniform superposition in some sense, but they are mutually distinct and detected by different measurements (the $\sigma_x$, $\sigma_y$, and $\sigma_z$ bases, respectively).
+\end{example}
+
+%------------------------------------------------------------------
+\section{Why two dimensions, and not three or four?}
+%------------------------------------------------------------------
+
+The qubit's two-dimensionality is a design choice for digital quantum computation, not a law of nature. Many physical systems have more than two relevant energy levels---an atom has infinitely many---but for computation we isolate two of them and ignore the rest. The reasons mirror the choice of binary classical bits:
+
+\begin{itemize}
+  \item \textbf{Universality.} Two-level systems plus a small set of gates suffice for universal quantum computation \citep{barenco_elementary_1995}; higher-dimensional ``qudits'' offer no theoretical capability that qubits lack.
+  \item \textbf{Engineering.} Two-level subspaces are easier to isolate. A transmon superconducting qubit, for instance, is a slightly anharmonic oscillator; the lowest two energy levels are well-separated from the third, allowing operations to remain in the qubit subspace \citep{koch_charge-insensitive_2007}.
+  \item \textbf{Modularity.} An $n$-qubit register has $2^n$ basis states, mirroring the $2^n$ bit-strings of $n$ classical bits and allowing direct compatibility with classical algorithm structures.
+\end{itemize}
+
+Higher-dimensional ``qutrits'' (three-level) and ``qudits'' ($d$-level) are studied for niche applications, but the dominant paradigm is the qubit.
+
+%------------------------------------------------------------------
+\section{The Bloch sphere}
+%------------------------------------------------------------------
+
+Up to global phase, every qubit state can be written
+\[
+  |\psi\rangle = \cos\tfrac{\theta}{2}\,|0\rangle + e^{i\varphi}\sin\tfrac{\theta}{2}\,|1\rangle, \qquad \theta\in[0,\pi],\;\varphi\in[0,2\pi).
+\]
+This parameterization maps every pure qubit state to a point on the surface of a unit sphere---the \keyterm{Bloch sphere}---with polar angle $\theta$ and azimuthal angle $\varphi$. The six cardinal points correspond to:
+
+\begin{itemize}
+  \item North pole ($\theta=0$): $|0\rangle$.
+  \item South pole ($\theta=\pi$): $|1\rangle$.
+  \item $+x$ axis ($\theta=\pi/2,\,\varphi=0$): $|+\rangle$.
+  \item $-x$ axis ($\theta=\pi/2,\,\varphi=\pi$): $|-\rangle$.
+  \item $+y$ axis ($\theta=\pi/2,\,\varphi=\pi/2$): $|i\rangle = \tfrac{1}{\sqrt 2}(|0\rangle+i|1\rangle)$.
+  \item $-y$ axis ($\theta=\pi/2,\,\varphi=3\pi/2$): $|-i\rangle = \tfrac{1}{\sqrt 2}(|0\rangle-i|1\rangle)$.
+\end{itemize}
+
+The Bloch sphere is a wonderfully concrete picture. Antipodal points are orthogonal states. The expectation values of the Pauli operators are the Cartesian coordinates of the state's Bloch vector:
+\[
+  \langle\sigma_x\rangle = \sin\theta\cos\varphi, \quad
+  \langle\sigma_y\rangle = \sin\theta\sin\varphi, \quad
+  \langle\sigma_z\rangle = \cos\theta.
+\]
+A mixed state lives inside the ball: its Bloch vector $\vec r$ satisfies $\|\vec r\| < 1$, with the centre of the ball representing the maximally mixed state $\rho = I/2$.
+
+\begin{remark}
+The Bloch sphere does not generalize cleanly to many qubits. An $n$-qubit pure state has $2\cdot 2^n - 2$ real degrees of freedom (after normalization and global phase), so even two qubits inhabit a six-dimensional space. The Bloch picture is genuinely a single-qubit aid. Use it accordingly.
+\end{remark}
+
+%------------------------------------------------------------------
+\section{Single-qubit gates as rotations}
+%------------------------------------------------------------------
+
+A single-qubit unitary $U$ acts on the Bloch sphere as a rigid rotation. This is the geometric content of the fact that $SU(2)$ is the double cover of $SO(3)$: every $U \in SU(2)$ corresponds to a rotation in three-dimensional space.
+
+The standard single-qubit gates are:
+\[
+  X = \sigma_x = \begin{pmatrix}0&1\\1&0\end{pmatrix}, \quad
+  Y = \sigma_y = \begin{pmatrix}0&-i\\i&0\end{pmatrix}, \quad
+  Z = \sigma_z = \begin{pmatrix}1&0\\0&-1\end{pmatrix},
+\]
+each a $\pi$-rotation about its respective Bloch axis. The Hadamard gate $H$ is a $\pi$-rotation about the axis $(\hat x+\hat z)/\sqrt 2$, swapping the $X$ and $Z$ axes; it maps $|0\rangle$ to $|+\rangle$ and $|1\rangle$ to $|-\rangle$. Continuous rotations about an axis $\hat n$ by angle $\theta$ are
+\[
+  R_{\hat n}(\theta) = e^{-i\theta\,\hat n\cdot\vec\sigma/2} = \cos\tfrac{\theta}{2}\,I - i\sin\tfrac{\theta}{2}\,(\hat n\cdot\vec\sigma).
+\]
+The phase gate $S = \mathrm{diag}(1,i) = R_z(\pi/2)\cdot e^{i\pi/4}$ and the $T$-gate $T = \mathrm{diag}(1, e^{i\pi/4})$ are the canonical fixed rotations that, together with Hadamard and CNOT, generate a discrete universal gate set (the \keyterm{Clifford+T} set).
+
+\begin{example}
+A Hadamard gate followed by a $Z$ gate followed by another Hadamard equals an $X$ gate: $HZH = X$. Geometrically: rotate the sphere so the $Z$ axis points along $X$, do a $\pi$ rotation about the original $Z$ direction (now $X$), rotate back.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Measurement and what it does}
+%------------------------------------------------------------------
+
+Measuring a qubit in the computational basis is described by the projectors $P_0 = |0\rangle\langle 0|$ and $P_1 = |1\rangle\langle 1|$. The probability of outcome $0$ is $\langle\psi|P_0|\psi\rangle = |\alpha|^2$; conditional on this outcome the post-measurement state is $|0\rangle$. Equivalent for outcome $1$.
+
+Measurement in a different basis $\{|\phi_0\rangle,|\phi_1\rangle\}$ can always be reduced to a basis rotation followed by a computational-basis measurement. Specifically, if $U = |0\rangle\langle\phi_0| + |1\rangle\langle\phi_1|$ is the unitary mapping the alternative basis to the computational basis, then measuring $|\psi\rangle$ in $\{|\phi_0\rangle,|\phi_1\rangle\}$ is equivalent to applying $U$ and then measuring in the computational basis. This is why current quantum hardware typically supports only computational-basis measurement: any other basis is obtained ``for free'' by a preceding gate.
+
+\begin{remark}
+Measurement is irreversible. Once a qubit is measured, the superposition is destroyed; there is no recovering the pre-measurement state from the outcome. Algorithms therefore have a single climactic measurement at the end, with all the unitary cleverness preceding it.
+\end{remark}
+
+The \keyterm{no-cloning theorem} \citep{nielsen_quantum_2010} is closely related: there is no unitary $U$ such that $U|\psi\rangle|0\rangle = |\psi\rangle|\psi\rangle$ for every $|\psi\rangle$. The proof is a one-liner: such a $U$ would be linear, but the cloning operation $|\psi\rangle \mapsto |\psi\rangle\otimes|\psi\rangle$ is nonlinear in $|\psi\rangle$ (since $(\alpha|\phi\rangle+\beta|\chi\rangle)^{\otimes 2} \neq \alpha|\phi\rangle^{\otimes 2} + \beta|\chi\rangle^{\otimes 2}$). No-cloning is the deep reason quantum signals cannot be amplified the way classical ones can, and it underlies both quantum cryptography and the difficulty of quantum error correction.
+
+%------------------------------------------------------------------
+\section{Multi-qubit registers}
+%------------------------------------------------------------------
+
+An $n$-qubit register lives in the tensor-product space $(\mathbb{C}^2)^{\otimes n} = \mathbb{C}^{2^n}$. The computational basis $\{|x\rangle : x \in \{0,1\}^n\}$ is indexed by classical bit-strings. A general state is
+\[
+  |\Psi\rangle = \sum_{x \in \{0,1\}^n} c_x\,|x\rangle, \qquad \sum_x |c_x|^2 = 1.
+\]
+The number of complex amplitudes is $2^n$. For $n=10$, that is 1024; for $n=50$, over a quadrillion; for $n=300$, more than the number of atoms in the observable universe. Yet measuring the register returns only an $n$-bit string. The art of quantum algorithm design is, again, to manipulate $2^n$ amplitudes so that the right bit-string falls out with high probability.
+
+\begin{example}
+Two qubits prepared in $|00\rangle$, with a Hadamard on the first qubit and a CNOT to the second, produce
+\[
+  \mathrm{CNOT}\,(H\otimes I)|00\rangle = \mathrm{CNOT}\,\tfrac{1}{\sqrt 2}(|00\rangle+|10\rangle) = \tfrac{1}{\sqrt 2}(|00\rangle+|11\rangle) = |\Phi^+\rangle,
+\]
+the canonical Bell state of Chapter on Entanglement.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Physical realizations}
+%------------------------------------------------------------------
+
+A qubit is an abstract object; its physical realization can be almost anything with two well-isolated quantum states. The leading current platforms include:
+
+\begin{itemize}
+  \item \textbf{Superconducting transmons.} An anharmonic LC oscillator etched on a chip, operated at millikelvin temperatures; the two lowest energy levels are the qubit \citep{koch_charge-insensitive_2007}. IBM and Google use this platform.
+  \item \textbf{Trapped ions.} The electronic states of an ion held in an electromagnetic trap; qubits are addressed and entangled with laser pulses \citep{cirac_quantum_1995}. IonQ and Quantinuum lead this technology.
+  \item \textbf{Neutral atoms.} Hyperfine states of neutral atoms held in optical-tweezer arrays; entangled via Rydberg-state interactions. QuEra and Pasqal lead this technology.
+  \item \textbf{Photonic qubits.} Polarisation or path of single photons, manipulated by linear optics; used by PsiQuantum and Xanadu.
+  \item \textbf{Topological qubits.} Encoded in topologically protected states of matter (e.g., Majorana zero modes); the Microsoft Station Q vision, still pre-demonstration at meaningful scale.
+\end{itemize}
+
+The hardware chapter develops these in more detail. The point here is that the abstract qubit framework holds across platforms: a state vector in $\mathbb{C}^2$, gates as unitaries, measurements as projectors, with platform-specific gate sets and error characteristics.
+
+\begin{remark}
+DiVincenzo's five criteria \citep{divincenzo_physical_2000} for a viable physical qubit are: (1) scalable two-level systems, (2) initialization to a known state, (3) long coherence relative to gate time, (4) a universal gate set, (5) qubit-specific measurement. Every platform must satisfy these, and the engineering competition is over how well.
+\end{remark}
+
+%------------------------------------------------------------------
+\section{A pocket reference}
+%------------------------------------------------------------------
+
+For the chapters that follow, the essential qubit facts are:
+
+\begin{itemize}
+  \item State: unit vector in $\mathbb{C}^2$, parameterized as $\cos(\theta/2)|0\rangle + e^{i\varphi}\sin(\theta/2)|1\rangle$.
+  \item Geometry: pure states on the Bloch sphere, mixed states inside the Bloch ball.
+  \item Gates: unitaries in $U(2)$, geometrically rotations of the Bloch sphere; generated by $\{H, T, \mathrm{CNOT}\}$ together with one other qubit.
+  \item Measurement: probabilistic projection onto basis states, irreversibly destroying superposition.
+  \item Composition: $n$ qubits live in $\mathbb{C}^{2^n}$, exponential in $n$.
+  \item Cloning: forbidden by linearity of quantum mechanics.
+\end{itemize}
+
+With these in hand, we are ready for the three phenomena that make the qubit \emph{quantum}: superposition, entanglement, and interference.
+
+\textsep

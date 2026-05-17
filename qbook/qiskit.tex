@@ -1,0 +1,155 @@
+\chapter{Programming Quanta with Qiskit}
+
+\chapterSubhead{The open-source toolkit that bridges algorithm and hardware}
+
+Quantum algorithms live in mathematical notation; quantum hardware lives in pulses and cryogenic chambers. Software frameworks bridge the two. The dominant such framework is \keyterm{Qiskit}, the open-source quantum computing toolkit developed primarily by IBM. Qiskit is the language in which most of the algorithms cited throughout this book were implemented and tested, and the path through which a researcher's quantum-finance code reaches actual hardware \citep{pathak_evolution_2025}.
+
+%------------------------------------------------------------------
+\section{What Qiskit is}
+%------------------------------------------------------------------
+
+Qiskit is a Python library for designing, simulating, optimizing, and executing quantum circuits. Its architecture has matured through several major revisions since the original 2017 release. The current stack (Qiskit 1.x and the IBM Quantum cloud) provides:
+
+\begin{itemize}
+  \item \textbf{Circuit construction.} A \texttt{QuantumCircuit} object with gates, measurements, classical control, and parameterised expressions.
+  \item \textbf{Transpilation.} A pipeline that compiles abstract circuits to the gate set and connectivity of a specific target backend, optimizing depth and gate count.
+  \item \textbf{Simulators.} Classical simulators (statevector, density-matrix, stabilizer, MPS) for testing and debugging.
+  \item \textbf{Hardware access.} Programmatic access to IBM Quantum hardware via the Qiskit Runtime service, with primitives for sampling and expectation estimation.
+  \item \textbf{Pulse control.} Lower-level access to the analog pulse schedules that implement gates on superconducting hardware.
+  \item \textbf{Application modules.} Domain-specific helpers, including Qiskit Finance (option pricing, portfolio optimization, credit risk).
+\end{itemize}
+
+Other frameworks exist---Google's Cirq, Microsoft's Q\#, Xanadu's PennyLane, AWS Braket---and each has strengths. Qiskit's dominant position comes from IBM's hardware reach, its substantial documentation, and the size of its user community. Most quantum-finance papers since 2018 use Qiskit as the implementation language.
+
+%------------------------------------------------------------------
+\section{A minimal Qiskit circuit}
+%------------------------------------------------------------------
+
+The shortest non-trivial Qiskit program creates a Bell state and measures it. In current Qiskit:
+
+\begin{verbatim}
+from qiskit import QuantumCircuit
+
+qc = QuantumCircuit(2, 2)
+qc.h(0)             # Hadamard on qubit 0
+qc.cx(0, 1)         # CNOT with control 0, target 1
+qc.measure([0,1], [0,1])
+\end{verbatim}
+
+Three lines of quantum code produce $|\Phi^+\rangle = \tfrac{1}{\sqrt 2}(|00\rangle + |11\rangle)$ and measure both qubits. Running this on a simulator yields outcomes $00$ and $11$ each with probability $\tfrac12$, and never $01$ or $10$. Running it on hardware yields the same distribution plus a few percent of $01$ and $10$ from gate and readout errors.
+
+\begin{example}
+A Bell-state circuit is the ``hello world'' of quantum computing. The fact that this three-line program demonstrates an essentially non-classical correlation (Chapter on Entanglement)---one that violates Bell inequalities when measured along non-trivial bases---is the single sharpest illustration of what Qiskit makes routine.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Transpilation: from algorithm to chip}
+%------------------------------------------------------------------
+
+A user writes circuits in terms of abstract gates ($H$, $X$, $T$, CNOT, parameterised rotations) and abstract qubits. A real chip implements only a specific gate set on a specific connectivity graph. \keyterm{Transpilation} is the translation step.
+
+The Qiskit transpiler performs several passes:
+
+\begin{itemize}
+  \item \textbf{Gate decomposition.} Each abstract gate is rewritten in the target gate set. A Toffoli becomes a chain of single-qubit and CNOT gates; a parameterized rotation may decompose into a sequence of native gates.
+  \item \textbf{Qubit routing.} Logical qubits are mapped to physical qubits, and SWAP gates are inserted where two-qubit gates are needed between non-adjacent qubits.
+  \item \textbf{Optimization.} Adjacent gates are combined, redundant pairs are cancelled, and circuit depth is minimized via several heuristic passes.
+  \item \textbf{Layout selection.} The transpiler chooses which physical qubits to use, weighing connectivity and per-qubit fidelity.
+\end{itemize}
+
+For an algorithm to run efficiently on a particular backend, transpilation typically reduces circuit depth by a factor of 2--5x compared to a naive rewrite. The transpilation strategy can be customized via optimization level (0 to 3 in Qiskit), with higher levels producing shorter but more compute-intensive transpilations.
+
+\begin{remark}
+A common surprise to newcomers: a circuit with 100 gates as written may transpile into 500 gates on hardware once routing and decomposition costs are included. Algorithm complexity claims should be made on transpiled, not abstract, circuit depth.
+\end{remark}
+
+%------------------------------------------------------------------
+\section{Primitives: sampling and estimation}
+%------------------------------------------------------------------
+
+Recent Qiskit Runtime introduced two high-level \keyterm{primitives} that capture the two main things quantum users want:
+
+\textbf{Sampler.} Given a parameterised circuit, return samples from the measurement distribution. Useful for circuit-style algorithms (Grover, QFT, sampling tasks). Returns counts of bit-strings.
+
+\textbf{Estimator.} Given a parameterised circuit and an observable, return the expectation $\langle\psi|H|\psi\rangle$. Useful for variational algorithms (VQE, QAOA) and amplitude estimation. Returns a real number (with error bars).
+
+These primitives hide the low-level details of shot counts, measurement-basis rotations, error mitigation, and post-processing. They are designed so that the same code works against simulators, noiseless backends, and noisy hardware with mitigation applied---changing one of these is a configuration choice rather than a rewrite.
+
+For finance, the Estimator primitive is the workhorse: portfolio cost functions, expected payoffs, and risk metrics all reduce to expectation values of suitable observables.
+
+%------------------------------------------------------------------
+\section{Qiskit Finance}
+%------------------------------------------------------------------
+
+The Qiskit Finance module \citep{noauthor_quantum_nodate-1} bundles common quantum-finance algorithms behind clean Python APIs:
+
+\begin{itemize}
+  \item \textbf{Option pricing} via quantum amplitude estimation \citep{stamatopoulos_option_2020}. Constructs the encoding circuit for log-normal price distributions and applies iterative amplitude estimation to compute expected payoffs.
+  \item \textbf{Portfolio optimization} via QAOA or VQE \citep{thomassin_quantum_2025,zaman_po-qa_2024}. Encodes Markowitz mean--variance optimization (with cardinality and budget constraints) as a QUBO Hamiltonian and minimizes via variational circuits.
+  \item \textbf{Credit risk} via quantum amplitude estimation on default-probability models \citep{dri_towards_2022}. Constructs Bernoulli mixtures for systemic risk factors and estimates portfolio loss distributions.
+  \item \textbf{Quantum data loaders} that prepare quantum states encoding empirical or analytic distributions, the bottleneck for many finance algorithms.
+\end{itemize}
+
+Each module is a thin layer above the core Qiskit primitives, exposing the financial problem at a level natural for practitioners while delegating quantum circuit construction to the framework. A typical workflow: import the relevant module, construct the financial problem as a Python object, hand it to a Qiskit algorithm class, run on a simulator or hardware, post-process.
+
+\begin{example}
+Pricing a European call option in Qiskit Finance is, schematically: build a \texttt{LogNormalDistribution} object with desired parameters, build a \texttt{EuropeanCallPricing} object referencing the distribution and strike, hand it to \texttt{IterativeAmplitudeEstimation}, call \texttt{estimate()}. The result is the option price with a confidence interval. The amplitude-estimation queries to the encoding circuit happen behind the scenes.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Hybrid programs: classical-quantum loops}
+%------------------------------------------------------------------
+
+For variational algorithms, the canonical loop is:
+
+\begin{enumerate}
+  \item Choose initial parameters $\boldsymbol\theta_0$.
+  \item Submit the parameterised circuit $U(\boldsymbol\theta)$ with current $\boldsymbol\theta$ to the Estimator primitive.
+  \item Receive the cost $C(\boldsymbol\theta)$.
+  \item Update parameters $\boldsymbol\theta$ using a classical optimizer (SPSA, COBYLA, Adam, etc.).
+  \item Repeat until convergence.
+\end{enumerate}
+
+Qiskit Runtime's Session API allows this loop to run with minimal latency between iterations, keeping the quantum hardware reserved across iterations rather than re-queueing each time. For NISQ workloads, this kind of latency reduction is itself a significant performance gain: a long optimization with hundreds of iterations would otherwise spend most of its time in queueing rather than computation.
+
+%------------------------------------------------------------------
+\section{Simulators: development before deployment}
+%------------------------------------------------------------------
+
+Most algorithm development happens on simulators, not on hardware. The Qiskit Aer simulators provide:
+
+\begin{itemize}
+  \item \textbf{Statevector simulator.} Exact pure-state simulation. Memory grows exponentially: 30 qubits requires $2^{30}\cdot 16$ bytes $\approx$ 16 GB.
+  \item \textbf{Density-matrix simulator.} Includes mixed states; can model arbitrary noise channels. Memory grows as $4^n$, far worse than statevector.
+  \item \textbf{Stabilizer simulator.} Efficient for Clifford-only circuits (any number of qubits in polynomial time), useful for benchmarking error correction.
+  \item \textbf{Matrix-product-state simulator.} Efficient for states with limited entanglement, common in NISQ algorithms.
+  \item \textbf{Noisy hardware simulator.} Reproduces the noise model of a specific real backend, allowing realistic testing before queueing.
+\end{itemize}
+
+A practical development workflow is to debug on the statevector simulator, validate on the noisy simulator using a real backend's noise model, and only then deploy to hardware. The cost difference is large: hardware time is metered and queued; simulators run on the user's laptop or cluster.
+
+%------------------------------------------------------------------
+\section{Where Qiskit is going}
+%------------------------------------------------------------------
+
+The Qiskit project's trajectory points to several directions over the next few years.
+
+\textbf{Dynamic circuits.} Mid-circuit measurement and classical feedforward, enabling teleportation-based gates, measurement-based variational algorithms, and error-correction primitives. Recent IBM hardware supports these, and Qiskit Runtime exposes them.
+
+\textbf{Error mitigation built-in.} Future Estimator primitive versions will provide error mitigation (ZNE, PEC) as a configuration option, no longer requiring user-side implementation.
+
+\textbf{Quantum-centric supercomputing.} Workflows that combine HPC clusters with quantum hardware over the cloud, with Qiskit serving as the orchestration layer. This is positioned as the architecture for utility-scale quantum applications.
+
+\textbf{Fault-tolerant primitives.} As logical qubits arrive, Qiskit's abstraction will need to expose them while hiding the encoding details. Early work in this direction is already in progress in Qiskit and competing frameworks.
+
+%------------------------------------------------------------------
+\section{Why this matters for the financial reader}
+%------------------------------------------------------------------
+
+A finance professional or researcher entering quantum computing should expect to spend most of their early effort in Qiskit, not in algorithm derivation from scratch. The papers cited throughout this book---\citet{stamatopoulos_option_2020}, \citet{morapakula_end--end_2026}, \citet{ciceri_enhanced_2025}, \citet{dri_towards_2022}, and many others---have Qiskit implementations available, and the fastest way to build intuition is to run them, modify them, and observe the results.
+
+Qiskit is not the entire story. PennyLane, Cirq, Q\# and others provide overlapping capabilities with different philosophies and hardware backends. But by sheer momentum, Qiskit is where the quantum-finance literature mostly lives, and where the next several years of practical experimentation will continue to be done.
+
+The remaining three chapters of this book turn to the negative side of the quantum advantage: cryptography. The same algorithms Qiskit makes accessible to researchers can, when run on fault-tolerant hardware, break the public-key cryptography that secures the financial system. We turn next to that threat.
+
+\textsep

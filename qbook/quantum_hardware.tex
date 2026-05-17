@@ -1,0 +1,171 @@
+\chapter{Hardware in the Real World}
+
+\chapterSubhead{The platforms that have to make qubits behave}
+
+A quantum algorithm is software; a quantum computer is physics. The abstract qubit of earlier chapters has to be realised as a real two-level quantum system, isolated well enough to preserve coherence (Chapter on Decoherence), addressable well enough to perform gates, and connectable well enough to entangle. No platform meets all these demands easily. This chapter surveys the leading hardware approaches, the trade-offs each makes, and the DiVincenzo criteria that any practical platform must satisfy.
+
+%------------------------------------------------------------------
+\section{DiVincenzo's criteria}
+%------------------------------------------------------------------
+
+\citet{divincenzo_physical_2000} laid out five criteria that any viable quantum computing platform must satisfy, plus two more for quantum communication. The five for computation:
+
+\begin{enumerate}
+\item \textbf{Scalable physical qubits.} The platform must support a register that can be grown to many qubits without fundamental redesign.
+\item \textbf{Initialization.} Qubits must be reliably prepared in a known state (typically $|0\rangle^{\otimes n}$) before computation.
+\item \textbf{Long coherence times.} Coherence must persist much longer than the duration of a single gate. The ratio $T_{\text{coh}}/t_{\text{gate}}$ is the figure of merit; numbers like $10^4$ or higher are needed for fault tolerance.
+\item \textbf{Universal gate set.} Some efficiently implementable set of gates must span the unitary group, exactly or to arbitrary precision.
+\item \textbf{Measurement.} Each qubit must be individually measurable in the computational basis with high fidelity.
+\end{enumerate}
+
+Every leading platform now meets each criterion at small scale; the contest is over how well, and how much it costs.
+
+%------------------------------------------------------------------
+\section{Superconducting qubits}
+%------------------------------------------------------------------
+
+Superconducting circuits operated at millikelvin temperatures form the dominant quantum computing platform today. The qubit is encoded in the lowest two energy levels of a nonlinear LC oscillator, where the nonlinearity comes from a Josephson junction---a sandwich of superconductor--insulator--superconductor through which Cooper pairs tunnel coherently. The \keyterm{transmon} \citep{koch_charge-insensitive_2007} is the dominant design, valued for its insensitivity to charge noise and its relatively long coherence times.
+
+\textbf{Strengths.}
+\begin{itemize}
+\item Manufacturable using semiconductor lithography techniques.
+\item Gate times are fast (10s to 100s of nanoseconds for single-qubit, hundreds of nanoseconds for two-qubit).
+\item Strong industrial pipeline (IBM, Google, Rigetti).
+\end{itemize}
+
+\textbf{Limitations.}
+\begin{itemize}
+\item Requires dilution refrigeration to $\sim$10 mK.
+\item Coherence times still modest (100s of microseconds for $T_1$, similar for $T_2$).
+\item Two-qubit gate errors around $10^{-3}$, far above the $10^{-15}$ needed for unmitigated long algorithms.
+\item Connectivity is fixed by chip layout, typically a planar grid; non-adjacent gates require SWAP overhead.
+\end{itemize}
+
+\citet{arute_quantum_2019} reported the first claim of \keyterm{quantum supremacy} (now sometimes called quantum advantage or computational quantum advantage) on a 53-qubit superconducting processor, completing in 200 seconds a sampling task estimated to require 10000 years on the world's then-largest classical supercomputer. The claim has been contested by improved classical simulations but the underlying device technology has matured rapidly since.
+
+%------------------------------------------------------------------
+\section{Trapped ions}
+%------------------------------------------------------------------
+
+\citet{cirac_quantum_1995} proposed using cold trapped ions as a quantum computing platform. The qubit is encoded in two internal electronic states of an ion (hyperfine or optical levels), held in vacuum by an electromagnetic trap and laser-cooled to its motional ground state. Single-qubit gates are driven by laser pulses; two-qubit gates exploit the shared motional modes of the ion chain.
+
+\textbf{Strengths.}
+\begin{itemize}
+\item Long coherence times (seconds to minutes, far exceeding gate durations).
+\item Very high single- and two-qubit gate fidelities (above 99.9\% on some platforms).
+\item All-to-all connectivity within a single trap---any pair of ions can interact directly.
+\item Identical qubits by virtue of identical atomic species.
+\end{itemize}
+
+\textbf{Limitations.}
+\begin{itemize}
+\item Slower gates than superconducting (microseconds to tens of microseconds).
+\item Scaling beyond tens of ions per trap is hard; ``modular'' architectures (multiple traps, photonic interconnects) are an active research area.
+\item Complex laser systems and ultra-high vacuum requirements.
+\end{itemize}
+
+IonQ and Quantinuum lead the trapped-ion industry; their machines now offer high-fidelity demonstrations of small algorithms, including quantum chemistry and small-scale combinatorial optimization for finance.
+
+%------------------------------------------------------------------
+\section{Neutral atoms}
+%------------------------------------------------------------------
+
+Neutral-atom platforms hold individual atoms in arrays of optical tweezers and use \keyterm{Rydberg interactions} to entangle them. The qubit is encoded in two hyperfine ground states or in a Rydberg state; gates are driven by laser pulses. The flexibility of the optical-tweezer array---rearrangeable, scalable to thousands of sites---has driven rapid growth in the platform.
+
+\textbf{Strengths.}
+\begin{itemize}
+\item Long coherence times for ground-state qubits (seconds).
+\item Rearrangeable connectivity; the optical tweezer pattern can be programmed.
+\item Demonstrated to thousands of qubits in some recent experiments.
+\end{itemize}
+
+\textbf{Limitations.}
+\begin{itemize}
+\item Two-qubit gate fidelities still catching up with leading trapped-ion numbers.
+\item Rydberg interaction times limit the practical gate speeds.
+\item Measurement is destructive (atoms must be re-loaded).
+\end{itemize}
+
+QuEra and Pasqal are the commercial leaders; \citet{harrow_quantum_2009}-style algorithms have been demonstrated at small scales on these platforms.
+
+%------------------------------------------------------------------
+\section{Photonic qubits}
+%------------------------------------------------------------------
+
+Photonic quantum computing encodes qubits in the polarization, path, or time-bin of single photons. Gates are implemented via linear optics (beam splitters, phase shifters) and measurement-based feedforward; entanglement is generated by photon pair sources and post-selection on coincidence measurements.
+
+\textbf{Strengths.}
+\begin{itemize}
+\item Operates at room temperature.
+\item Photons travel naturally, making the platform ideal for quantum communication.
+\item Compatible with integrated photonic chip fabrication.
+\end{itemize}
+
+\textbf{Limitations.}
+\begin{itemize}
+\item Probabilistic two-photon gates without strong nonlinearities; deterministic gates require sophisticated measurement-based schemes.
+\item Loss in optical components is the dominant error channel.
+\item Photon detection inefficiency.
+\end{itemize}
+
+PsiQuantum and Xanadu lead in photonic quantum computing, with Xanadu having demonstrated Gaussian boson sampling at large scale.
+
+%------------------------------------------------------------------
+\section{Other platforms}
+%------------------------------------------------------------------
+
+Several additional platforms are at earlier stages of development but matter strategically.
+
+\textbf{Silicon spin qubits.} Electron or nuclear spins in silicon, addressed and entangled via gate-defined quantum dots or donor atoms \citep{loss_quantum_1998,kane_silicon_1998}. Coherence times are long; integration with standard CMOS manufacturing is attractive. Intel and several academic consortia are active.
+
+\textbf{Topological qubits.} States of matter with non-Abelian anyon excitations would give intrinsically protected qubits \citep{kitaev_fault-tolerant_2003}. Microsoft Station Q is pursuing this vision via Majorana zero modes; demonstration at scale remains elusive.
+
+\textbf{Nitrogen-vacancy centres.} Spin states of nitrogen-vacancy defects in diamond, addressable via optical and microwave control. Used primarily for quantum sensing and small-scale quantum networking, less for computation.
+
+\textbf{Quantum annealers.} D-Wave systems implement the special-purpose task of finding ground states of Ising Hamiltonians, used in QUBO portfolio optimization \citep{morapakula_end--end_2026}. They are not universal quantum computers but offer practical access to optimization tasks at thousands of qubits.
+
+%------------------------------------------------------------------
+\section{Connectivity, qubit count, and effective scale}
+%------------------------------------------------------------------
+
+Raw qubit count is the loudest marketing number but the least informative. Three other quantities matter at least as much.
+
+\textbf{Connectivity.} A 100-qubit chip with only nearest-neighbour connectivity differs sharply from a 100-qubit trap with all-to-all coupling. SWAP gates can route information, but each SWAP adds depth and error.
+
+\textbf{Gate fidelity.} A pair of qubits with 99.9\% two-qubit fidelity can run a circuit of order 1000 gates before errors dominate. A pair with 99\% fidelity is limited to about 100 gates. The difference is exponential in circuit depth.
+
+\textbf{Quantum volume.} A scalar metric introduced by IBM combining qubit count, connectivity, fidelity, and circuit complexity. It captures the largest depth-$d$ random circuit a device can execute with reasonable fidelity on $d$ qubits. Quantum volume doubles roughly each year on the leading platforms.
+
+A more recent IBM measure is \keyterm{circuit layer operations per second} (CLOPS), capturing throughput rather than capability. For financial applications that run many circuits, throughput matters as much as fidelity.
+
+\begin{remark}
+A 1000-qubit device with poor connectivity and 1\% errors is not, in practice, more useful than a 100-qubit device with good connectivity and 0.1\% errors. The total \emph{effective} computational power is what matters, and the leading benchmark is some variant of quantum volume.
+\end{remark}
+
+%------------------------------------------------------------------
+\section{Control electronics and cryogenics}
+%------------------------------------------------------------------
+
+The qubits get the attention, but the supporting infrastructure is half the system. A superconducting quantum computer requires:
+
+\begin{itemize}
+\item A dilution refrigerator achieving $\sim$10 mK.
+\item Multi-stage filtering on all signal lines to prevent thermal noise from reaching the qubits.
+\item Arbitrary waveform generators producing nanosecond-resolution control pulses.
+\item Low-noise amplifiers (Josephson parametric amplifiers and HEMT amplifiers) for qubit readout.
+\item A classical FPGA control system orchestrating thousands of pulse sequences in real time.
+\end{itemize}
+
+Each layer is itself a major engineering enterprise. Cryogenic control electronics---moving classical control closer to the qubits, reducing cable counts---is one of the central scaling challenges of superconducting systems. Trapped-ion and neutral-atom platforms have analogous laser and vacuum infrastructure that scales nontrivially.
+
+%------------------------------------------------------------------
+\section{The road ahead}
+%------------------------------------------------------------------
+
+Leading vendors publish quantum computing roadmaps with steadily increasing qubit counts and decreasing error rates. IBM's roadmap, for example, targets thousands of physical qubits per chip in the next few years, with modular interconnections to scale further \citep{ibm_quantum_2023}. Quantinuum aims for fault-tolerant logical qubits by 2030; QuEra and Pasqal aim for 10,000+ neutral atoms. PsiQuantum aims for fault-tolerant photonic systems.
+
+These roadmaps are aggressive but not implausible. The metric to watch is not raw qubit count but \emph{logical} qubit count---the number of fault-tolerant, error-corrected qubits realized on top of the physical hardware. As of 2026, demonstrations of even a single logical qubit are recent and small-scale. The transition from NISQ to fault-tolerant computation will be the central hardware milestone of the next decade.
+
+The chapter on quantum error correction explains the encoding of one logical qubit in many physical qubits, and the chapter on NISQ describes what we can do in the meantime. The remaining hardware question is whether the engineering follows the roadmap, or stalls at some plateau---a question only experiment can answer.
+
+\textsep

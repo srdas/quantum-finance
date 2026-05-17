@@ -1,0 +1,147 @@
+\chapter{Schr\"odinger's Equation}
+
+\chapterSubhead{The master rule of unitary motion}
+
+If the qubit is the actor and Hilbert space is the stage, then the \keyterm{Schr\"odinger equation} is the script. It tells you, given the state of a closed quantum system at one moment, what the state will be at any later moment. Every quantum gate, every algorithm, every superconducting qubit pulse---all of it is, at the lowest level, a particular solution of this single equation \citep{schrodinger_undulatory_1926}.
+
+%------------------------------------------------------------------
+\section{The equation}
+%------------------------------------------------------------------
+
+The time-dependent Schr\"odinger equation governs the evolution of the state $|\psi(t)\rangle$ of a closed quantum system:
+\[
+  i\hbar\,\frac{d}{dt}|\psi(t)\rangle = \hat H\,|\psi(t)\rangle.
+\]
+Here $\hat H$ is the \keyterm{Hamiltonian}, a Hermitian operator on the system's Hilbert space corresponding to the total energy of the system, and $\hbar$ is the reduced Planck constant. The equation is linear in $|\psi\rangle$; this linearity is the formal source of superposition.
+
+For a time-independent Hamiltonian, the solution is
+\[
+  |\psi(t)\rangle = e^{-i\hat H t/\hbar}\,|\psi(0)\rangle = U(t)\,|\psi(0)\rangle.
+\]
+The operator $U(t) = e^{-i\hat H t/\hbar}$ is unitary because $\hat H$ is Hermitian. So evolution under any closed-system Hamiltonian is automatically unitary, recovering the second postulate of Chapter on Quantum Computing. The Hamiltonian is the generator of time evolution.
+
+\begin{remark}
+Engineering a quantum gate $U$ means engineering a Hamiltonian whose evolution at the chosen interaction time equals $U$. ``Programming'' a quantum computer is, at the hardware level, choosing pulses that synthesize the right effective Hamiltonian over a precise duration.
+\end{remark}
+
+%------------------------------------------------------------------
+\section{Eigenstates and stationary states}
+%------------------------------------------------------------------
+
+The \keyterm{time-independent Schr\"odinger equation} is the eigenvalue problem
+\[
+  \hat H\,|E_n\rangle = E_n\,|E_n\rangle.
+\]
+Its solutions are the energy eigenstates with definite energy $E_n$. Under time evolution they pick up only a global phase:
+\[
+  e^{-i\hat H t/\hbar}\,|E_n\rangle = e^{-iE_n t/\hbar}\,|E_n\rangle.
+\]
+Because global phase is unobservable, the populations of energy eigenstates are conserved---which is why they are called \keyterm{stationary states}.
+
+A general state expands as $|\psi(0)\rangle = \sum_n c_n|E_n\rangle$, evolving to
+\[
+  |\psi(t)\rangle = \sum_n c_n\,e^{-iE_n t/\hbar}|E_n\rangle.
+\]
+The amplitudes $c_n$ are constant in modulus but acquire relative phases proportional to their energies. Interference (Chapter on Interference) arises directly from these relative phases.
+
+\begin{example}
+For a qubit with Hamiltonian $\hat H = \tfrac{\hbar\omega}{2}\sigma_z$, the energy eigenstates are $|0\rangle$ and $|1\rangle$ with energies $\pm\hbar\omega/2$. A superposition $|+\rangle = \tfrac{1}{\sqrt 2}(|0\rangle+|1\rangle)$ evolves as
+\[
+  |\psi(t)\rangle = \tfrac{1}{\sqrt 2}(e^{-i\omega t/2}|0\rangle + e^{i\omega t/2}|1\rangle) = \cos(\omega t/2)|+\rangle - i\sin(\omega t/2)|-\rangle.
+\]
+The state oscillates between $|+\rangle$ and $|-\rangle$ at angular frequency $\omega$---the simplest example of \keyterm{Larmor precession}, the rotational motion of a qubit's Bloch vector about the $z$-axis.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Continuous-variable Schr\"odinger: the wave function}
+%------------------------------------------------------------------
+
+For a particle moving on a line, the state is a wave function $\psi(x,t) \in L^2(\mathbb{R})$ (Section~\ref{sec:l2}). The Hamiltonian for a particle of mass $m$ in potential $V(x)$ is
+\[
+  \hat H = -\frac{\hbar^2}{2m}\,\frac{\partial^2}{\partial x^2} + V(x),
+\]
+and the Schr\"odinger equation becomes the partial differential equation
+\[
+  i\hbar\,\frac{\partial\psi(x,t)}{\partial t} = -\frac{\hbar^2}{2m}\,\frac{\partial^2\psi(x,t)}{\partial x^2} + V(x)\,\psi(x,t).
+\]
+This is the form most physicists first encounter. The Born rule reads $|\psi(x,t)|^2\,dx$ as the probability of finding the particle in the interval $[x,x+dx]$.
+
+For quantum computing on qubits, this continuous form rarely appears directly. But it underlies essentially all hardware physics: the energy levels of a transmon qubit, the trapping potential of a single ion, the photon modes of an optical cavity. The leap from continuous Schr\"odinger dynamics to discrete qubit gates is a leap of \emph{effective theory}---we restrict attention to two energy levels, model their interactions, and let the underlying continuous physics handle itself.
+
+%------------------------------------------------------------------
+\section{Time-dependent Hamiltonians: pulses and gates}
+%------------------------------------------------------------------
+
+In practice, the Hamiltonian of a real quantum device depends on time, because experimenters control external fields to drive the qubits through desired evolutions. The general solution involves a time-ordered exponential:
+\[
+  U(t) = \mathcal{T}\,\exp\!\Big(-\frac{i}{\hbar}\int_0^t \hat H(t')\,dt'\Big),
+\]
+where $\mathcal{T}$ denotes time-ordering. For most practical gate synthesis, one designs a pulse $\hat H(t)$ over an interval $[0,T]$ such that $U(T)$ equals a desired gate.
+
+Two illustrations:
+
+\textbf{Rabi oscillation.} A qubit driven on resonance experiences an effective Hamiltonian $\hat H \propto \sigma_x$ in the rotating frame. Constant drive for time $t$ produces $U = \exp(-i\Omega t\,\sigma_x/2) = R_x(\Omega t)$. A drive duration of $t = \pi/\Omega$ gives an $X$ gate; half that, an $R_x(\pi/2)$ gate.
+
+\textbf{Cross-resonance gate.} Two coupled superconducting qubits driven at the frequency of one of them produce a CNOT-like entangling gate via a carefully tuned effective Hamiltonian \citep{koch_charge-insensitive_2007}. The pulse shape (DRAG, Gaussian, square) is optimized to minimize leakage to non-qubit states and to suppress unwanted phase errors.
+
+\begin{remark}
+The pulse-level view is essential when designing error-mitigation strategies or when an algorithm pushes the limits of hardware. Qiskit Pulse and analogous frameworks expose this layer of control, allowing programmers to specify Hamiltonians and waveforms directly rather than only abstract gates.
+\end{remark}
+
+%------------------------------------------------------------------
+\section{The path integral perspective}
+%------------------------------------------------------------------
+
+Feynman's path-integral reformulation \citep{feynman_simulating_1982} expresses the amplitude for a quantum system to go from $|i\rangle$ at time 0 to $|f\rangle$ at time $T$ as a sum over all possible paths in configuration space, each weighted by $e^{iS[\text{path}]/\hbar}$, where $S$ is the classical action along the path:
+\[
+  \langle f|U(T)|i\rangle = \int \mathcal{D}[\text{path}]\,e^{iS[\text{path}]/\hbar}.
+\]
+For most paths, neighbouring paths have wildly different phases and interfere destructively. Paths near the classical extremum of $S$ have stationary phase and interfere constructively. This is why classical mechanics emerges as the $\hbar \to 0$ limit of quantum mechanics: only the classical path survives the interference.
+
+For finance, the path-integral language is the bridge to \keyterm{Feynman--Kac} formulas and stochastic calculus. The price of a European option, expressed as $\mathbb{E}^Q[e^{-rT}\,\text{payoff}]$, has a path-integral representation in which the integration runs over price paths weighted by the risk-neutral measure. Quantum amplitude estimation is, in a precise sense, the quantum mechanical analogue: an amplitude (rather than a probability density) encodes the expectation, and a quantum circuit (rather than a classical Monte Carlo) extracts it.
+
+%------------------------------------------------------------------
+\section{What the Schr\"odinger equation forces on us}
+%------------------------------------------------------------------
+
+The Schr\"odinger equation has three structural consequences that pervade everything in quantum computing.
+
+\textbf{Unitarity.} Closed-system evolution is unitary, preserving inner products and norms. Quantum gates are thus reversible (Chapter on Classical vs Quantum), and information is conserved within a closed circuit.
+
+\textbf{Linearity.} The equation is linear in $|\psi\rangle$. Two solutions superpose to a third solution. This is what makes superposition possible and gives quantum algorithms their parallelism.
+
+\textbf{Energy as generator of time.} The Hamiltonian both encodes the system's energy spectrum and generates its time evolution. To build a gate, engineer a Hamiltonian. To simulate a physical system, engineer the same Hamiltonian on a quantum device---this is the original motivation of Feynman \citep{feynman_simulating_1982} and the foundation of quantum simulation as a discipline.
+
+\begin{remark}
+The structural lesson: every interesting quantum operation traces back to a Hamiltonian. Algorithm design, hardware engineering, and quantum simulation are all variations on the same theme of constructing or evolving under desired Hamiltonians.
+\end{remark}
+
+%------------------------------------------------------------------
+\section{When the Schr\"odinger equation fails}
+%------------------------------------------------------------------
+
+The Schr\"odinger equation describes \emph{closed} systems. Real quantum computers are not closed: they couple to environmental degrees of freedom (phonons in a chip substrate, blackbody photons, control electronics) that scramble the system's state. The closed-system equation is then no longer applicable, and one must use the formalism of \keyterm{open quantum systems}---master equations and Lindblad operators (Chapter on Decoherence).
+
+A common open-system equation is the Lindblad master equation
+\[
+  \frac{d\rho}{dt} = -\frac{i}{\hbar}[\hat H,\rho] + \sum_k \Big(L_k\rho L_k^\dagger - \tfrac{1}{2}\{L_k^\dagger L_k,\rho\}\Big),
+\]
+where $L_k$ are the so-called \keyterm{jump operators} encoding interactions with the environment. The first term is the unitary Schr\"odinger evolution; the second is the dissipative correction. When the $L_k$ vanish, we recover unitary evolution; otherwise, populations leak between states, off-diagonal coherences decay, and the quantum advantage diminishes.
+
+Quantum error correction (Chapter on Error Correction) and decoherence-aware algorithm design exist precisely because this open-system reality cannot be ignored. The clean Schr\"odinger picture is the goal; the open-system picture is the engineering challenge.
+
+%------------------------------------------------------------------
+\section{Take-aways}
+%------------------------------------------------------------------
+
+\begin{itemize}
+  \item Schr\"odinger's equation specifies the dynamics of a closed quantum system: $i\hbar\,\partial_t|\psi\rangle = \hat H|\psi\rangle$.
+  \item Solutions are unitary: $|\psi(t)\rangle = e^{-i\hat H t/\hbar}|\psi(0)\rangle$.
+  \item Eigenstates of $\hat H$ are stationary; superpositions evolve via phases accumulating proportional to energies.
+  \item Quantum gates are pulses that synthesize chosen unitaries; the Hamiltonian is the engineer's design variable.
+  \item Real devices require open-system corrections (Lindblad equation), which underlie decoherence and motivate error correction.
+\end{itemize}
+
+The next chapter takes the Schr\"odinger equation into the laboratory: the actual physical platforms on which quantum information is stored and manipulated, and the engineering trade-offs each one imposes.
+
+\textsep

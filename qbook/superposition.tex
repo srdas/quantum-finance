@@ -1,0 +1,122 @@
+\chapter{Superposition}
+
+\chapterSubhead{Many things at once, until you look}
+
+Superposition is the headline quantum phenomenon---the one that makes for good popular science and bad popular science in equal measure. The mathematics is straightforward: it is just the linearity of the state space. The conceptual content is sharper than its popular versions suggest, and worth getting right.
+
+%------------------------------------------------------------------
+\section{The principle, plainly}
+%------------------------------------------------------------------
+
+The \keyterm{superposition principle} states that if $|\psi_1\rangle$ and $|\psi_2\rangle$ are valid states of a quantum system, then so is any linear combination
+\[
+  |\psi\rangle = \alpha|\psi_1\rangle + \beta|\psi_2\rangle, \qquad \alpha,\beta\in\mathbb{C},
+\]
+subject to normalization $\||\psi\rangle\|^2 = 1$. The complex coefficients are amplitudes; the squared magnitudes are probabilities of obtaining each component upon measurement in the $\{|\psi_1\rangle,|\psi_2\rangle\}$ basis (when those vectors are orthogonal).
+
+A qubit prepared in $|+\rangle = \tfrac{1}{\sqrt 2}(|0\rangle + |1\rangle)$ is in superposition of $|0\rangle$ and $|1\rangle$. The often-repeated phrase ``the qubit is in both states at once'' is, strictly speaking, misleading. The qubit is in \emph{one} state---$|+\rangle$---which happens to be a non-trivial linear combination of $|0\rangle$ and $|1\rangle$. The state $|+\rangle$ is just as definite, in the quantum sense, as $|0\rangle$ itself.
+
+\begin{remark}
+A better intuition: $|0\rangle$ and $|1\rangle$ are two preferred directions, like ``up'' and ``right.'' The state $|+\rangle$ is ``upper-right.'' Calling $|+\rangle$ ``both up and right at the same time'' is technically true and conceptually confusing. It is one direction, equally tilted between two of our chosen labels.
+\end{remark}
+
+%------------------------------------------------------------------
+\section{Where does superposition come from?}
+%------------------------------------------------------------------
+
+Three operational paths produce superpositions in a quantum computer:
+
+\begin{itemize}
+  \item \textbf{Hadamard from a basis state.} $H|0\rangle = |+\rangle$ and $H|1\rangle = |-\rangle$. A column of Hadamards on $n$ qubits initialised in $|0\rangle^{\otimes n}$ produces the uniform superposition
+  \[
+    H^{\otimes n}|0\rangle^{\otimes n} = \frac{1}{\sqrt{2^n}}\sum_{x\in\{0,1\}^n} |x\rangle.
+  \]
+  This is the standard \keyterm{uniform superposition} starting point for many quantum algorithms.
+  \item \textbf{Continuous rotation.} A rotation $R_y(\theta)$ applied to $|0\rangle$ produces $\cos(\theta/2)|0\rangle + \sin(\theta/2)|1\rangle$, a superposition with controllable amplitude.
+  \item \textbf{Phase encoding.} Applying $R_z(\varphi)$ to $|+\rangle$ produces $\tfrac{1}{\sqrt 2}(|0\rangle + e^{i\varphi}|1\rangle)$, encoding a real-valued parameter $\varphi$ in the relative phase of a superposition.
+\end{itemize}
+
+In a typical quantum algorithm, the first step is to put an input register into superposition over all bit-strings of interest; the body of the algorithm then evaluates a function in superposition and rearranges amplitudes; the final step is measurement.
+
+\begin{example}
+The Deutsch--Jozsa algorithm \citep{deutsch_quantum_1985} prepares $n$ qubits in the uniform superposition $H^{\otimes n}|0\rangle^{\otimes n}$, then queries a function $f:\{0,1\}^n \to \{0,1\}$ that is either constant or balanced. After a single quantum query and a final Hadamard, measurement returns $0^n$ if and only if $f$ is constant. Classical determination requires up to $2^{n-1}+1$ queries; the quantum advantage on this oracle is exponential.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Quantum parallelism: powerful but tricky}
+%------------------------------------------------------------------
+
+A function $f:\{0,1\}^n \to \{0,1\}$ can be implemented as a unitary $U_f$ acting on $n+1$ qubits as $U_f|x\rangle|y\rangle = |x\rangle|y \oplus f(x)\rangle$. If we feed $U_f$ the input register in uniform superposition,
+\[
+  U_f \Big(\tfrac{1}{\sqrt{2^n}}\sum_x |x\rangle\Big)|0\rangle = \tfrac{1}{\sqrt{2^n}}\sum_x |x\rangle|f(x)\rangle,
+\]
+we have, in one circuit invocation, evaluated $f$ on all $2^n$ inputs simultaneously. This is \keyterm{quantum parallelism}, and it is impressive on paper.
+
+But---a crucial but---measuring the output register returns a single $(x, f(x))$ pair, drawn uniformly. So the brute-force gain of parallelism is wiped out by the bottleneck of measurement: we cannot read $2^n$ values from $2^n$ amplitudes in a single shot. Quantum algorithms succeed only when they additionally rearrange amplitudes via \keyterm{interference} so that the measurement is biased toward a useful outcome (Chapter on Interference).
+
+\begin{remark}
+Quantum parallelism alone is not where the speedup lives. It is necessary but not sufficient. Every quantum algorithm with provable advantage uses parallelism to generate a structured superposition, then uses interference to concentrate amplitude on the answer. Without the second step, the algorithm is a costly random sampler.
+\end{remark}
+
+%------------------------------------------------------------------
+\section{Examples in finance: data loading and amplitude encoding}
+%------------------------------------------------------------------
+
+In quantum algorithms for finance, the very first step is often the construction of a superposition that encodes a probability distribution. To compute the expected payoff of an option under a risk-neutral price distribution $p(x)$, we want to prepare
+\[
+  |\psi_p\rangle = \sum_x \sqrt{p(x)}\,|x\rangle,
+\]
+so that measuring in the computational basis reproduces samples from $p(x)$. This is \keyterm{amplitude encoding} of a classical distribution; the bottleneck is constructing the unitary that produces $|\psi_p\rangle$ from $|0\rangle$.
+
+For specific distributions (uniform, Gaussian-like, log-normal) there are efficient circuit constructions. For arbitrary distributions, generic loading takes time exponential in the number of qubits---the well-known \keyterm{input problem} of quantum algorithms \citep{biamonte_quantum_2017}. Resolving the input problem efficiently is one of the active research fronts of quantum machine learning and quantum finance.
+
+\citet{stamatopoulos_option_2020} construct circuits for option pricing under log-normal price distributions; the encoding circuit is the costly part of their pipeline. Subsequent \keyterm{quantum amplitude estimation} reads the expected payoff with a quadratic speedup over classical Monte Carlo---an advantage that only materialises once the distribution is loaded.
+
+%------------------------------------------------------------------
+\section{Measurement collapse and the basis choice}
+%------------------------------------------------------------------
+
+A superposition state $\alpha|0\rangle + \beta|1\rangle$ measured in the computational basis collapses to $|0\rangle$ or $|1\rangle$. But it could also be measured in the $\{|+\rangle, |-\rangle\}$ basis, in which case it would collapse to $|+\rangle$ or $|-\rangle$ instead. The probabilities follow the same Born rule applied to the new basis.
+
+What is the qubit ``really'' in superposition of? The honest answer is: the question presupposes a basis, and the basis is a choice of the experimenter. The state $|+\rangle$ is a superposition of $|0\rangle$ and $|1\rangle$, and simultaneously a single basis state in the $\{|+\rangle,|-\rangle\}$ basis with no superposition at all. ``Superposition'' is basis-dependent; ``state'' is basis-independent.
+
+\begin{example}
+Schr\"odinger's cat is in superposition of ``alive'' and ``dead'' in one preferred basis. In a different (and physically unmotivated) basis, the same state might be a single basis vector. The cat doesn't change; the description does.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Coherent superposition versus statistical mixture}
+%------------------------------------------------------------------
+
+A frequent confusion: is a 50/50 superposition the same as a 50/50 classical mixture? The answer is no, and the distinction is central to everything quantum.
+
+A \keyterm{coherent superposition} $|+\rangle = \tfrac{1}{\sqrt 2}(|0\rangle + |1\rangle)$ is a pure state. The density operator is
+\[
+  |+\rangle\langle+| = \tfrac{1}{2}\begin{pmatrix}1 & 1 \\ 1 & 1\end{pmatrix}.
+\]
+A \keyterm{statistical mixture} of $|0\rangle$ with probability $\tfrac12$ and $|1\rangle$ with probability $\tfrac12$ is the mixed state
+\[
+  \rho_{\mathrm{mix}} = \tfrac{1}{2}|0\rangle\langle 0| + \tfrac{1}{2}|1\rangle\langle 1| = \tfrac{1}{2}\begin{pmatrix}1 & 0 \\ 0 & 1\end{pmatrix} = \tfrac{I}{2}.
+\]
+The diagonal entries are identical---both give 50/50 statistics for a computational-basis measurement. But the off-diagonal entries differ. Those off-diagonals are precisely the \keyterm{coherences}, and they are what make interference possible. Apply a Hadamard:
+\[
+  H|+\rangle\langle+|H = |0\rangle\langle 0|, \qquad H\rho_{\mathrm{mix}}H = \rho_{\mathrm{mix}}.
+\]
+The coherent superposition produces $|0\rangle$ with certainty after a Hadamard; the mixture remains 50/50. Decoherence (Chapter on Decoherence) is the process by which a coherent superposition turns into a statistical mixture through coupling to an environment.
+
+%------------------------------------------------------------------
+\section{What superposition is, and what it isn't}
+%------------------------------------------------------------------
+
+A short list of common misconceptions, and their corrections:
+
+\begin{itemize}
+  \item ``The qubit is in both states simultaneously.'' Misleading. The qubit is in one state, which is a linear combination of basis states.
+  \item ``Superposition gives exponential parallelism for free.'' Not by itself. Parallelism without interference is a random sampler.
+  \item ``A 50/50 superposition is a 50/50 random bit.'' Not the same; the difference is the coherence, which interference exploits.
+  \item ``Superposition collapses when you look.'' Yes, but only along the measurement basis you chose; in another basis the same outcome carries less information.
+\end{itemize}
+
+The cleaner picture: superposition is just the linearity of the quantum state space. Its power comes not from the linearity itself but from what unitary evolution and interference can do with it. The next chapter on \keyterm{entanglement} and the chapter on \keyterm{interference} fill in what those mechanisms look like.
+
+\textsep

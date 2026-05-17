@@ -1,43 +1,202 @@
-\contentsline {chapter}{List of figures}{5}{section*.2}%
-\contentsline {chapter}{Foreword}{6}{chapter*.3}%
-\contentsline {chapter}{\chapternumberline {1}What does quantum computing mean for finance?}{7}{chapter.4}%
-\contentsline {section}{\numberline {1.1}Why quantum computing, and why now?}{8}{section.5}%
-\contentsline {section}{\numberline {1.2}The landscape of quantum finance}{9}{section.6}%
-\contentsline {section}{\numberline {1.3}Quantum Monte Carlo and derivative pricing}{10}{section.8}%
-\contentsline {section}{\numberline {1.4}Portfolio optimization}{13}{section.9}%
-\contentsline {section}{\numberline {1.5}Risk management and credit risk}{15}{section.10}%
-\contentsline {section}{\numberline {1.6}Quantum machine learning in finance}{16}{section.11}%
-\contentsline {section}{\numberline {1.7}Algorithmic trading and market microstructure}{18}{section.12}%
-\contentsline {section}{\numberline {1.8}Post-quantum cryptography and financial security}{19}{section.13}%
-\contentsline {section}{\numberline {1.9}Current hardware, limitations, and the NISQ constraint}{20}{section.14}%
-\contentsline {section}{\numberline {1.10}Schaden's quantum finance: a different tradition}{22}{section.15}%
-\contentsline {section}{\numberline {1.11}Prospects and the road ahead}{23}{section.16}%
-\contentsline {chapter}{\chapternumberline {2}Mathematical Preliminaries}{25}{chapter.18}%
-\contentsline {section}{\numberline {2.1}Vector Spaces}{26}{section.19}%
-\contentsline {section}{\numberline {2.2}Span and Linear Independence}{26}{section.22}%
-\contentsline {section}{\numberline {2.3}Basis and Dimension}{27}{section.24}%
-\contentsline {section}{\numberline {2.4}Inner (Scalar) Product}{27}{section.26}%
-\contentsline {section}{\numberline {2.5}Norms}{28}{section.31}%
-\contentsline {section}{\numberline {2.6}Hilbert Spaces}{28}{section.33}%
-\contentsline {section}{\numberline {2.7}Orthogonality and Orthonormal Bases}{30}{section.36}%
-\contentsline {section}{\numberline {2.8}Gram--Schmidt Orthogonalization}{30}{section.38}%
-\contentsline {section}{\numberline {2.9}Linear Operators}{31}{section.40}%
-\contentsline {section}{\numberline {2.10}Eigenvalues and Eigenvectors}{31}{section.41}%
-\contentsline {section}{\numberline {2.11}Nonsingular Matrices}{32}{section.43}%
-\contentsline {section}{\numberline {2.12}Similar Matrices}{32}{section.44}%
-\contentsline {section}{\numberline {2.13}Hermitian Operators}{32}{section.46}%
-\contentsline {section}{\numberline {2.14}Unitary Operators}{33}{section.48}%
-\contentsline {section}{\numberline {2.15}Spectral Decomposition}{33}{section.50}%
-\contentsline {section}{\numberline {2.16}Tensor Product of Vector Spaces}{34}{section.52}%
-\contentsline {section}{\numberline {2.17}Tensor Product of Operators}{35}{section.54}%
-\contentsline {section}{\numberline {2.18}Jordan Canonical Form}{35}{section.56}%
-\contentsline {section}{\numberline {2.19}Matrix Norms}{36}{section.58}%
-\contentsline {section}{\numberline {2.20}Quadratic Forms}{37}{section.60}%
-\contentsline {section}{\numberline {2.21}Functions of Matrices}{38}{section.62}%
-\contentsline {section}{\numberline {2.22}$L^2$ Function Spaces}{39}{section.64}%
-\contentsline {section}{\numberline {2.23}Fourier Series}{40}{section.65}%
-\contentsline {section}{\numberline {2.24}Eigenfunctions}{40}{section.66}%
-\contentsline {section}{\numberline {2.25}Hadamard Operator}{41}{section.68}%
-\contentsline {section}{\numberline {2.26}Adjoint, Self-Adjoint, and Unitary Operators on Function Spaces}{41}{section.69}%
-\contentsline {section}{\numberline {2.27}Matrix Representations of Operators}{42}{section.70}%
-\contentsline {section}{\numberline {2.28}Coordinate Transformations}{43}{section.72}%
+\contentsline {chapter}{List of figures}{11}{section*.2}%
+\contentsline {chapter}{Foreword}{12}{chapter*.3}%
+\contentsline {chapter}{\chapternumberline {1}What does quantum computing mean for finance?}{13}{chapter.4}%
+\contentsline {section}{\numberline {1.1}Why quantum computing, and why now?}{14}{section.5}%
+\contentsline {section}{\numberline {1.2}The landscape of quantum finance}{15}{section.6}%
+\contentsline {section}{\numberline {1.3}Quantum Monte Carlo and derivative pricing}{16}{section.8}%
+\contentsline {section}{\numberline {1.4}Portfolio optimization}{19}{section.9}%
+\contentsline {section}{\numberline {1.5}Risk management and credit risk}{21}{section.10}%
+\contentsline {section}{\numberline {1.6}Quantum machine learning in finance}{22}{section.11}%
+\contentsline {section}{\numberline {1.7}Algorithmic trading and market microstructure}{24}{section.12}%
+\contentsline {section}{\numberline {1.8}Post-quantum cryptography and financial security}{25}{section.13}%
+\contentsline {section}{\numberline {1.9}Current hardware, limitations, and the NISQ constraint}{26}{section.14}%
+\contentsline {section}{\numberline {1.10}Schaden's quantum finance: a different tradition}{28}{section.15}%
+\contentsline {section}{\numberline {1.11}Prospects and the road ahead}{29}{section.16}%
+\contentsline {chapter}{\chapternumberline {2}Mathematical Preliminaries}{31}{chapter.18}%
+\contentsline {section}{\numberline {2.1}Vector Spaces}{32}{section.19}%
+\contentsline {section}{\numberline {2.2}Span and Linear Independence}{32}{section.22}%
+\contentsline {section}{\numberline {2.3}Basis and Dimension}{33}{section.24}%
+\contentsline {section}{\numberline {2.4}Inner (Scalar) Product}{33}{section.26}%
+\contentsline {section}{\numberline {2.5}Norms}{34}{section.31}%
+\contentsline {section}{\numberline {2.6}Hilbert Spaces}{34}{section.33}%
+\contentsline {section}{\numberline {2.7}Orthogonality and Orthonormal Bases}{36}{section.36}%
+\contentsline {section}{\numberline {2.8}Gram--Schmidt Orthogonalization}{36}{section.38}%
+\contentsline {section}{\numberline {2.9}Linear Operators}{37}{section.40}%
+\contentsline {section}{\numberline {2.10}Eigenvalues and Eigenvectors}{37}{section.41}%
+\contentsline {section}{\numberline {2.11}Nonsingular Matrices}{38}{section.43}%
+\contentsline {section}{\numberline {2.12}Similar Matrices}{38}{section.44}%
+\contentsline {section}{\numberline {2.13}Hermitian Operators}{38}{section.46}%
+\contentsline {section}{\numberline {2.14}Unitary Operators}{39}{section.48}%
+\contentsline {section}{\numberline {2.15}Spectral Decomposition}{39}{section.50}%
+\contentsline {section}{\numberline {2.16}Tensor Product of Vector Spaces}{40}{section.52}%
+\contentsline {section}{\numberline {2.17}Tensor Product of Operators}{41}{section.54}%
+\contentsline {section}{\numberline {2.18}Jordan Canonical Form}{41}{section.56}%
+\contentsline {section}{\numberline {2.19}Matrix Norms}{42}{section.58}%
+\contentsline {section}{\numberline {2.20}Quadratic Forms}{43}{section.60}%
+\contentsline {section}{\numberline {2.21}Functions of Matrices}{44}{section.62}%
+\contentsline {section}{\numberline {2.22}$L^2$ Function Spaces}{45}{section.64}%
+\contentsline {section}{\numberline {2.23}Fourier Series}{46}{section.65}%
+\contentsline {section}{\numberline {2.24}Eigenfunctions}{46}{section.66}%
+\contentsline {section}{\numberline {2.25}Hadamard Operator}{47}{section.68}%
+\contentsline {section}{\numberline {2.26}Adjoint, Self-Adjoint, and Unitary Operators on Function Spaces}{47}{section.69}%
+\contentsline {section}{\numberline {2.27}Matrix Representations of Operators}{48}{section.70}%
+\contentsline {section}{\numberline {2.28}Coordinate Transformations}{49}{section.72}%
+\contentsline {chapter}{\chapternumberline {3}Two Worlds, One Question}{50}{chapter.74}%
+\contentsline {section}{\numberline {3.1}The classical model: bits, gates, Turing}{51}{section.75}%
+\contentsline {section}{\numberline {3.2}The quantum model: amplitudes, not probabilities}{52}{section.76}%
+\contentsline {section}{\numberline {3.3}Two qubits, four amplitudes, and the exponential staircase}{53}{section.78}%
+\contentsline {section}{\numberline {3.4}What classical machines cannot do (efficiently)}{54}{section.80}%
+\contentsline {section}{\numberline {3.5}Reversibility, unitarity, and information conservation}{55}{section.81}%
+\contentsline {section}{\numberline {3.6}Probability and randomness, classical and quantum}{56}{section.83}%
+\contentsline {section}{\numberline {3.7}Hybrid computation: the practical near term}{57}{section.84}%
+\contentsline {section}{\numberline {3.8}What the contrast really teaches}{57}{section.85}%
+\contentsline {chapter}{\chapternumberline {4}A Map of Quantum Computing}{59}{chapter.86}%
+\contentsline {section}{\numberline {4.1}The four postulates, said plainly}{60}{section.87}%
+\contentsline {section}{\numberline {4.2}Qubits, gates, and circuits}{60}{section.92}%
+\contentsline {section}{\numberline {4.3}Where does the speed come from?}{62}{section.94}%
+\contentsline {section}{\numberline {4.4}The algorithmic landscape}{63}{section.96}%
+\contentsline {section}{\numberline {4.5}The hardware reality check}{65}{section.97}%
+\contentsline {section}{\numberline {4.6}What this book covers, and in what order}{66}{section.98}%
+\contentsline {chapter}{\chapternumberline {5}Where Quantum States Live}{68}{chapter.105}%
+\contentsline {section}{\numberline {5.1}Why a complex Hilbert space?}{69}{section.106}%
+\contentsline {section}{\numberline {5.2}States as rays, not vectors}{70}{section.107}%
+\contentsline {section}{\numberline {5.3}Observables as Hermitian operators}{70}{section.109}%
+\contentsline {section}{\numberline {5.4}Composite systems and tensor products}{72}{section.111}%
+\contentsline {section}{\numberline {5.5}Density operators and mixed states}{73}{section.113}%
+\contentsline {section}{\numberline {5.6}The geometry of distinguishability}{73}{section.114}%
+\contentsline {section}{\numberline {5.7}Why finite-dimensional Hilbert spaces suffice for computing}{74}{section.115}%
+\contentsline {section}{\numberline {5.8}What to carry into the next chapters}{75}{section.116}%
+\contentsline {chapter}{\chapternumberline {6}Dirac's Brackets}{77}{chapter.117}%
+\contentsline {section}{\numberline {6.1}Kets and bras}{78}{section.118}%
+\contentsline {section}{\numberline {6.2}Inner products: bra-keting}{79}{section.120}%
+\contentsline {section}{\numberline {6.3}Outer products: ket-bras as operators}{80}{section.122}%
+\contentsline {section}{\numberline {6.4}The resolution of the identity}{80}{section.124}%
+\contentsline {section}{\numberline {6.5}Operators in spectral form}{81}{section.125}%
+\contentsline {section}{\numberline {6.6}Tensor products in bra--ket}{82}{section.126}%
+\contentsline {section}{\numberline {6.7}Expectation values, in three notations}{83}{section.128}%
+\contentsline {section}{\numberline {6.8}A small grammar of bra--ket}{83}{section.129}%
+\contentsline {chapter}{\chapternumberline {7}The Qubit}{85}{chapter.131}%
+\contentsline {section}{\numberline {7.1}What a qubit is}{86}{section.132}%
+\contentsline {section}{\numberline {7.2}Why two dimensions, and not three or four?}{86}{section.134}%
+\contentsline {section}{\numberline {7.3}The Bloch sphere}{87}{section.135}%
+\contentsline {section}{\numberline {7.4}Single-qubit gates as rotations}{89}{section.137}%
+\contentsline {section}{\numberline {7.5}Measurement and what it does}{90}{section.139}%
+\contentsline {section}{\numberline {7.6}Multi-qubit registers}{91}{section.141}%
+\contentsline {section}{\numberline {7.7}Physical realizations}{91}{section.143}%
+\contentsline {section}{\numberline {7.8}A pocket reference}{93}{section.145}%
+\contentsline {chapter}{\chapternumberline {8}Superposition}{94}{chapter.146}%
+\contentsline {section}{\numberline {8.1}The principle, plainly}{94}{section.147}%
+\contentsline {section}{\numberline {8.2}Where does superposition come from?}{95}{section.149}%
+\contentsline {section}{\numberline {8.3}Quantum parallelism: powerful but tricky}{96}{section.151}%
+\contentsline {section}{\numberline {8.4}Examples in finance: data loading and amplitude encoding}{97}{section.153}%
+\contentsline {section}{\numberline {8.5}Measurement collapse and the basis choice}{98}{section.154}%
+\contentsline {section}{\numberline {8.6}Coherent superposition versus statistical mixture}{99}{section.156}%
+\contentsline {section}{\numberline {8.7}What superposition is, and what it isn't}{100}{section.157}%
+\contentsline {chapter}{\chapternumberline {9}Entanglement}{102}{chapter.158}%
+\contentsline {section}{\numberline {9.1}Entanglement, defined}{103}{section.159}%
+\contentsline {section}{\numberline {9.2}The Bell states}{103}{section.160}%
+\contentsline {section}{\numberline {9.3}Why Einstein objected}{104}{section.162}%
+\contentsline {section}{\numberline {9.4}Quantifying entanglement}{105}{section.164}%
+\contentsline {section}{\numberline {9.5}Entanglement as a computational resource}{106}{section.166}%
+\contentsline {section}{\numberline {9.6}Entanglement in financial algorithms}{107}{section.168}%
+\contentsline {section}{\numberline {9.7}Entanglement in cryptography}{108}{section.169}%
+\contentsline {section}{\numberline {9.8}What to remember}{109}{section.170}%
+\contentsline {chapter}{\chapternumberline {10}Interference}{111}{chapter.171}%
+\contentsline {section}{\numberline {10.1}What interference is}{111}{section.172}%
+\contentsline {section}{\numberline {10.2}Constructive and destructive amplification}{113}{section.174}%
+\contentsline {section}{\numberline {10.3}Coherence: the prerequisite for interference}{114}{section.176}%
+\contentsline {section}{\numberline {10.4}The phase kickback trick}{115}{section.177}%
+\contentsline {section}{\numberline {10.5}Interference in financial algorithms}{116}{section.179}%
+\contentsline {section}{\numberline {10.6}The classical view of interference, contrasted}{117}{section.180}%
+\contentsline {section}{\numberline {10.7}Putting the three pillars together}{118}{section.181}%
+\contentsline {chapter}{\chapternumberline {11}Schr\"odinger's Equation}{120}{chapter.182}%
+\contentsline {section}{\numberline {11.1}The equation}{120}{section.183}%
+\contentsline {section}{\numberline {11.2}Eigenstates and stationary states}{121}{section.185}%
+\contentsline {section}{\numberline {11.3}Continuous-variable Schr\"odinger: the wave function}{122}{section.187}%
+\contentsline {section}{\numberline {11.4}Time-dependent Hamiltonians: pulses and gates}{123}{section.188}%
+\contentsline {section}{\numberline {11.5}The path integral perspective}{124}{section.190}%
+\contentsline {section}{\numberline {11.6}What the Schr\"odinger equation forces on us}{125}{section.191}%
+\contentsline {section}{\numberline {11.7}When the Schr\"odinger equation fails}{126}{section.193}%
+\contentsline {section}{\numberline {11.8}Take-aways}{127}{section.194}%
+\contentsline {chapter}{\chapternumberline {12}Hardware in the Real World}{129}{chapter.195}%
+\contentsline {section}{\numberline {12.1}DiVincenzo's criteria}{130}{section.196}%
+\contentsline {section}{\numberline {12.2}Superconducting qubits}{130}{section.202}%
+\contentsline {section}{\numberline {12.3}Trapped ions}{132}{section.203}%
+\contentsline {section}{\numberline {12.4}Neutral atoms}{133}{section.204}%
+\contentsline {section}{\numberline {12.5}Photonic qubits}{134}{section.205}%
+\contentsline {section}{\numberline {12.6}Other platforms}{135}{section.206}%
+\contentsline {section}{\numberline {12.7}Connectivity, qubit count, and effective scale}{136}{section.207}%
+\contentsline {section}{\numberline {12.8}Control electronics and cryogenics}{137}{section.209}%
+\contentsline {section}{\numberline {12.9}The road ahead}{138}{section.210}%
+\contentsline {chapter}{\chapternumberline {13}Decoherence}{140}{chapter.211}%
+\contentsline {section}{\numberline {13.1}Two pictures of decoherence}{141}{section.212}%
+\contentsline {section}{\numberline {13.2}$T_1$ and $T_2$}{141}{section.213}%
+\contentsline {section}{\numberline {13.3}Quantum operations and noise channels}{143}{section.215}%
+\contentsline {section}{\numberline {13.4}The Lindblad master equation}{144}{section.216}%
+\contentsline {section}{\numberline {13.5}Sources of decoherence in real hardware}{144}{section.218}%
+\contentsline {section}{\numberline {13.6}Decoherence as the loss of interference}{146}{section.219}%
+\contentsline {section}{\numberline {13.7}The classical limit as decoherence-driven}{146}{section.220}%
+\contentsline {section}{\numberline {13.8}What it all means for algorithm design}{147}{section.222}%
+\contentsline {chapter}{\chapternumberline {14}Saving Qubits from Themselves}{149}{chapter.223}%
+\contentsline {section}{\numberline {14.1}Why classical strategies don't work}{150}{section.224}%
+\contentsline {section}{\numberline {14.2}The three-qubit codes}{150}{section.225}%
+\contentsline {section}{\numberline {14.3}Shor's nine-qubit code}{151}{section.226}%
+\contentsline {section}{\numberline {14.4}Stabilizer formalism and CSS codes}{152}{section.227}%
+\contentsline {section}{\numberline {14.5}The surface code}{153}{section.229}%
+\contentsline {section}{\numberline {14.6}The threshold theorem and fault tolerance}{154}{section.231}%
+\contentsline {section}{\numberline {14.7}Where the field stands in 2026}{155}{section.233}%
+\contentsline {section}{\numberline {14.8}Beyond surface codes: high-rate codes and biased noise}{156}{section.234}%
+\contentsline {section}{\numberline {14.9}The QEC takeaway}{157}{section.235}%
+\contentsline {chapter}{\chapternumberline {15}Living in the NISQ Era}{159}{chapter.236}%
+\contentsline {section}{\numberline {15.1}What NISQ means, precisely}{160}{section.237}%
+\contentsline {section}{\numberline {15.2}Variational algorithms: the workhorse}{160}{section.238}%
+\contentsline {section}{\numberline {15.3}Error mitigation, not correction}{162}{section.240}%
+\contentsline {section}{\numberline {15.4}Where NISQ wins, where it doesn't}{163}{section.241}%
+\contentsline {section}{\numberline {15.5}The benchmarking landscape}{164}{section.243}%
+\contentsline {section}{\numberline {15.6}The practical NISQ recipe for finance}{165}{section.244}%
+\contentsline {section}{\numberline {15.7}What ends the NISQ era?}{166}{section.250}%
+\contentsline {chapter}{\chapternumberline {16}Programming Quanta with Qiskit}{168}{chapter.251}%
+\contentsline {section}{\numberline {16.1}What Qiskit is}{169}{section.252}%
+\contentsline {section}{\numberline {16.2}A minimal Qiskit circuit}{170}{section.253}%
+\contentsline {section}{\numberline {16.3}Transpilation: from algorithm to chip}{171}{section.255}%
+\contentsline {section}{\numberline {16.4}Primitives: sampling and estimation}{172}{section.257}%
+\contentsline {section}{\numberline {16.5}Qiskit Finance}{173}{section.258}%
+\contentsline {section}{\numberline {16.6}Hybrid programs: classical-quantum loops}{174}{section.260}%
+\contentsline {section}{\numberline {16.7}Simulators: development before deployment}{175}{section.266}%
+\contentsline {section}{\numberline {16.8}Where Qiskit is going}{176}{section.267}%
+\contentsline {section}{\numberline {16.9}Why this matters for the financial reader}{177}{section.268}%
+\contentsline {chapter}{\chapternumberline {17}RSA}{179}{chapter.269}%
+\contentsline {section}{\numberline {17.1}Public-key cryptography in one paragraph}{180}{section.270}%
+\contentsline {section}{\numberline {17.2}The RSA construction}{180}{section.271}%
+\contentsline {section}{\numberline {17.3}Where the security comes from}{181}{section.278}%
+\contentsline {section}{\numberline {17.4}RSA in the financial system}{182}{section.280}%
+\contentsline {section}{\numberline {17.5}Variants and accelerators}{184}{section.281}%
+\contentsline {section}{\numberline {17.6}Pollard rho and other classical factoring techniques}{185}{section.282}%
+\contentsline {section}{\numberline {17.7}The harvest-now--decrypt-later threat}{186}{section.283}%
+\contentsline {section}{\numberline {17.8}The post-quantum migration}{186}{section.284}%
+\contentsline {chapter}{\chapternumberline {18}Elliptic Curves}{188}{chapter.285}%
+\contentsline {section}{\numberline {18.1}What an elliptic curve is}{189}{section.286}%
+\contentsline {section}{\numberline {18.2}Scalar multiplication and the discrete log problem}{190}{section.288}%
+\contentsline {section}{\numberline {18.3}ECDH key exchange and ECDSA signatures}{191}{section.289}%
+\contentsline {section}{\numberline {18.4}Curve choices and standards}{192}{section.298}%
+\contentsline {section}{\numberline {18.5}Why ECC is the modern default}{193}{section.299}%
+\contentsline {section}{\numberline {18.6}Pairings and identity-based cryptography}{195}{section.301}%
+\contentsline {section}{\numberline {18.7}Shor's algorithm hits ECC at least as hard as RSA}{195}{section.302}%
+\contentsline {section}{\numberline {18.8}The post-quantum landscape for ECC replacements}{197}{section.304}%
+\contentsline {section}{\numberline {18.9}The unifying lesson}{198}{section.305}%
+\contentsline {chapter}{\chapternumberline {19}Shor's Algorithm}{199}{chapter.306}%
+\contentsline {section}{\numberline {19.1}Factoring as period finding}{200}{section.307}%
+\contentsline {section}{\numberline {19.2}The quantum period-finding subroutine}{201}{section.309}%
+\contentsline {section}{\numberline {19.3}Why classical algorithms cannot match this}{203}{section.311}%
+\contentsline {section}{\numberline {19.4}From factoring to discrete logarithms}{204}{section.312}%
+\contentsline {section}{\numberline {19.5}Has Shor's algorithm been run?}{205}{section.313}%
+\contentsline {section}{\numberline {19.6}Resource estimates for cryptographically relevant Shor}{206}{section.315}%
+\contentsline {section}{\numberline {19.7}The strategic implications}{207}{section.316}%
+\contentsline {section}{\numberline {19.8}The book in one circuit}{208}{section.317}%
+\contentsline {chapter}{\chapternumberline {20}Where Now?}{210}{chapter.318}%
+\contentsline {section}{\numberline {20.1}What we know, and where the limits are}{211}{section.319}%
+\contentsline {section}{\numberline {20.2}An agenda for the next five years}{212}{section.320}%
+\contentsline {section}{\numberline {20.3}The hopes}{214}{section.321}%
+\contentsline {section}{\numberline {20.4}The fears}{216}{section.322}%
+\contentsline {section}{\numberline {20.5}A balanced posture}{219}{section.323}%
+\contentsline {section}{\numberline {20.6}Closing}{220}{section.324}%

@@ -1,0 +1,103 @@
+\chapter{Two Worlds, One Question}
+
+\chapterSubhead{Classical bits, quantum amplitudes, and what really changes}
+
+Every computation we have ever performed---on an abacus, a slide rule, a Cray supercomputer, or a smartphone---obeys the rules of classical physics. Switches click, electrons flow, transistors gate. The arithmetic underneath is binary, deterministic, and local. Quantum computation breaks each of those assumptions in a precise, mathematical way. This chapter draws the contrast carefully, because most misunderstandings about quantum computing trace back to mixing the two worlds together.
+
+%------------------------------------------------------------------
+\section{The classical model: bits, gates, Turing}
+%------------------------------------------------------------------
+
+A \keyterm{classical bit} is a variable that takes the value $0$ or $1$. A classical computer is, in the abstract, a Turing machine: a finite-state controller reading and writing on an unbounded tape \citep{shannon_mathematical_1948}. Two facts make this model what it is:
+
+\begin{itemize}
+  \item \textbf{Definiteness.} At every moment, every bit has a single, observable value. There is no ambiguity, no parallel reality, no probability before measurement (excepting the trivial case where we are simply uncertain about what value was written).
+  \item \textbf{Locality.} The state of bit $A$ has no effect on bit $B$ unless a wire, signal, or instruction couples them. Information must be transported to be felt elsewhere.
+\end{itemize}
+
+Classical logic is built from the standard gates \keyterm{AND}, \keyterm{OR}, \keyterm{NOT}, \keyterm{NAND}---and any function on $n$ bits can be assembled from them. Gates are typically irreversible: $\mathrm{AND}(1,0)=0$ and $\mathrm{AND}(0,1)=0$ produce the same output from different inputs, so you cannot recover the input from the output. Landauer showed this irreversibility has a thermodynamic cost: erasing one bit dissipates at least $k_B T\ln 2$ joules of heat \citep{landauer_irreversibility_1961}. Bennett later showed that one can, in principle, compute reversibly and pay no such bill \citep{bennett_logical_1973}. That observation matters more than it first appears---quantum computation is \emph{intrinsically} reversible, so it sidesteps Landauer's tax entirely.
+
+%------------------------------------------------------------------
+\section{The quantum model: amplitudes, not probabilities}
+%------------------------------------------------------------------
+
+A \keyterm{qubit} is the quantum analogue of a bit. Where a bit is a number, a qubit is a unit vector in a two-dimensional complex Hilbert space (Chapter on Hilbert spaces). We write a qubit's state as
+\[
+  |\psi\rangle = \alpha\,|0\rangle + \beta\,|1\rangle, \qquad \alpha,\beta\in\mathbb{C}, \quad |\alpha|^2+|\beta|^2 = 1.
+\]
+The complex numbers $\alpha,\beta$ are \keyterm{amplitudes}. When we measure the qubit in the standard basis we obtain $0$ with probability $|\alpha|^2$ and $1$ with probability $|\beta|^2$. The Born rule \citep{born_zur_1926} provides this bridge between the abstract amplitude and the observed probability.
+
+But---and this is the entire point---between preparation and measurement, the system is described by amplitudes, not probabilities. Amplitudes can be negative or complex; probabilities cannot. Amplitudes can cancel; probabilities cannot. The capacity for \emph{cancellation} is the engine of quantum interference, and it is what classical models cannot replicate without paying an exponential cost.
+
+\begin{remark}
+A common, misleading line is ``a qubit can be both 0 and 1 at the same time.'' Better: a qubit is described by a complex unit vector whose components determine the statistics of measurement outcomes. Before measurement, neither outcome is realised; after measurement, exactly one is. The richness lies in what happens \emph{between}.
+\end{remark}
+
+%------------------------------------------------------------------
+\section{Two qubits, four amplitudes, and the exponential staircase}
+%------------------------------------------------------------------
+
+Two classical bits have four possible joint states---$00$, $01$, $10$, $11$. Two qubits are described by four \emph{amplitudes}:
+\[
+  |\Psi\rangle = \alpha_{00}|00\rangle + \alpha_{01}|01\rangle + \alpha_{10}|10\rangle + \alpha_{11}|11\rangle, \qquad \sum |\alpha_{ij}|^2 = 1.
+\]
+An $n$-qubit state lives in a space of dimension $2^n$ and is therefore specified by $2^n$ complex numbers. Three qubits give 8 amplitudes; ten qubits give 1024; fifty qubits give over a quadrillion. Simulating a 50-qubit pure state on a classical computer already pushes the limits of supercomputing memory \citep{arute_quantum_2019}.
+
+This exponential scaling is not a parlour trick. It is the precise resource that quantum algorithms exploit. A quantum computer with $n$ qubits can, in some sense, manipulate $2^n$ amplitudes in parallel via a single unitary operation. The catch---one of the deep catches of the field---is that we cannot \emph{read out} all $2^n$ amplitudes. Measurement collapses the state into a single classical outcome, drawn from a probability distribution determined by the amplitudes. So the algorithmic art is to arrange amplitudes so that, upon measurement, the answer we want falls out with high probability.
+
+\begin{example}
+For three classical bits, we can represent any specific configuration with three switches. For three qubits, a general state requires $2^3=8$ complex amplitudes, subject to one normalization constraint and one global phase ambiguity---leaving $2\cdot 8 - 2 = 14$ real degrees of freedom. The state space is genuinely vast compared with the eight classical configurations.
+\end{example}
+
+%------------------------------------------------------------------
+\section{What classical machines cannot do (efficiently)}
+%------------------------------------------------------------------
+
+It is tempting to say that quantum computers are simply faster classical computers. They are not. What separates them is a small list of computational structures where classical methods require exponential resources and quantum methods do not. The most consequential examples are:
+
+\begin{itemize}
+  \item \textbf{Factoring large integers.} Shor's algorithm \citep{shor_polynomial_1997} factors an $n$-bit integer in time polynomial in $n$, whereas the best classical algorithms (the number field sieve, \citep{lenstra_factoring_1993}) require sub-exponential but super-polynomial time. This is the threat to RSA cryptography (Chapter on RSA).
+  \item \textbf{Unstructured search.} Grover's algorithm \citep{grover_fast_1996} searches an unsorted database of $N$ items in $O(\sqrt{N})$ steps, a quadratic improvement over classical $O(N)$.
+  \item \textbf{Simulation of quantum systems.} Simulating a system of $n$ interacting quantum particles on a classical computer requires manipulating a state space of dimension exponential in $n$. Feynman pointed this out in 1982 \citep{feynman_simulating_1982}: nature is quantum, so to simulate it efficiently we should build quantum computers.
+  \item \textbf{Sampling and integration.} Quantum amplitude estimation provides a quadratic speedup over classical Monte Carlo \citep{egger_quantum_2020}, which is precisely the bottleneck of derivative pricing and risk simulation in finance.
+\end{itemize}
+
+For most everyday computing tasks---web browsing, word processing, training large language models---quantum computers offer no advantage. Quantum speedups are surgical, not universal.
+
+%------------------------------------------------------------------
+\section{Reversibility, unitarity, and information conservation}
+%------------------------------------------------------------------
+
+All allowed transformations of a closed quantum system are \keyterm{unitary} (Section~\ref{sec:unitary-ops}). A unitary $U$ satisfies $U^\dagger U = I$ and preserves the inner product, so it preserves information. Quantum gates are therefore reversible by construction: every gate $U$ has an inverse $U^\dagger$, and applying both in sequence returns the original state.
+
+This is a strict change from classical computation. There is no quantum AND gate that maps $(\alpha,\beta)\to\alpha\wedge\beta$ in the naive sense, because such a map would lose information and could not be unitary. Instead, quantum versions of irreversible classical gates require ancillary qubits to preserve a record of the input. The \keyterm{Toffoli gate} (controlled-controlled-NOT) is the canonical universal reversible gate. Together with single-qubit unitaries and CNOT, it spans the entire space of quantum computation \citep{barenco_elementary_1995}.
+
+\begin{remark}
+The fact that classical computation can be \emph{embedded} inside quantum computation is what makes the latter strictly more powerful (or equally powerful) on every problem. Quantum cannot lose; it can only fail to gain, depending on the problem structure.
+\end{remark}
+
+%------------------------------------------------------------------
+\section{Probability and randomness, classical and quantum}
+%------------------------------------------------------------------
+
+Classical probability is, in spirit, a tool for reasoning under ignorance. A coin lying under your hand is heads or tails with certainty; you simply do not know which. Quantum probability is different. Until measured, a qubit in superposition is not secretly $0$ or secretly $1$. It is genuinely in a state described by amplitudes, with no underlying definite value waiting to be revealed. The experimental evidence for this view is decisive: violations of Bell's inequalities \citep{bell_einstein_1964,aspect_experimental_1982} rule out the existence of any local hidden-variable model that would reproduce quantum statistics.
+
+This has practical consequences. A classical Monte Carlo simulation generates samples from a distribution; we average them and obtain an estimate of an expected value. A quantum amplitude estimation does something subtler: the quantum circuit \emph{encodes} the desired expectation as the amplitude of a particular outcome, and amplitude estimation reads that amplitude back with precision that scales as $1/N$ rather than the classical $1/\sqrt{N}$. The improvement is paid for in coherence, not in samples.
+
+%------------------------------------------------------------------
+\section{Hybrid computation: the practical near term}
+%------------------------------------------------------------------
+
+For the foreseeable future---certainly the entire NISQ era \citep{preskill_quantum_2018}---useful quantum computation will be \keyterm{hybrid quantum--classical}. A classical machine prepares data, drives the quantum circuit's parameters, and post-processes measurement results; the quantum machine does the part where its peculiar resources matter. Variational quantum algorithms \citep{cerezo_variational_2021} are the canonical example: a classical optimizer adjusts a parameterized quantum circuit to minimize a cost function evaluated on the quantum device.
+
+In finance, this hybrid pattern is already standard. Portfolio optimization runs as continuous mean--variance on the classical side, with a discrete QUBO solved on the quantum side and weights recombined classically \citep{morapakula_end--end_2026}. Quantum machine learning models load classical financial data into quantum states, transform them via parameterized circuits, and read out classical features for downstream classical models \citep{ciceri_enhanced_2025}. The two worlds do not compete; they cooperate, with quantum hardware as the accelerator for the small set of operations where it has a genuine edge.
+
+%------------------------------------------------------------------
+\section{What the contrast really teaches}
+%------------------------------------------------------------------
+
+The deepest difference between classical and quantum computation is not speed. It is what counts as a \emph{state}. Classical states are points in a discrete configuration space. Quantum states are unit vectors in a continuous Hilbert space, evolving by unitary maps and projected to classical outcomes only at the moment of measurement. Everything else in this book---superposition, entanglement, interference, error correction, Shor's algorithm---follows from this single shift in mathematical setting.
+
+Keep this contrast in mind as we proceed. When a chapter says ``the algorithm uses interference to amplify the right answer,'' it is leveraging amplitude cancellation, which has no classical counterpart. When we say ``the entangled state cannot be written as a product,'' we are pointing to a correlation structure absent from classical probability distributions. The mathematics of Chapter on Mathematical Preliminaries is the formalism for these statements; the chapters that follow show what the formalism makes possible.
+
+\textsep

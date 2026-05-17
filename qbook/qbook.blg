@@ -1,53 +1,56 @@
-This is BibTeX, Version 0.99d (TeX Live 2023/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2023)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: qbook.aux
 The style file: plainnatmodified.bst
 Database file #1: Quantum.bib
+Database file #2: Quantum2.bib
 Warning--to sort, need author or key in noauthor_quantum_nodate-1
 Warning--empty year in noauthor_quantum_nodate-1
 Warning--empty journal in herman_survey_2022
 Warning--empty year in huang_nus-frontiers--fintech-and-quantum-computing-2022part_nodate
+Warning--empty journal in lenstra_factoring_1993
+Warning--empty journal in shor_fault-tolerant_1996
 Warning--empty year in soller_quantum_nodate-1
 Warning--empty year in soller_quantum_nodate
-You've used 29 entries,
+You've used 74 entries,
             2812 wiz_defined-function locations,
-            790 strings with 12376 characters,
-and the built_in function-call counts, 15038 in all, are:
-= -- 1340
-> -- 1128
-< -- 9
-+ -- 419
-- -- 334
-* -- 1278
-:= -- 2312
-add.period$ -- 115
-call.type$ -- 29
-change.case$ -- 183
-chr.to.int$ -- 29
-cite$ -- 65
-duplicate$ -- 562
-empty$ -- 1031
-format.name$ -- 387
-if$ -- 3110
+            1100 strings with 20273 characters,
+and the built_in function-call counts, 37459 in all, are:
+= -- 3501
+> -- 2309
+< -- 43
++ -- 859
+- -- 683
+* -- 3114
+:= -- 5704
+add.period$ -- 292
+call.type$ -- 74
+change.case$ -- 402
+chr.to.int$ -- 74
+cite$ -- 157
+duplicate$ -- 1526
+empty$ -- 2837
+format.name$ -- 817
+if$ -- 7825
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 19
-newline$ -- 181
-num.names$ -- 112
-pop$ -- 469
+missing$ -- 64
+newline$ -- 447
+num.names$ -- 292
+pop$ -- 972
 preamble$ -- 1
-purify$ -- 183
+purify$ -- 401
 quote$ -- 0
-skip$ -- 541
+skip$ -- 1326
 stack$ -- 0
-substring$ -- 307
-swap$ -- 48
-text.length$ -- 0
+substring$ -- 1401
+swap$ -- 125
+text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 314
-warning$ -- 6
-while$ -- 103
+type$ -- 799
+warning$ -- 8
+while$ -- 317
 width$ -- 0
-write$ -- 421
-(There were 6 warnings)
+write$ -- 1083
+(There were 8 warnings)

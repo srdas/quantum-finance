@@ -1,0 +1,157 @@
+\chapter{Shor's Algorithm}
+
+\chapterSubhead{The factoring bombshell that started the quantum gold rush}
+
+In 1994 Peter Shor, then at Bell Labs, published an algorithm that factors an $n$-bit integer in time polynomial in $n$ on a quantum computer \citep{shor_polynomial_1997}. By the same technique, it solves the discrete logarithm problem. RSA, ECC, ECDH, ECDSA---the public-key infrastructure that secures essentially every encrypted transaction in the modern financial system---is broken by Shor's algorithm running on a sufficiently large fault-tolerant quantum computer. Shor's result transformed quantum computing from an academic curiosity into a strategic priority for governments, banks, and intelligence agencies worldwide. This chapter explains how it works.
+
+%------------------------------------------------------------------
+\section{Factoring as period finding}
+%------------------------------------------------------------------
+
+Shor's central insight is that factoring an integer $N$ can be reduced to finding the \keyterm{period} of a particular function.
+
+Pick a random $a$ coprime to $N$. Consider the function
+\[
+  f(x) = a^x \bmod N.
+\]
+This function is periodic: there exists a smallest positive integer $r$ (the \keyterm{order} of $a$ modulo $N$) such that $f(x+r) = f(x)$ for all $x$. The order $r$ is the period of $f$.
+
+If we know $r$, and $r$ happens to be even, and $a^{r/2} \not\equiv -1 \pmod{N}$, then
+\[
+  a^r - 1 = (a^{r/2}-1)(a^{r/2}+1) \equiv 0 \pmod{N},
+\]
+so $N$ divides $(a^{r/2}-1)(a^{r/2}+1)$ but not either factor. Computing $\gcd(a^{r/2}\pm 1, N)$ via the Euclidean algorithm yields a non-trivial factor of $N$. The conditions ($r$ even, $a^{r/2} \neq -1$) hold for at least half of randomly chosen $a$, so a few attempts suffice.
+
+The reduction from factoring to period finding is purely classical. What Shor's algorithm contributes is the quantum subroutine that finds the period $r$ exponentially faster than any classical algorithm can.
+
+\begin{example}
+Take $N = 15$, $a = 7$. The powers of $7 \bmod 15$ are $7, 4, 13, 1, 7, 4, \ldots$, so $r = 4$. Since $r$ is even and $7^{r/2} = 49 \equiv 4 \pmod{15}$, neither $-1$ nor problematic, we compute $\gcd(7^2 - 1, 15) = \gcd(48, 15) = 3$ and $\gcd(7^2+1, 15) = \gcd(50, 15) = 5$. The factors are $3$ and $5$.
+\end{example}
+
+%------------------------------------------------------------------
+\section{The quantum period-finding subroutine}
+%------------------------------------------------------------------
+
+The quantum part of Shor's algorithm uses two registers and three steps: create a uniform superposition, evaluate $f$, and apply the quantum Fourier transform.
+
+\textbf{Setup.} Let $Q = 2^q$ for some $q$ with $Q \geq N^2$. Prepare two registers: the first of size $q$ initialized to $|0\rangle$, the second of size $\lceil\log_2 N\rceil$ also initialized to $|0\rangle$.
+
+\textbf{Step 1: superposition.} Apply Hadamard gates to each qubit of the first register:
+\[
+  \tfrac{1}{\sqrt Q}\sum_{x=0}^{Q-1} |x\rangle|0\rangle.
+\]
+
+\textbf{Step 2: function evaluation.} Apply the unitary $U_f$ implementing $|x\rangle|0\rangle \mapsto |x\rangle|f(x)\rangle = |x\rangle|a^x \bmod N\rangle$. The state becomes
+\[
+  \tfrac{1}{\sqrt Q}\sum_{x=0}^{Q-1} |x\rangle|a^x \bmod N\rangle.
+\]
+
+\textbf{Step 3: measure the second register.} Suppose the outcome is $f_0$. The first register collapses to the superposition over all $x$ with $a^x \equiv f_0 \pmod{N}$---namely the residues $x_0, x_0+r, x_0+2r, \ldots$ for some offset $x_0$:
+\[
+  \tfrac{1}{\sqrt{Q/r}}\sum_{j=0}^{Q/r - 1} |x_0 + jr\rangle.
+\]
+This is a comb of $\delta$-functions spaced by $r$---a state whose Fourier transform reveals $r$ directly.
+
+\textbf{Step 4: quantum Fourier transform on the first register.}
+\[
+  \mathrm{QFT}_Q|x\rangle = \tfrac{1}{\sqrt Q}\sum_{y=0}^{Q-1} e^{2\pi i xy/Q}|y\rangle.
+\]
+The Fourier transform of a comb is a comb. After QFT, the amplitudes concentrate near multiples of $Q/r$. Measuring the first register yields a value $y$ close to $kQ/r$ for some $k$.
+
+\textbf{Step 5: classical post-processing.} From the measured $y$, recover $r$ by computing the continued-fraction expansion of $y/Q$ and extracting the rational approximation $k/r$ in lowest terms. With probability $O(1/\log\log r)$, the measured $y$ allows recovery of $r$. Repeat $O(\log\log N)$ times to amplify success probability close to 1.
+
+The total quantum cost is dominated by the modular exponentiation $U_f$, which requires $O(n^3)$ gates (using the standard schoolbook implementation) or $O(n^2 \log n \log\log n)$ with faster modular arithmetic. The QFT itself costs $O(n^2)$ gates. The whole algorithm runs in $O(n^3)$ time on a quantum computer.
+
+\begin{remark}
+The structural magic is in Step 3 and Step 4. The function evaluation creates an entanglement between the input register and the function register; measuring the function register collapses the input register to a periodic state with the desired period. The QFT extracts that period via interference: amplitudes at non-period frequencies cancel, amplitudes at period-related frequencies add constructively.
+\end{remark}
+
+%------------------------------------------------------------------
+\section{Why classical algorithms cannot match this}
+%------------------------------------------------------------------
+
+The classical complexity of period finding for $f(x) = a^x \bmod N$ is the same as factoring $N$: sub-exponential via the number field sieve \citep{lenstra_factoring_1993}. There is no known classical algorithm that exploits the periodic structure to achieve polynomial time. The reason---roughly---is that classical algorithms can examine $f$ only at one input at a time, and the period $r$ can be as large as $N$. Sampling $f$ uniformly and looking for repetitions takes $O(\sqrt r) = O(\sqrt N) = O(2^{n/2})$ queries (birthday paradox), exponential in $n$.
+
+The quantum algorithm escapes this by evaluating $f$ \emph{in superposition} on all $Q$ inputs simultaneously, then using the QFT to read off the period directly. The QFT is the crucial primitive: it converts a periodic state into a sharply peaked state at the reciprocal frequencies, with all the interference happening coherently inside the quantum register.
+
+This is the same QFT-based interference pattern that drives quantum phase estimation, the algorithm at the heart of quantum amplitude estimation for finance \citep{stamatopoulos_option_2020}. The factoring application is the most famous use; the underlying primitive (period/phase estimation via QFT) is shared with much of the rest of quantum algorithmics.
+
+%------------------------------------------------------------------
+\section{From factoring to discrete logarithms}
+%------------------------------------------------------------------
+
+Shor's algorithm extends to the \keyterm{discrete logarithm problem} (DLP) in any abelian group, with a structurally similar construction. For the DLP in $\mathbb{Z}_p^*$ (find $x$ such that $g^x \equiv h \pmod{p}$), one constructs a function $f(a,b) = g^a h^{-b} \bmod p$ that is periodic in $(a,b)$ in a way that encodes $x$, then uses the QFT to extract the period.
+
+The same template applies to the ECDLP (find $k$ such that $Q = [k]P$ on an elliptic curve): the function $f(a,b) = [a]P - [b]Q$ has a period in $(a,b)$ that encodes $k$. Resource estimates suggest a 256-bit ECDLP requires $\sim 2500$ logical qubits and $\sim 10^{10}$ Toffoli gates, fewer than 2048-bit RSA factoring.
+
+Both forms of Shor are polynomial-time in the bit-length of the problem. This is the algorithmic content that has driven the post-quantum cryptography migration discussed in the RSA and ECC chapters.
+
+%------------------------------------------------------------------
+\section{Has Shor's algorithm been run?}
+%------------------------------------------------------------------
+
+Small-scale demonstrations of Shor's algorithm have been published since 2001.
+
+\textbf{NMR (Nuclear Magnetic Resonance).} \citet{vandersypen_experimental_2001} factored $N=15$ on a 7-qubit liquid-state NMR system, identifying the factors 3 and 5. The demonstration was historic but controversial---NMR systems are not scalable quantum computers, and the ``qubits'' were ensemble averages rather than individual two-level systems.
+
+\textbf{Photonic systems.} Several photonic demonstrations have factored small integers (15, 21) using compiled, optimized versions of Shor's circuit. These too rely on substantial classical pre-computation and do not represent ``full'' executions of the algorithm.
+
+\textbf{Superconducting.} Demonstrations on IBM and other platforms have factored similarly small integers. Recent work (2024--2025) has factored 35 and 91 on noisy superconducting hardware with extensive error mitigation, again with significant classical assistance.
+
+The largest integer factored by a genuine ``end-to-end'' quantum execution of Shor's algorithm remains in the low double digits. The reason is that factoring a $n$-bit integer requires controlled modular exponentiation on a register of $\sim 2n$ qubits, with circuit depth in the tens of thousands of two-qubit gates---vastly beyond what current NISQ hardware can execute coherently. The actual quantum threat to RSA awaits fault-tolerant quantum computing.
+
+\begin{remark}
+News stories occasionally claim that a small-scale quantum factoring demonstration ``breaks RSA.'' These claims are misleading. Factoring 35 or 91 is no threat to 2048-bit RSA. The scaling problem is severe: the resources required grow polynomially, but the polynomial is large enough that current hardware is many orders of magnitude short.
+\end{remark}
+
+%------------------------------------------------------------------
+\section{Resource estimates for cryptographically relevant Shor}
+%------------------------------------------------------------------
+
+For RSA-2048, the most-cited modern resource estimate is roughly:
+\begin{itemize}
+  \item $\sim$ 4000 logical qubits (after compilation and ancilla overhead).
+  \item $\sim$ $3 \times 10^9$ Toffoli gates.
+  \item $\sim$ 8 hours of computation time on hardware with appropriate clock rates.
+  \item Implemented on surface-code-encoded logical qubits requiring physical error rates $\sim 10^{-3}$, code distance $\sim 25$, and thus $\sim 20$ million physical qubits.
+\end{itemize}
+
+These estimates have been steadily declining as algorithmic improvements and better resource analyses appear. The 2025 estimates are around half the qubit count and Toffoli count of those from 2019; another 5--10x reduction is plausible. Even so, the requirements are far beyond current devices. The most aggressive vendor roadmaps target millions of physical qubits by the early-to-mid 2030s; cryptographically relevant Shor seems achievable in that decade, with significant uncertainty.
+
+For ECC-256, the resource estimates are smaller---around 2500 logical qubits and $10^{10}$ Toffolis, with corresponding physical qubit counts in the low millions. ECC may fall first.
+
+%------------------------------------------------------------------
+\section{The strategic implications}
+%------------------------------------------------------------------
+
+Three strategic conclusions flow from the existence of Shor's algorithm:
+
+\textbf{Migrate now, not later.} The harvest-now-decrypt-later threat is operational today. Any data that must remain confidential beyond, say, 2035 should be encrypted with post-quantum schemes today. NIST's standardisation of ML-KEM and ML-DSA \citep{nist_fips203_2024} gives financial institutions a clear migration target.
+
+\textbf{Hybrid first.} For the next several years, hybrid classical-PQC protocols are the prudent default. They preserve classical security guarantees while gaining post-quantum resistance, at the cost of some bandwidth and CPU overhead.
+
+\textbf{Crypto-agility.} The PQC landscape will continue to evolve. Cryptanalysis of lattice-based schemes is an active research area, and breaks of NIST candidates have occurred during standardisation. Financial systems should be designed to swap cryptographic primitives easily---an architectural principle called \keyterm{crypto-agility}---rather than to depend on any single algorithm.
+
+\citet{auer_quantum_2024} make these points in the central-bank context. \citet{gong_quantum_2026-1} elaborate them for the broader financial sector. The migration is, in practice, the most actionable consequence of quantum computing for finance professionals today---more so than any of the speedup opportunities, which require quantum hardware advances that have not yet arrived.
+
+%------------------------------------------------------------------
+\section{The book in one circuit}
+%------------------------------------------------------------------
+
+Shor's algorithm ties together every conceptual thread of this book.
+
+\begin{itemize}
+  \item It begins with the \keyterm{qubit} register in \keyterm{superposition}, generated by a Hadamard layer.
+  \item It evaluates $f(x) = a^x \bmod N$ via a quantum circuit, entangling the input and function registers (\keyterm{entanglement}).
+  \item It measures the function register, collapsing the input register to a periodic comb (\keyterm{measurement}).
+  \item It applies the quantum Fourier transform, exploiting \keyterm{interference} to convert period in the time domain to peaks in the frequency domain.
+  \item It runs on a \keyterm{fault-tolerant} architecture (Chapter on Error Correction) because the circuit depth far exceeds NISQ coherence.
+  \item It is implemented in \keyterm{Qiskit} or similar frameworks (Chapter on Qiskit), albeit at small instance sizes.
+  \item Its consequences for \keyterm{RSA} and \keyterm{ECC} drive the entire post-quantum cryptography agenda for the financial sector.
+\end{itemize}
+
+Shor's algorithm is the canonical demonstration of why quantum computing matters. It is also a sobering reminder that the same technology that could transform Monte Carlo simulation, portfolio optimization, and machine learning in finance also threatens to dismantle the cryptographic substrate on which the entire financial system runs. Building the first capability and defending against the second are two sides of the same project, and both demand the attention of the financial industry over the next decade.
+
+The remaining chapters of the book, and the surveys cited throughout, return to those positive applications: where quantum computing helps finance, how to think about advantage on real hardware, and what the discipline looks like as it matures from a research curiosity into a practical tool.
+
+\textsep

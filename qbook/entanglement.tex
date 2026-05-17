@@ -1,0 +1,119 @@
+\chapter{Entanglement}
+
+\chapterSubhead{Correlations without a cause---and why algorithms need them}
+
+If superposition is quantum's most famous concept, \keyterm{entanglement} is its most powerful. The word was coined by Schr\"odinger to describe the phenomenon that he considered ``not one but rather the characteristic trait of quantum mechanics.'' Einstein, who never accepted it, called it ``spooky action at a distance.'' Bell turned the philosophical disagreement into a falsifiable prediction \citep{bell_einstein_1964}, and Aspect's experiments \citep{aspect_experimental_1982} settled the question in nature's favour: entanglement is real, and no local theory of hidden variables can reproduce its statistics.
+
+%------------------------------------------------------------------
+\section{Entanglement, defined}
+%------------------------------------------------------------------
+
+A pure state $|\Psi\rangle \in \mathcal{H}_A \otimes \mathcal{H}_B$ of a bipartite system is \keyterm{separable} (a product state) if it can be written as
+\[
+  |\Psi\rangle = |\phi\rangle_A \otimes |\chi\rangle_B
+\]
+for some $|\phi\rangle_A \in \mathcal{H}_A$ and $|\chi\rangle_B \in \mathcal{H}_B$. Otherwise it is \keyterm{entangled}. For mixed states, separability means the density operator can be written as $\rho_{AB} = \sum_i p_i\,\rho_A^{(i)}\otimes\rho_B^{(i)}$ with $p_i \geq 0$; otherwise the state is entangled.
+
+The mathematical definition is simple. What it implies is striking: an entangled state cannot be described by giving the state of $A$ and the state of $B$ separately. The whole carries information that the parts do not.
+
+%------------------------------------------------------------------
+\section{The Bell states}
+%------------------------------------------------------------------
+
+The four \keyterm{Bell states} are an orthonormal basis of the two-qubit Hilbert space, consisting entirely of maximally entangled states:
+\begin{align*}
+  |\Phi^+\rangle &= \tfrac{1}{\sqrt 2}(|00\rangle + |11\rangle), &
+  |\Phi^-\rangle &= \tfrac{1}{\sqrt 2}(|00\rangle - |11\rangle), \\
+  |\Psi^+\rangle &= \tfrac{1}{\sqrt 2}(|01\rangle + |10\rangle), &
+  |\Psi^-\rangle &= \tfrac{1}{\sqrt 2}(|01\rangle - |10\rangle).
+\end{align*}
+Each can be created from $|00\rangle$ by a Hadamard on the first qubit followed by a CNOT with the first qubit as control and the second as target, possibly preceded by single-qubit operations to select among the four. The Bell states are the simplest non-trivial entangled states, and the canonical resource for quantum communication tasks: superdense coding, quantum teleportation, and entanglement-based key distribution \citep{nielsen_quantum_2010,bennett_quantum_2014}.
+
+\begin{example}
+Measuring $|\Phi^+\rangle = \tfrac{1}{\sqrt 2}(|00\rangle + |11\rangle)$ on the first qubit yields $0$ or $1$ with equal probability $\tfrac12$. Conditional on outcome $0$, the second qubit collapses to $|0\rangle$; conditional on outcome $1$, to $|1\rangle$. The two outcomes are perfectly correlated, regardless of the spatial separation of the qubits.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Why Einstein objected}
+%------------------------------------------------------------------
+
+The \keyterm{EPR paradox} \citep{einstein_can_1935} argued that entanglement implied either faster-than-light influence or an incomplete description of physical reality. The argument: if Alice and Bob share $|\Phi^+\rangle$ and Alice measures, she instantaneously ``knows'' Bob's outcome regardless of distance. To Einstein, this was inadmissible, so quantum mechanics had to be incomplete; some additional ``hidden variable'' must determine the outcomes ahead of time.
+
+Bell \citep{bell_einstein_1964} translated this disagreement into a mathematical inequality satisfied by any local-hidden-variable theory, but violated by quantum mechanics. Experiments \citep{aspect_experimental_1982} have repeatedly confirmed the quantum predictions to many standard deviations, ruling out local-hidden-variable theories. The 2022 Nobel Prize in Physics was awarded to Aspect, Clauser, and Zeilinger for this body of work.
+
+Entanglement does not transmit information faster than light. Alice's measurement outcomes, viewed alone, are random; she has no way to signal Bob through her choice of measurement basis. What she can do, via classical communication of her outcomes, is share \emph{correlations} that have no classical explanation. This is the formal content of the \keyterm{no-signalling theorem}.
+
+\begin{remark}
+The cleanest framing: quantum correlations are stronger than classical, but weaker than the strongest correlations that would allow signalling. Entanglement is the precise way nature draws the line.
+\end{remark}
+
+%------------------------------------------------------------------
+\section{Quantifying entanglement}
+%------------------------------------------------------------------
+
+For a bipartite pure state $|\Psi\rangle_{AB}$, the standard measure of entanglement is the \keyterm{entropy of entanglement}: the von Neumann entropy of the reduced density operator
+\[
+  \rho_A = \mathrm{Tr}_B|\Psi\rangle\langle\Psi|, \qquad
+  S(\rho_A) = -\mathrm{Tr}(\rho_A \log_2 \rho_A).
+\]
+For a separable pure state, $\rho_A$ is itself pure and $S(\rho_A) = 0$. For a maximally entangled state of two $d$-dimensional systems, $\rho_A = I/d$ is maximally mixed and $S(\rho_A) = \log_2 d$. For the Bell states, $S = 1$ bit (or ``ebit'').
+
+The \keyterm{Schmidt decomposition} sharpens this further: any bipartite pure state can be written
+\[
+  |\Psi\rangle = \sum_i \sqrt{\lambda_i}\,|u_i\rangle_A \otimes |v_i\rangle_B,
+\]
+where $\{|u_i\rangle\}, \{|v_i\rangle\}$ are orthonormal bases of the two subsystems and $\lambda_i \geq 0$ are the Schmidt coefficients with $\sum_i \lambda_i = 1$. The number of nonzero $\lambda_i$, called the \keyterm{Schmidt rank}, is at least $2$ if and only if the state is entangled.
+
+\begin{example}
+$|\Phi^+\rangle = \tfrac{1}{\sqrt 2}(|0\rangle|0\rangle + |1\rangle|1\rangle)$ already has Schmidt form, with Schmidt rank 2 and coefficients $\lambda_1 = \lambda_2 = \tfrac12$. Tracing out one qubit gives $\rho_A = I/2$, a maximally mixed state with $S(\rho_A) = 1$ bit.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Entanglement as a computational resource}
+%------------------------------------------------------------------
+
+In quantum algorithms, entanglement is not just an aesthetic curiosity---it is the structural feature that lets quantum computation outpace classical. A quantum circuit that produces only separable states is essentially a collection of independent single-qubit evolutions, simulable classically with linear overhead.
+
+The technical statement is that \emph{any} quantum algorithm with super-polynomial advantage over classical must generate entanglement \citep{nielsen_quantum_2010}. Shor's algorithm leverages entanglement between the input register and a function register to perform period-finding. Grover's algorithm uses entanglement implicitly when querying the oracle on superpositions of all inputs. Quantum amplitude estimation builds an entangled state from the input register and an ancilla register, then extracts the amplitude via phase estimation.
+
+Stabilizer states---the states produced by Clifford gates---can be highly entangled but are nonetheless classically simulable in polynomial time (the Gottesman--Knill theorem). So entanglement is necessary, but not sufficient, for quantum advantage. The full computational power of quantum mechanics requires non-Clifford gates (e.g., the $T$-gate) on top of entangling Cliffords.
+
+\begin{remark}
+A useful slogan: entanglement is the substrate; non-Clifford gates are the activity on it. Take away either and quantum reduces to a classical machine in disguise.
+\end{remark}
+
+%------------------------------------------------------------------
+\section{Entanglement in financial algorithms}
+%------------------------------------------------------------------
+
+In quantum finance, entanglement appears most directly in two places.
+
+\textbf{Amplitude estimation.} The quantum Monte Carlo machinery underlying option pricing and risk \citep{egger_quantum_2020,stamatopoulos_option_2020} entangles a function register (encoding payoff values) with an ancilla. The amplitude of a particular basis state of the ancilla equals the expected payoff. Phase estimation reads that amplitude with quadratic speedup over classical Monte Carlo.
+
+\textbf{QAOA and VQE.} Variational algorithms for portfolio optimization \citep{thomassin_quantum_2025,zaman_po-qa_2024,morapakula_end--end_2026} use parameterized circuits that include entangling layers (typically CNOTs in a defined connectivity pattern) interleaved with single-qubit rotations. The depth of entangling layers controls the expressive power of the ansatz; without them, the variational state cannot represent the correlations needed to encode realistic portfolio constraints.
+
+A practical question in NISQ-era quantum finance is how much entanglement the hardware can sustain. Each two-qubit gate adds noise, and noise destroys entanglement; deep entangling circuits become unreliable on current devices. The art of NISQ algorithm design is to use just enough entanglement to capture the structure of the problem and no more---a constraint that has produced a literature on \keyterm{shallow ansatz} circuits and error-aware quantum optimization \citep{cerezo_variational_2021}.
+
+%------------------------------------------------------------------
+\section{Entanglement in cryptography}
+%------------------------------------------------------------------
+
+Entanglement underlies the security of \keyterm{entanglement-based} quantum key distribution \citep{bennett_quantum_2014}. Two parties share Bell pairs over a quantum channel; eavesdropping necessarily disturbs the entanglement, which the legitimate parties can detect by checking statistics on a random sample of measurement outcomes. The protocol's security follows from the no-signalling theorem and the monogamy of entanglement---the fact that a maximally entangled state of $A$ with $B$ cannot also be entangled with a third party.
+
+This security is in striking contrast to RSA and elliptic-curve cryptography (Chapters on RSA and Elliptic Curves), whose security rests on the computational hardness of factoring and discrete logarithms---hardness assumptions that quantum computers can defeat (Chapter on Shor's Algorithm). Entanglement-based protocols are \emph{information-theoretically} secure, not just computationally secure.
+
+%------------------------------------------------------------------
+\section{What to remember}
+%------------------------------------------------------------------
+
+\begin{itemize}
+  \item Entanglement is the failure of a joint state to factorize as a product of subsystem states.
+  \item Bell states are the canonical maximally entangled two-qubit states; they are the building blocks of quantum communication.
+  \item Quantum correlations are stronger than classical (violating Bell inequalities) but cannot signal (no-signalling theorem).
+  \item Entanglement is a necessary resource for super-polynomial quantum speedups, but it is not sufficient on its own.
+  \item In finance, entanglement appears in amplitude estimation and variational ansatz construction; in cryptography, in QKD.
+\end{itemize}
+
+The next phenomenon---\keyterm{interference}---is what turns entangled and superposed states into useful computation by amplifying correct answers and cancelling wrong ones.
+
+\textsep

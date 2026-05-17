@@ -1,0 +1,113 @@
+\chapter{Interference}
+
+\chapterSubhead{Where the quantum speedup actually lives}
+
+Superposition and entanglement are spectacular phenomena, but neither alone delivers algorithmic advantage. A uniform superposition is statistically indistinguishable from a random sampler; an entangled register holds correlations that classical post-processing must still extract. The third pillar---\keyterm{interference}---is what turns these resources into computation. Interference is the engine. Without it, quantum mechanics is an expensive way to flip coins.
+
+%------------------------------------------------------------------
+\section{What interference is}
+%------------------------------------------------------------------
+
+Quantum amplitudes are complex numbers. When two computational paths arrive at the same final state, their amplitudes \emph{add}, with possible cancellation due to phase. The probability of the outcome is the squared modulus of the sum, not the sum of squared moduli:
+\[
+  P(\text{outcome}) = \Big|\sum_{\text{paths}} \alpha_{\text{path}}\Big|^2 \neq \sum_{\text{paths}} |\alpha_{\text{path}}|^2.
+\]
+The latter is the classical formula for the probability of a sum of mutually exclusive paths. The former is the quantum formula and includes \keyterm{cross terms} that classical probability cannot produce. Those cross terms are the source of interference, and they can be either constructive (positive) or destructive (negative).
+
+\begin{example}
+The Mach--Zehnder interferometer is the canonical illustration. A photon enters a beam splitter, takes one of two paths to a second beam splitter, and is detected at one of two outputs. Each path contributes an amplitude. If the path lengths are equal, the amplitudes interfere constructively at one output and destructively at the other---the photon is always detected at the same output, despite having ``probability $\tfrac12$'' to take each path. Introducing a phase shift on one arm changes this; sweeping the phase produces the celebrated sinusoidal interference fringes.
+\end{example}
+
+The Hadamard gate followed by a phase followed by another Hadamard implements exactly this interferometer on a qubit:
+\[
+  H R_z(\varphi) H |0\rangle = \cos(\varphi/2)|0\rangle - i\sin(\varphi/2)|1\rangle.
+\]
+The probability of measuring $|0\rangle$ is $\cos^2(\varphi/2)$, varying sinusoidally with $\varphi$. The qubit has, in effect, taken both arms of the interferometer and self-interfered.
+
+%------------------------------------------------------------------
+\section{Constructive and destructive amplification}
+%------------------------------------------------------------------
+
+Quantum algorithms can be understood as choreographies of interference. The starting configuration is a superposition over all candidate answers, with roughly equal amplitudes. The algorithm then applies a sequence of unitaries that adds positive phases to the desired answer and negative or imaginary phases to the wrong ones. When the final state is measured, the amplitudes of incorrect answers have largely cancelled, and the correct answer is overwhelmingly probable.
+
+\textbf{Grover's algorithm} \citep{grover_fast_1996} provides the cleanest illustration. Starting from the uniform superposition over $N$ items, Grover alternates two operations: an oracle that flips the sign of the amplitude of the target item, and a ``diffusion'' operation that reflects all amplitudes about their mean. Each pair of operations increases the amplitude of the target by approximately $2/\sqrt N$. After $O(\sqrt N)$ iterations, the target's amplitude is close to $1$ and measurement returns it with high probability. The non-target amplitudes have systematically interfered destructively.
+
+\textbf{The quantum Fourier transform} (QFT) underlies Shor's algorithm and amplitude estimation. The QFT redistributes amplitudes across a register by applying a precise pattern of phases:
+\[
+  \mathrm{QFT}|x\rangle = \tfrac{1}{\sqrt{N}}\sum_y e^{2\pi i xy / N}|y\rangle.
+\]
+A function that has been evaluated in superposition---producing a register state whose amplitudes carry the function's structure---can be passed through the QFT to convert that structure into a pattern of constructive and destructive interference, revealing the function's period upon measurement.
+
+\begin{remark}
+A simple way to think about it: classical algorithms compute the right answer. Quantum algorithms make the right answer the most probable measurement outcome. Both can be ``correct,'' but the mechanism is qualitatively different.
+\end{remark}
+
+%------------------------------------------------------------------
+\section{Coherence: the prerequisite for interference}
+%------------------------------------------------------------------
+
+Interference requires that the amplitudes of competing paths remain \keyterm{coherent}---meaning their relative phases are preserved during the computation. Any disturbance that randomizes the relative phases (heat, stray magnetic field, environmental coupling) destroys interference and reduces the quantum computer to a classical one.
+
+This is why quantum hardware must be isolated, cooled, and operated within strict timing windows. A superconducting transmon at IBM operates at 10 millikelvin in a dilution refrigerator, with electromagnetic shielding and cable filtering at multiple stages. A trapped ion is suspended in ultra-high vacuum and addressed by laser pulses with picosecond precision. Even with these heroic measures, current devices retain coherence for only tens to hundreds of microseconds---vastly shorter than the duration of a useful algorithm at scale \citep{preskill_quantum_2018}.
+
+The chapter on \keyterm{decoherence} treats the physics of coherence loss. The chapter on \keyterm{error correction} treats how to combat it. Without those defences, interference patterns wash out, and the quantum advantage with them.
+
+%------------------------------------------------------------------
+\section{The phase kickback trick}
+%------------------------------------------------------------------
+
+A particular interference effect, \keyterm{phase kickback}, appears in nearly every quantum algorithm. It works as follows. Suppose we have a function $f$ implemented as a unitary $U_f$ with
+\[
+  U_f|x\rangle|y\rangle = |x\rangle|y \oplus f(x)\rangle.
+\]
+Prepare the second register in $|-\rangle = \tfrac{1}{\sqrt 2}(|0\rangle - |1\rangle)$. Then
+\[
+  U_f|x\rangle|-\rangle = (-1)^{f(x)}|x\rangle|-\rangle.
+\]
+The phase $(-1)^{f(x)}$, which logically belongs to the second register, has been ``kicked back'' onto the first register. We have converted a function-value computation into a phase imprinted on the input. If the first register is in superposition over many $x$, each $|x\rangle$ component now carries a sign determined by $f(x)$.
+
+This trick is at the heart of Deutsch--Jozsa, Bernstein--Vazirani, Simon's algorithm, Grover's algorithm, and Shor's algorithm. It is the standard way to convert a function oracle into an interference-ready phase pattern.
+
+\begin{example}
+For Deutsch's problem with $f:\{0,1\}\to\{0,1\}$: prepare $|+\rangle|-\rangle$, apply $U_f$, then a final Hadamard. The result is
+\[
+  H_1\, U_f\,(H_1\otimes I)\,|0\rangle|-\rangle = \begin{cases} |0\rangle|-\rangle & \text{if $f$ is constant}, \\ |1\rangle|-\rangle & \text{if $f$ is balanced.}\end{cases}
+\]
+A single quantum query distinguishes constant from balanced; classically, two queries are required.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Interference in financial algorithms}
+%------------------------------------------------------------------
+
+In quantum amplitude estimation, the central tool of quantum Monte Carlo for finance, interference is doing two jobs at once. First, it converts the amplitude of a target state---which encodes the expected payoff---into a phase via the Grover-like ``amplification operator.'' Second, the quantum Fourier transform reads that phase off as a basis state of an output register, with interference concentrating amplitude on the basis state closest to the true phase \citep{stamatopoulos_option_2020}.
+
+The result is that the amplitude is estimated with precision $O(1/N)$ given $N$ oracle queries, in contrast to the classical Monte Carlo precision $O(1/\sqrt N)$. The square-root speedup is paid for entirely by interference: without coherent phases preserved across $N$ oracle applications, the quantum estimator degrades to the classical one.
+
+The chapter on quantum hardware will return to this point. NISQ-era amplitude estimation is limited by circuit depth, not by qubit count: the longer the coherent interference pattern, the better the speedup---but also the more likely a phase error will derail it. Hybrid \keyterm{shallow amplitude estimation} variants \citep{cerezo_variational_2021,temme_error_2017} trade some of the asymptotic speedup for circuits short enough to execute reliably on current devices.
+
+%------------------------------------------------------------------
+\section{The classical view of interference, contrasted}
+%------------------------------------------------------------------
+
+Classical physics has interference too---water waves on a pond, sound waves in a concert hall, light waves at a diffraction grating. The mathematics looks identical: complex amplitudes, superposition, constructive and destructive sums. So what makes quantum interference different?
+
+The answer is that classical interference occurs in a single physical wave occupying space. Many photons or molecules collectively realize the wave amplitudes. Quantum interference, by contrast, occurs at the level of \emph{single particles}. A single electron self-interferes in a double-slit experiment; the interference pattern builds up one electron at a time. The amplitudes are properties of the quantum state of one particle, not of an ensemble.
+
+This single-particle interference is what makes quantum interference an algorithmic resource. A classical interferometer can compute one function of phase; a quantum computer with $n$ qubits has $2^n$ amplitudes available for interference patterns, far beyond what any classical wave system of comparable size can realize.
+
+%------------------------------------------------------------------
+\section{Putting the three pillars together}
+%------------------------------------------------------------------
+
+We can now restate the structure of quantum advantage in one line.
+
+\begin{itemize}
+  \item \textbf{Superposition} provides a register state that simultaneously holds $2^n$ basis components.
+  \item \textbf{Entanglement} links those components into a structured joint state that classical systems cannot efficiently represent.
+  \item \textbf{Interference} amplifies useful components and cancels useless ones, so that measurement returns an informative outcome.
+\end{itemize}
+
+Each pillar is necessary; none is sufficient on its own. The next chapter on the Schr\"odinger equation describes the underlying dynamics that produce all three, and from there we move to the hardware that has to keep these dynamics intact long enough for the algorithm to finish.
+
+\textsep

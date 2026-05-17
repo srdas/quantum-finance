@@ -1,0 +1,171 @@
+\chapter{Dirac's Brackets}
+
+\chapterSubhead{The notation that made quantum mechanics readable}
+
+In 1939 Paul Dirac introduced a notation so well suited to quantum mechanics that almost every physicist has used it ever since \citep{dirac_principles_1958}. \keyterm{Bra--ket} notation is not a different theory; it is the same linear algebra of the Hilbert-space and operator chapters written in a way that hides nothing essential and shows the structure of expressions at a glance. Once it clicks, the formalism feels almost typographic---each symbol points to its meaning.
+
+%------------------------------------------------------------------
+\section{Kets and bras}
+%------------------------------------------------------------------
+
+A column vector in $\mathbb{C}^d$ is written as a \keyterm{ket}:
+\[
+  |\psi\rangle = \begin{pmatrix} \alpha_1 \\ \alpha_2 \\ \vdots \\ \alpha_d \end{pmatrix}.
+\]
+The symbol inside the brackets labels the state, not its components: $|0\rangle$, $|1\rangle$, $|\psi\rangle$, $|+\rangle$ are all kets. The corresponding \keyterm{bra} is the conjugate transpose:
+\[
+  \langle\psi| = |\psi\rangle^\dagger = (\bar\alpha_1, \bar\alpha_2, \ldots, \bar\alpha_d).
+\]
+Bras act on kets to produce complex numbers (inner products) and on operators to produce new bras. The map $|\psi\rangle \mapsto \langle\psi|$ is anti-linear: $|\alpha\psi+\beta\phi\rangle \mapsto \bar\alpha\langle\psi| + \bar\beta\langle\phi|$. The Riesz representation theorem (Section~\ref{sec:hilbert}) guarantees a one-to-one correspondence between kets and bras in any Hilbert space.
+
+\begin{example}
+The computational basis vectors of a qubit are written
+\[
+  |0\rangle = \begin{pmatrix}1\\0\end{pmatrix}, \quad |1\rangle = \begin{pmatrix}0\\1\end{pmatrix}, \quad \langle 0| = (1,0), \quad \langle 1| = (0,1).
+\]
+Any qubit state is $\alpha|0\rangle + \beta|1\rangle$ for complex $\alpha,\beta$ with $|\alpha|^2+|\beta|^2=1$.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Inner products: bra-keting}
+%------------------------------------------------------------------
+
+The inner product of two states is written by joining bra and ket:
+\[
+  \langle\phi|\psi\rangle = \sum_i \bar{\phi}_i\,\psi_i \in \mathbb{C}.
+\]
+The notation is wonderfully suggestive: ``$\langle\phi$ on $\psi\rangle$.'' Several identities follow at sight:
+\begin{itemize}
+  \item $\langle\phi|\psi\rangle = \overline{\langle\psi|\phi\rangle}$ (conjugate symmetry).
+  \item $\langle\psi|\psi\rangle = \||\psi\rangle\|^2 \geq 0$, with equality iff $|\psi\rangle = 0$.
+  \item Linearity in the right slot: $\langle\phi|(\alpha|\psi\rangle + \beta|\chi\rangle) = \alpha\langle\phi|\psi\rangle + \beta\langle\phi|\chi\rangle$.
+  \item Anti-linearity in the left slot: $(\langle\phi|\alpha + \langle\chi|\beta)|\psi\rangle$ has $\bar\alpha,\bar\beta$ on the outside.
+\end{itemize}
+The \keyterm{Cauchy--Schwarz inequality} reads $|\langle\phi|\psi\rangle| \leq \||\phi\rangle\|\cdot\||\psi\rangle\|$.
+
+\begin{example}
+For $|\psi\rangle = \tfrac{1}{\sqrt 2}(|0\rangle + |1\rangle)$ and $|\phi\rangle = \tfrac{1}{\sqrt 2}(|0\rangle - |1\rangle)$, the inner product is
+\[
+  \langle\phi|\psi\rangle = \tfrac{1}{2}(\langle 0|0\rangle - \langle 0|1\rangle + \langle 1|0\rangle - \langle 1|1\rangle) = \tfrac{1}{2}(1-0+0-1) = 0.
+\]
+The states are orthogonal: a measurement in the $\{|\phi\rangle,|\psi\rangle\}$ basis distinguishes them perfectly.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Outer products: ket-bras as operators}
+%------------------------------------------------------------------
+
+Joining a ket and a bra in the opposite order yields an \keyterm{outer product}, which is a matrix---an operator:
+\[
+  |\psi\rangle\langle\phi| = \begin{pmatrix} \psi_1 \\ \psi_2 \\ \vdots \\ \psi_d \end{pmatrix} (\bar\phi_1,\bar\phi_2,\ldots,\bar\phi_d) = (\psi_i \bar\phi_j)_{ij}.
+\]
+This operator acts on a ket $|\chi\rangle$ by first computing the bra-ket $\langle\phi|\chi\rangle$ (a scalar) and then producing $|\psi\rangle\langle\phi|\chi\rangle = \langle\phi|\chi\rangle\,|\psi\rangle$. The right-hand side is a ket; the operator sends $|\chi\rangle$ to $|\psi\rangle$ scaled by the overlap $\langle\phi|\chi\rangle$.
+
+A particularly important case is the \keyterm{projector} onto a unit vector $|\psi\rangle$:
+\[
+  P_\psi = |\psi\rangle\langle\psi|.
+\]
+It satisfies $P_\psi^2 = P_\psi$ and $P_\psi^\dagger = P_\psi$. The action $P_\psi|\chi\rangle = \langle\psi|\chi\rangle\,|\psi\rangle$ projects $|\chi\rangle$ onto the line through $|\psi\rangle$.
+
+\begin{example}
+$\sigma_z = |0\rangle\langle 0| - |1\rangle\langle 1|$, $\sigma_x = |0\rangle\langle 1| + |1\rangle\langle 0|$, and $I = |0\rangle\langle 0| + |1\rangle\langle 1|$. The Hadamard gate is $H = |+\rangle\langle 0| + |-\rangle\langle 1| = \tfrac{1}{\sqrt 2}(|0\rangle\langle 0| + |0\rangle\langle 1| + |1\rangle\langle 0| - |1\rangle\langle 1|)$.
+\end{example}
+
+%------------------------------------------------------------------
+\section{The resolution of the identity}
+%------------------------------------------------------------------
+
+If $\{|e_i\rangle\}$ is an orthonormal basis, then
+\[
+  \sum_i |e_i\rangle\langle e_i| = I.
+\]
+This identity is called the \keyterm{resolution of the identity} or the \keyterm{completeness relation}. It is the bra--ket form of the statement that a vector equals the sum of its projections onto basis vectors:
+\[
+  |\psi\rangle = I|\psi\rangle = \sum_i |e_i\rangle\langle e_i|\psi\rangle = \sum_i \langle e_i|\psi\rangle\,|e_i\rangle.
+\]
+The coefficients $\langle e_i|\psi\rangle$ are the components in the chosen basis.
+
+The completeness relation is the workhorse of bra--ket computation. It allows the insertion of $I = \sum_i |e_i\rangle\langle e_i|$ at any point in an expression---an algebraic move equivalent to ``inserting basis vectors and summing''---without changing the result. It is the same trick used to derive matrix representations of operators in Section~\ref{sec:matrix-rep}.
+
+%------------------------------------------------------------------
+\section{Operators in spectral form}
+%------------------------------------------------------------------
+
+A Hermitian operator $A$ with eigenvalues $\lambda_i$ and eigenvectors $|\lambda_i\rangle$ has the bra--ket spectral form (Section~\ref{sec:spectral})
+\[
+  A = \sum_i \lambda_i\,|\lambda_i\rangle\langle\lambda_i|.
+\]
+This form makes functions of $A$ transparent:
+\[
+  f(A) = \sum_i f(\lambda_i)\,|\lambda_i\rangle\langle\lambda_i|.
+\]
+For the Pauli $\sigma_z$ with eigenvalues $\pm 1$ and eigenvectors $|0\rangle,|1\rangle$:
+\[
+  e^{i\theta\sigma_z} = e^{i\theta}|0\rangle\langle 0| + e^{-i\theta}|1\rangle\langle 1| = \cos\theta\,I + i\sin\theta\,\sigma_z.
+\]
+Every unitary applied to a qubit can be written in such closed form; the Schr\"odinger evolution of a qubit under a time-independent Hamiltonian is just $\exp(-iHt/\hbar)$, expanded on the eigenbasis of $H$.
+
+%------------------------------------------------------------------
+\section{Tensor products in bra--ket}
+%------------------------------------------------------------------
+
+For composite systems, the tensor product symbol is often suppressed:
+\[
+  |\psi\rangle_A \otimes |\phi\rangle_B = |\psi\rangle|\phi\rangle = |\psi,\phi\rangle = |\psi\phi\rangle.
+\]
+For two qubits, the computational basis is $\{|00\rangle, |01\rangle, |10\rangle, |11\rangle\}$. Inner products factorize across tensor products:
+\[
+  (\langle\psi_1|\otimes\langle\phi_1|)(|\psi_2\rangle\otimes|\phi_2\rangle) = \langle\psi_1|\psi_2\rangle\,\langle\phi_1|\phi_2\rangle.
+\]
+Operators acting on different subsystems commute under the tensor product:
+\[
+  (A \otimes I)(I \otimes B) = (I \otimes B)(A \otimes I) = A \otimes B.
+\]
+
+\begin{example}
+For the Bell state $|\Phi^+\rangle = \tfrac{1}{\sqrt 2}(|00\rangle + |11\rangle)$, the inner product with $|01\rangle$ is
+\[
+  \langle 01|\Phi^+\rangle = \tfrac{1}{\sqrt 2}(\langle 01|00\rangle + \langle 01|11\rangle) = \tfrac{1}{\sqrt 2}(0+0) = 0.
+\]
+The amplitude of $|01\rangle$ in $|\Phi^+\rangle$ is zero---measurement never gives 01.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Expectation values, in three notations}
+%------------------------------------------------------------------
+
+The expectation value of an observable $A$ in a state $|\psi\rangle$ is written
+\[
+  \langle A\rangle_\psi = \langle\psi|A|\psi\rangle.
+\]
+Reading inside-out: $A|\psi\rangle$ is a ket; bra'ing with $\langle\psi|$ gives a scalar. For a mixed state $\rho = \sum_i p_i\,|\psi_i\rangle\langle\psi_i|$, the expectation generalises to
+\[
+  \langle A\rangle_\rho = \mathrm{Tr}(\rho\,A) = \sum_i p_i\,\langle\psi_i|A|\psi_i\rangle.
+\]
+The cyclic property of the trace, $\mathrm{Tr}(AB) = \mathrm{Tr}(BA)$, gives a third (and very useful) view: $\langle A\rangle_\rho = \mathrm{Tr}(A\rho)$.
+
+In financial applications, $A$ is often a payoff operator: the expected payoff is $\mathrm{Tr}(\rho\,A)$ for an appropriately prepared $\rho$. Quantum amplitude estimation reads this expectation value with quadratically fewer queries than the classical $1/\sqrt{N}$ Monte Carlo rate \citep{egger_quantum_2020}.
+
+%------------------------------------------------------------------
+\section{A small grammar of bra--ket}
+%------------------------------------------------------------------
+
+For quick reference, the standard moves of the formalism are:
+
+\begin{itemize}
+  \item $\langle\phi|\psi\rangle$: a scalar (inner product).
+  \item $|\psi\rangle\langle\phi|$: an operator (outer product).
+  \item $\langle\psi|A|\phi\rangle$: a scalar (matrix element of $A$).
+  \item $A|\psi\rangle$: a ket (operator acting on state).
+  \item $\langle\psi|A$: a bra (operator transposed onto bra).
+  \item $\sum_i |e_i\rangle\langle e_i| = I$: completeness, may be inserted anywhere.
+  \item $A = \sum_i \lambda_i\,|\lambda_i\rangle\langle\lambda_i|$: spectral decomposition.
+\end{itemize}
+
+\begin{remark}
+A useful rule of thumb when reading bra--ket: parse from inside outward. Identify scalars first (bra-kets), then collapse them. Operators acting on kets are kets, operators acting from the right on bras are bras. With practice, expressions become almost diagrammatic.
+\end{remark}
+
+The notation will return on every page of every chapter that follows. The investment in fluency pays off immediately: the same expressions that look intimidating in matrix form ($U\rho U^\dagger$, $\mathrm{Tr}_B(\rho_{AB})$, $\sum_x \langle x|U|\psi\rangle\,|x\rangle$) read at a glance once the eye is trained.
+
+\textsep

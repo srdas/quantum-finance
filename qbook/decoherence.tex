@@ -1,0 +1,142 @@
+\chapter{Decoherence}
+
+\chapterSubhead{Why the quantum world fades into the classical}
+
+A perfectly isolated qubit, evolving under a known Hamiltonian, holds its superposition indefinitely. A real qubit, embedded in a chip or a vacuum chamber or an optical cavity, interacts with countless environmental degrees of freedom---phonons, photons, fluctuating fields, neighbouring atoms. Those interactions destroy coherence on a timescale far shorter than we would like. \keyterm{Decoherence} is the name of this destruction. Understanding it is the prerequisite to combating it.
+
+%------------------------------------------------------------------
+\section{Two pictures of decoherence}
+%------------------------------------------------------------------
+
+There are two complementary ways to think about decoherence.
+
+\textbf{Information-theoretic.} A qubit becomes entangled with the environment. The joint qubit--environment state remains pure and unitary; but if we discard the environment (we have no access to it), the reduced state of the qubit becomes mixed. The off-diagonal entries of its density matrix decay, and with them go the interference effects that make quantum computing work.
+
+\textbf{Physical.} The qubit, coupled to a heat bath, exchanges energy and acquires phase fluctuations. Energy exchange relaxes the qubit's populations toward thermal equilibrium ($T_1$ relaxation). Phase fluctuations randomize the relative phase between basis states ($T_2$ dephasing). Both processes erode the qubit's usefulness as a quantum bit.
+
+Both pictures describe the same phenomenon \citep{zurek_decoherence_2003}. The information-theoretic view explains \emph{why} environmental coupling is fatal; the physical view describes \emph{how} it actually happens in a given device.
+
+%------------------------------------------------------------------
+\section{$T_1$ and $T_2$}
+%------------------------------------------------------------------
+
+The two canonical timescales of single-qubit decoherence are:
+
+\textbf{$T_1$ (energy relaxation time).} The characteristic time for a qubit in $|1\rangle$ to decay to $|0\rangle$ via energy dissipation into the environment. In Bloch-vector language, $T_1$ governs the decay of the $z$-component of the Bloch vector toward its thermal equilibrium.
+
+\textbf{$T_2$ (dephasing time).} The characteristic time for a qubit's superposition $|+\rangle$ to lose its coherent off-diagonal entries. In Bloch-vector language, $T_2$ governs the decay of the $x$- and $y$-components of the Bloch vector toward zero.
+
+The two timescales are related by the inequality $T_2 \leq 2T_1$. The pure-dephasing time, defined by $1/T_\varphi = 1/T_2 - 1/(2T_1)$, isolates the dephasing process not caused by energy relaxation.
+
+For current superconducting transmon qubits, $T_1$ and $T_2$ are typically 100--300 microseconds. Trapped-ion qubits routinely achieve $T_2$ of seconds or longer. The figure of merit for an algorithm is $T_{\text{coh}}/t_{\text{gate}}$: how many gates fit inside one coherence time. Numbers in the few thousand are typical now; numbers above $10^4$ are the threshold for serious error correction.
+
+\begin{example}
+A two-qubit gate on a transmon takes around 300 ns. With $T_2 = 100$ microseconds, about 300 such gates fit inside a coherence time. Allowing for single-qubit gates between them and for noise margins, a useful NISQ circuit is typically limited to depths of order 100 two-qubit gates.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Quantum operations and noise channels}
+%------------------------------------------------------------------
+
+The general formalism for noise is the \keyterm{quantum operation} (also called \keyterm{quantum channel}), a linear map $\mathcal{E}$ on density operators preserving positivity and trace. Every such map has a \keyterm{Kraus representation}:
+\[
+  \mathcal{E}(\rho) = \sum_k K_k \rho K_k^\dagger, \qquad \sum_k K_k^\dagger K_k = I.
+\]
+The operators $\{K_k\}$ are the Kraus operators of the channel. A unitary evolution has a single Kraus operator equal to the unitary; a noisy channel has multiple.
+
+Two canonical single-qubit noise channels:
+
+\textbf{Amplitude damping (energy relaxation, $T_1$).} Kraus operators
+\[
+  K_0 = \begin{pmatrix}1 & 0 \\ 0 & \sqrt{1-\gamma}\end{pmatrix}, \quad
+  K_1 = \begin{pmatrix}0 & \sqrt{\gamma} \\ 0 & 0\end{pmatrix},
+\]
+with $\gamma = 1 - e^{-t/T_1}$. The diagonal $K_0$ damps the $|1\rangle$ population; the off-diagonal $K_1$ irreversibly transfers $|1\rangle$ to $|0\rangle$ (emitting a quantum to the environment).
+
+\textbf{Phase damping (pure dephasing, $T_\varphi$).} Kraus operators
+\[
+  K_0 = \begin{pmatrix}1 & 0 \\ 0 & \sqrt{1-\lambda}\end{pmatrix}, \quad
+  K_1 = \begin{pmatrix}0 & 0 \\ 0 & \sqrt{\lambda}\end{pmatrix},
+\]
+with $\lambda = 1 - e^{-t/T_\varphi}$. The off-diagonals of $\rho$ shrink by $\sqrt{1-\lambda}$; populations are unchanged. This is the canonical destruction of coherence without energy loss.
+
+%------------------------------------------------------------------
+\section{The Lindblad master equation}
+%------------------------------------------------------------------
+
+For continuous-time noisy evolution under weak environmental coupling (the Born--Markov approximation), the density operator obeys the \keyterm{Lindblad master equation}
+\[
+  \frac{d\rho}{dt} = -\frac{i}{\hbar}[\hat H,\rho] + \sum_k \Big(L_k\rho L_k^\dagger - \tfrac{1}{2}\{L_k^\dagger L_k,\rho\}\Big).
+\]
+The first term is the closed-system Schr\"odinger evolution; the second term is the dissipative correction with \keyterm{jump operators} $L_k$ encoding specific noise processes. For a transmon qubit with $T_1$ relaxation, $L_1 = \sqrt{1/T_1}\,\sigma_-$ (lowering operator); for pure dephasing, $L_2 = \sqrt{1/(2T_\varphi)}\,\sigma_z$.
+
+The Lindblad equation has the great virtue of being a continuous, deterministic equation for $\rho(t)$ that can be simulated numerically. It is the workhorse of quantum hardware modelling, control design, and noise characterization.
+
+\begin{remark}
+The Born--Markov approximation assumes weak coupling to a memoryless environment. Real devices sometimes have non-Markovian dynamics (the environment remembers prior interactions), requiring more elaborate models. \keyterm{1/f noise} in superconducting qubits is a classic example.
+\end{remark}
+
+%------------------------------------------------------------------
+\section{Sources of decoherence in real hardware}
+%------------------------------------------------------------------
+
+The dominant decoherence channels depend on the platform.
+
+\textbf{Superconducting qubits.}
+\begin{itemize}
+\item Dielectric loss at the substrate--metal interface, the largest known $T_1$ killer for transmons.
+\item Two-level defects in oxide layers, which exchange energy with the qubit.
+\item Quasiparticle poisoning from stray non-equilibrium quasiparticles.
+\item Cosmic rays and ionising radiation, recently identified as an unavoidable bulk source of correlated errors.
+\end{itemize}
+
+\textbf{Trapped ions.}
+\begin{itemize}
+\item Spontaneous emission from optically driven states.
+\item Motional heating from electric field noise on trap electrodes.
+\item Magnetic field fluctuations dephasing hyperfine qubits.
+\end{itemize}
+
+\textbf{Photonic systems.}
+\begin{itemize}
+\item Photon loss in waveguides, fibres, and detectors---the dominant error.
+\item Mode mismatch causing imperfect interference at beam splitters.
+\end{itemize}
+
+Each platform's roadmap revolves around progressively eliminating these channels: better materials, cleaner fabrication, improved shielding, better control protocols.
+
+%------------------------------------------------------------------
+\section{Decoherence as the loss of interference}
+%------------------------------------------------------------------
+
+For finance algorithms, the practical effect of decoherence is the degradation of interference patterns. Quantum amplitude estimation relies on coherent phases accumulating over many oracle queries. Each application of the oracle has some probability of an uncorrected error; as the circuit depth grows, the surviving coherent component shrinks exponentially.
+
+The result is a soft ceiling on algorithm performance. A noisy quantum amplitude estimation, even with the asymptotic $1/N$ scaling preserved in principle, achieves only $1/\sqrt{N}$ in practice once $N$ exceeds a noise-set crossover. \keyterm{Error mitigation} techniques \citep{temme_error_2017,kim_evidence_2023}---zero-noise extrapolation, probabilistic error cancellation, virtual distillation---push this crossover further out but do not remove it. Only full error correction (Chapter on Error Correction) breaks the ceiling.
+
+%------------------------------------------------------------------
+\section{The classical limit as decoherence-driven}
+%------------------------------------------------------------------
+
+Decoherence has a deep conceptual role beyond engineering. It explains why the macroscopic world appears classical, even though its constituents are quantum. A coffee cup interacting with $10^{23}$ air molecules, photons, and phonons decoheres on a timescale of about $10^{-20}$ seconds---essentially instantaneously. Its position state is then a statistical mixture in the preferred ``pointer basis'' (here, position-eigenstate-like states), with no observable quantum coherence \citep{zurek_decoherence_2003}.
+
+In the language of Chapter on Superposition: macroscopic objects are not in superposition because they cannot maintain coherence in the face of constant environmental coupling. Quantum mechanics does not vanish at large scales; it is just that the coherences needed to demonstrate it are washed out before any observer notices. The boundary between quantum and classical is not a sharp line; it is a coherence-time scale, which is itself a function of size, isolation, and the number of environmental degrees of freedom.
+
+\begin{remark}
+This is why building a quantum computer is engineering at the very edge of nature. The default state of any macroscopic system is rapid decoherence; to compute we must hold the system off the slide into classicality for the duration of the algorithm. The harder the computation, the longer the hold.
+\end{remark}
+
+%------------------------------------------------------------------
+\section{What it all means for algorithm design}
+%------------------------------------------------------------------
+
+Three rules of thumb follow from the structure of decoherence.
+
+\textbf{Shallower is better.} Circuit depth, not qubit count, is the binding constraint on most NISQ-era algorithms. Algorithms that work with low-depth circuits and many short runs (variational methods, hybrid loops) generally outperform deep one-shot circuits.
+
+\textbf{Error-aware design.} Algorithms benefit from being expressed in primitives whose noise behaviour is well-characterized: standard gate sets, restricted connectivity patterns, dynamical decoupling sequences. Custom pulse sequences may be more efficient in principle but harder to characterize.
+
+\textbf{Mitigation, then correction.} Error mitigation can extract useful results from noisy circuits when error correction is not yet possible. The mitigated estimator is biased and noisy, but at moderate depths it provides accurate expectations that the bare noisy estimator does not.
+
+The next chapter on \keyterm{quantum error correction} describes the long-term fix: encoding logical qubits in many physical qubits so the noise can be detected and corrected before it accumulates fatally.
+
+\textsep

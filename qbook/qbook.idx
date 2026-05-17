@@ -1,19 +1,158 @@
-\indexentry{qubits|hyperpage}{8}
-\indexentry{entanglement|hyperpage}{8}
-\indexentry{interference|hyperpage}{8}
-\indexentry{NISQ era|hyperpage}{9}
-\indexentry{simulation and sampling|hyperpage}{9}
-\indexentry{optimization|hyperpage}{9}
-\indexentry{machine learning|hyperpage}{9}
-\indexentry{harvest now, decrypt later|hyperpage}{10}
-\indexentry{Quantum amplitude estimation|hyperpage}{11}
-\indexentry{combinatorial optimization|hyperpage}{13}
-\indexentry{Quadratic Unconstrained Binary Optimization|hyperpage}{13}
-\indexentry{quantum annealing|hyperpage}{13}
-\indexentry{QAOA|hyperpage}{13}
-\indexentry{slack variables|hyperpage}{14}
-\indexentry{quantum-inspired|hyperpage}{15}
-\indexentry{loss given default|hyperpage}{15}
-\indexentry{quantum machine learning|hyperpage}{16}
-\indexentry{input problem|hyperpage}{17}
-\indexentry{hybrid quantum-classical|hyperpage}{21}
+\indexentry{qubits|hyperpage}{14}
+\indexentry{entanglement|hyperpage}{14}
+\indexentry{interference|hyperpage}{14}
+\indexentry{NISQ era|hyperpage}{15}
+\indexentry{simulation and sampling|hyperpage}{15}
+\indexentry{optimization|hyperpage}{15}
+\indexentry{machine learning|hyperpage}{15}
+\indexentry{harvest now, decrypt later|hyperpage}{16}
+\indexentry{Quantum amplitude estimation|hyperpage}{17}
+\indexentry{combinatorial optimization|hyperpage}{19}
+\indexentry{Quadratic Unconstrained Binary Optimization|hyperpage}{19}
+\indexentry{quantum annealing|hyperpage}{19}
+\indexentry{QAOA|hyperpage}{19}
+\indexentry{slack variables|hyperpage}{20}
+\indexentry{quantum-inspired|hyperpage}{21}
+\indexentry{loss given default|hyperpage}{21}
+\indexentry{quantum machine learning|hyperpage}{22}
+\indexentry{input problem|hyperpage}{23}
+\indexentry{hybrid quantum-classical|hyperpage}{27}
+\indexentry{classical bit|hyperpage}{51}
+\indexentry{AND|hyperpage}{51}
+\indexentry{OR|hyperpage}{51}
+\indexentry{NOT|hyperpage}{51}
+\indexentry{NAND|hyperpage}{51}
+\indexentry{qubit|hyperpage}{52}
+\indexentry{amplitudes|hyperpage}{52}
+\indexentry{unitary|hyperpage}{55}
+\indexentry{Toffoli gate|hyperpage}{55}
+\indexentry{hybrid quantum--classical|hyperpage}{57}
+\indexentry{qubit|hyperpage}{60}
+\indexentry{quantum gate|hyperpage}{61}
+\indexentry{CNOT|hyperpage}{61}
+\indexentry{universal gate set|hyperpage}{61}
+\indexentry{quantum circuit|hyperpage}{61}
+\indexentry{Church--Turing--Deutsch|hyperpage}{63}
+\indexentry{quantum error correction|hyperpage}{65}
+\indexentry{superposition|hyperpage}{69}
+\indexentry{ray|hyperpage}{70}
+\indexentry{Born rule|hyperpage}{71}
+\indexentry{expectation value|hyperpage}{71}
+\indexentry{tensor product|hyperpage}{72}
+\indexentry{entangled|hyperpage}{72}
+\indexentry{density operator|hyperpage}{73}
+\indexentry{no-cloning theorem|hyperpage}{74}
+\indexentry{trace distance|hyperpage}{74}
+\indexentry{fidelity|hyperpage}{74}
+\indexentry{bra--ket|hyperpage}{76}
+\indexentry{Bra--ket|hyperpage}{77}
+\indexentry{ket|hyperpage}{78}
+\indexentry{bra|hyperpage}{78}
+\indexentry{Cauchy--Schwarz inequality|hyperpage}{79}
+\indexentry{outer product|hyperpage}{80}
+\indexentry{projector|hyperpage}{80}
+\indexentry{resolution of the identity|hyperpage}{81}
+\indexentry{completeness relation|hyperpage}{81}
+\indexentry{qubit|hyperpage}{85}
+\indexentry{computational basis|hyperpage}{86}
+\indexentry{amplitudes|hyperpage}{86}
+\indexentry{Bloch sphere|hyperpage}{88}
+\indexentry{Clifford+T|hyperpage}{89}
+\indexentry{no-cloning theorem|hyperpage}{90}
+\indexentry{superposition principle|hyperpage}{94}
+\indexentry{uniform superposition|hyperpage}{96}
+\indexentry{quantum parallelism|hyperpage}{97}
+\indexentry{interference|hyperpage}{97}
+\indexentry{amplitude encoding|hyperpage}{98}
+\indexentry{input problem|hyperpage}{98}
+\indexentry{quantum amplitude estimation|hyperpage}{98}
+\indexentry{coherent superposition|hyperpage}{99}
+\indexentry{statistical mixture|hyperpage}{99}
+\indexentry{coherences|hyperpage}{100}
+\indexentry{entanglement|hyperpage}{101}
+\indexentry{interference|hyperpage}{101}
+\indexentry{entanglement|hyperpage}{102}
+\indexentry{separable|hyperpage}{103}
+\indexentry{entangled|hyperpage}{103}
+\indexentry{Bell states|hyperpage}{103}
+\indexentry{EPR paradox|hyperpage}{104}
+\indexentry{no-signalling theorem|hyperpage}{105}
+\indexentry{entropy of entanglement|hyperpage}{105}
+\indexentry{Schmidt decomposition|hyperpage}{105}
+\indexentry{Schmidt rank|hyperpage}{106}
+\indexentry{shallow ansatz|hyperpage}{108}
+\indexentry{entanglement-based|hyperpage}{108}
+\indexentry{interference|hyperpage}{109}
+\indexentry{interference|hyperpage}{111}
+\indexentry{cross terms|hyperpage}{112}
+\indexentry{coherent|hyperpage}{114}
+\indexentry{decoherence|hyperpage}{115}
+\indexentry{error correction|hyperpage}{115}
+\indexentry{phase kickback|hyperpage}{115}
+\indexentry{shallow amplitude estimation|hyperpage}{117}
+\indexentry{Schr\"odinger equation|hyperpage}{120}
+\indexentry{Hamiltonian|hyperpage}{121}
+\indexentry{time-independent Schr\"odinger equation|hyperpage}{121}
+\indexentry{stationary states|hyperpage}{122}
+\indexentry{Larmor precession|hyperpage}{122}
+\indexentry{Feynman--Kac|hyperpage}{125}
+\indexentry{open quantum systems|hyperpage}{127}
+\indexentry{jump operators|hyperpage}{127}
+\indexentry{transmon|hyperpage}{131}
+\indexentry{quantum supremacy|hyperpage}{131}
+\indexentry{Rydberg interactions|hyperpage}{133}
+\indexentry{circuit layer operations per second|hyperpage}{137}
+\indexentry{Decoherence|hyperpage}{140}
+\indexentry{quantum operation|hyperpage}{143}
+\indexentry{quantum channel|hyperpage}{143}
+\indexentry{Kraus representation|hyperpage}{143}
+\indexentry{Lindblad master equation|hyperpage}{144}
+\indexentry{jump operators|hyperpage}{144}
+\indexentry{1/f noise|hyperpage}{144}
+\indexentry{Error mitigation|hyperpage}{146}
+\indexentry{quantum error correction|hyperpage}{148}
+\indexentry{Quantum error correction|hyperpage}{149}
+\indexentry{no-cloning theorem|hyperpage}{150}
+\indexentry{three-qubit bit-flip code|hyperpage}{150}
+\indexentry{discretization of continuous errors|hyperpage}{152}
+\indexentry{stabilizer formalism|hyperpage}{152}
+\indexentry{CSS|hyperpage}{152}
+\indexentry{magic state distillation|hyperpage}{153}
+\indexentry{surface code|hyperpage}{153}
+\indexentry{threshold theorem|hyperpage}{154}
+\indexentry{NISQ|hyperpage}{159}
+\indexentry{variational quantum algorithm|hyperpage}{160}
+\indexentry{error mitigation|hyperpage}{162}
+\indexentry{Shor's algorithm|hyperpage}{164}
+\indexentry{Qiskit|hyperpage}{167}
+\indexentry{Qiskit|hyperpage}{168}
+\indexentry{Transpilation|hyperpage}{171}
+\indexentry{primitives|hyperpage}{172}
+\indexentry{RSA|hyperpage}{179}
+\indexentry{public-key|hyperpage}{180}
+\indexentry{asymmetric|hyperpage}{180}
+\indexentry{trapdoor function|hyperpage}{180}
+\indexentry{integer factorization|hyperpage}{181}
+\indexentry{number field sieve|hyperpage}{182}
+\indexentry{harvest now, decrypt later|hyperpage}{186}
+\indexentry{post-quantum cryptography|hyperpage}{187}
+\indexentry{elliptic curves|hyperpage}{187}
+\indexentry{Shor's algorithm|hyperpage}{187}
+\indexentry{elliptic-curve cryptography|hyperpage}{188}
+\indexentry{elliptic curve|hyperpage}{189}
+\indexentry{scalar multiplication|hyperpage}{190}
+\indexentry{elliptic curve discrete logarithm problem|hyperpage}{190}
+\indexentry{bilinear pairings|hyperpage}{195}
+\indexentry{period|hyperpage}{200}
+\indexentry{order|hyperpage}{200}
+\indexentry{discrete logarithm problem|hyperpage}{204}
+\indexentry{crypto-agility|hyperpage}{208}
+\indexentry{qubit|hyperpage}{208}
+\indexentry{superposition|hyperpage}{208}
+\indexentry{entanglement|hyperpage}{208}
+\indexentry{measurement|hyperpage}{208}
+\indexentry{interference|hyperpage}{208}
+\indexentry{fault-tolerant|hyperpage}{209}
+\indexentry{Qiskit|hyperpage}{209}
+\indexentry{RSA|hyperpage}{209}
+\indexentry{ECC|hyperpage}{209}

@@ -1,0 +1,125 @@
+\chapter{Living in the NISQ Era}
+
+\chapterSubhead{Doing useful work with noisy, intermediate-scale quantum machines}
+
+In 2018 John Preskill coined a term that has shaped expectations of the entire field: \keyterm{NISQ}, for \emph{Noisy Intermediate-Scale Quantum} computing \citep{preskill_quantum_2018}. The phrase captures the awkward middle ground we now inhabit: machines large enough that classical simulation is hard, but small and noisy enough that fault-tolerant error correction (Chapter on Error Correction) is not yet running at scale. The NISQ era is where every demonstration of quantum advantage to date has lived, and where the next several years of quantum finance research will continue to live.
+
+%------------------------------------------------------------------
+\section{What NISQ means, precisely}
+%------------------------------------------------------------------
+
+A NISQ device, in Preskill's original sense, has these features:
+
+\begin{itemize}
+  \item \textbf{Noisy.} Gate error rates are too high (roughly $10^{-3}$ for two-qubit gates) to run long algorithms without error correction.
+  \item \textbf{Intermediate-scale.} Qubit count is large enough that classical exact simulation is expensive but small enough that the device cannot host the millions of physical qubits needed for fault-tolerant algorithms of consequence. The original range was 50--several hundred; in 2026, leading machines have reached 1000+ physical qubits, still nowhere near fault-tolerant scale.
+  \item \textbf{Pre-fault-tolerant.} Quantum error correction may be demonstrated on small numbers of logical qubits but is not yet the routine substrate of computation.
+\end{itemize}
+
+The defining tension of NISQ is this: every additional gate adds noise that compounds without correction. Useful NISQ algorithms must therefore be either \emph{short} (low circuit depth) or \emph{noise-tolerant} (designed to extract information despite errors). The bulk of NISQ-era algorithm research is about meeting one of those criteria.
+
+%------------------------------------------------------------------
+\section{Variational algorithms: the workhorse}
+%------------------------------------------------------------------
+
+The dominant NISQ algorithmic paradigm is the \keyterm{variational quantum algorithm} \citep{cerezo_variational_2021}. A parameterized quantum circuit $U(\boldsymbol\theta)$ is evaluated on the device to compute a cost function $C(\boldsymbol\theta) = \langle\psi(\boldsymbol\theta)|H|\psi(\boldsymbol\theta)\rangle$ for some Hamiltonian $H$. A classical optimizer adjusts $\boldsymbol\theta$ to minimize $C$. The pattern combines a shallow, error-tolerant quantum subroutine with a powerful classical outer loop.
+
+Two canonical variational algorithms:
+
+\textbf{Variational Quantum Eigensolver (VQE)} \citep{peruzzo_variational_2014}. Find the ground state of a Hamiltonian $H$. The cost function is the expectation $\langle H\rangle$; the optimizer drives it down. Used for quantum chemistry and condensed-matter problems; also adaptable to finance via Hamiltonians encoding portfolio constraints.
+
+\textbf{Quantum Approximate Optimization Algorithm (QAOA)} \citep{farhi_quantum_2014}. Approximate the ground state of an Ising or QUBO Hamiltonian via a layered ansatz of cost and mixer unitaries. Each layer adds expressive power; the optimal depth depends on the problem and the device. Used for combinatorial optimization, including portfolio selection \citep{zaman_po-qa_2024,thomassin_quantum_2025}.
+
+Both algorithms share three features that make them NISQ-suitable: shallow circuits, intrinsic error tolerance via the variational principle, and clean integration with classical optimizers. They also share two weaknesses: cost-function evaluations are noisy and require many shots; the optimization landscape has barren plateaus and local minima that grow worse with qubit count.
+
+\begin{example}
+A QAOA portfolio optimization with 20 assets uses 20 qubits in superposition over portfolio inclusion patterns, with two-qubit gates between coupled assets and single-qubit rotations capturing risk-return trade-offs. A few layers of QAOA can produce competitive portfolios on small instances even in noisy execution.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Error mitigation, not correction}
+%------------------------------------------------------------------
+
+NISQ devices cannot run quantum error correction at full scale. They can run \keyterm{error mitigation}, a different idea: instead of correcting errors during the computation, accept them, but extract less biased expectation values by post-processing many noisy runs.
+
+Three widely used techniques:
+
+\textbf{Zero-noise extrapolation (ZNE)} \citep{temme_error_2017}. Run the algorithm at several deliberately increased noise levels, fit a model of how the expectation behaves as a function of noise, and extrapolate to zero noise. Linear or exponential extrapolation suffices in many cases. ZNE is conceptually simple and has been demonstrated to give meaningful corrections at moderate depths.
+
+\textbf{Probabilistic error cancellation (PEC)} \citep{temme_error_2017}. Decompose the desired noiseless gate as a quasi-probabilistic mixture of noisy gates, then sample from this mixture and apply correcting sign flips. PEC is exact in principle but expensive: the sampling overhead grows exponentially with circuit depth.
+
+\textbf{Virtual distillation / error suppression}. Use a virtual purification procedure with multiple copies of the noisy state to produce a less noisy estimate. Particularly effective for state-tomography-style tasks.
+
+\citet{kim_evidence_2023} demonstrated that error-mitigated quantum computations on a 127-qubit IBM device produced accurate expectation values for a problem (Ising-like dynamics) where classical exact simulation is infeasible---suggestive evidence that NISQ devices can be useful, not just toy demonstrations.
+
+%------------------------------------------------------------------
+\section{Where NISQ wins, where it doesn't}
+%------------------------------------------------------------------
+
+A useful framing: NISQ wins where the algorithmic structure is intrinsically tolerant of noise. This includes:
+
+\begin{itemize}
+  \item \textbf{Variational ground state finding} where the variational principle guarantees that the cost is bounded below the true ground energy and noisy improvements are still improvements.
+  \item \textbf{Quantum sampling} for problems where the output distribution itself is the answer; some kinds of noise still produce hard-to-simulate distributions.
+  \item \textbf{Hybrid feature extraction} as in \citet{ciceri_enhanced_2025}'s bond trading results, where quantum hardware noise plausibly acts as a regularizer that improves classical model generalization.
+  \item \textbf{Quantum simulation of mildly noisy physical systems}, where the simulated system itself is noisy and the device's noise is part of the model rather than an obstacle.
+\end{itemize}
+
+NISQ loses where the algorithm requires deep coherent circuits with high-precision interference. The most prominent loser is \keyterm{Shor's algorithm} (Chapter on Shor): the precision of phase estimation required to factor large integers translates to circuits beyond NISQ reach. Quantum amplitude estimation runs at the same border: shallow variants exist but trade speedup for circuit depth, and true asymptotic speedup awaits fault tolerance.
+
+\begin{remark}
+The blunt summary: NISQ is good for \emph{exploration} and possibly for \emph{narrow advantage on small instances}; it is not good for \emph{breakthrough applications at scale}. Both kinds of work matter, but the marketing temptation is always to confuse them.
+\end{remark}
+
+%------------------------------------------------------------------
+\section{The benchmarking landscape}
+%------------------------------------------------------------------
+
+How do we measure NISQ progress? Several benchmark frameworks have emerged.
+
+\textbf{Quantum volume.} A scalar metric introduced by IBM combining qubit count, connectivity, and fidelity in a single number, based on the largest random circuit a device can successfully execute.
+
+\textbf{CLOPS.} Circuit Layer Operations Per Second, capturing throughput. For variational algorithms, where many circuit evaluations occur in the optimization loop, CLOPS may matter more than peak fidelity.
+
+\textbf{Application-specific benchmarks.} The Quantum Economic Development Consortium (QED-C) and others have proposed standardised benchmarks for specific applications (chemistry, optimization, finance) that measure end-to-end accuracy and runtime on the actual problems users care about.
+
+\textbf{Randomized benchmarking.} A protocol that measures average gate fidelity by running random Clifford sequences. The decay rate of the success probability is a clean noise metric independent of state preparation and measurement (SPAM) errors.
+
+Each benchmark has weaknesses; none captures every dimension of performance. The mature view is that benchmarks are tools for comparing apples to apples, not universal scores.
+
+%------------------------------------------------------------------
+\section{The practical NISQ recipe for finance}
+%------------------------------------------------------------------
+
+For a finance team contemplating a NISQ project, a working recipe is:
+
+\begin{enumerate}
+  \item \textbf{Find a problem that fits NISQ.} Variational optimization or quantum-enhanced machine learning, on instances small enough to fit on current hardware (typically tens of variables/features).
+  \item \textbf{Build the classical baseline first.} Establish what classical algorithms achieve on the same instance. Quantum claims of advantage require this baseline to compare against.
+  \item \textbf{Choose hardware.} Match the algorithm's structure to the device's strengths: trapped ions for high fidelity and connectivity, superconducting for throughput and qubit count.
+  \item \textbf{Apply error mitigation.} ZNE or PEC for expectation-style quantities. Without mitigation, NISQ results are typically too biased to interpret.
+  \item \textbf{Iterate.} The optimization loop, hyperparameter tuning, and noise characterization run many times. Compute budget is dominated by classical-quantum loop overhead, not by single-shot quantum cost.
+\end{enumerate}
+
+\citet{morapakula_end--end_2026} and \citet{ciceri_enhanced_2025} are good examples of this discipline in action in the finance literature.
+
+%------------------------------------------------------------------
+\section{What ends the NISQ era?}
+%------------------------------------------------------------------
+
+The NISQ era will end---either by gradual transition into the fault-tolerant era, as logical qubit counts grow and error rates drop below threshold, or by some unexpected hybrid regime where logical and physical operations co-exist. Current vendor roadmaps point toward the first scenario, with the late 2020s as a likely transition window for early fault-tolerant computations and the 2030s for genuinely deep logical-qubit algorithms.
+
+For finance, the key question is when an end-to-end advantage on a production-scale problem becomes possible. Several conditions must be met simultaneously:
+
+\begin{itemize}
+  \item Physical error rates below code threshold (approached now).
+  \item Logical qubit counts in the hundreds (mid-to-late 2020s on aggressive roadmaps).
+  \item Efficient classical data loading or problem encoding (an algorithmic obstacle, not just a hardware one).
+  \item Total runtime competitive with classical solutions (a system-level question).
+\end{itemize}
+
+We are not there yet. The NISQ era is therefore best understood as a long apprenticeship: building intuition, identifying the structures where quantum techniques will eventually pay off, and developing the engineering discipline of hybrid classical-quantum computing. Finance applications have been at the leading edge of this apprenticeship and will likely be at the leading edge of the transition to fault tolerance as well.
+
+The next chapter introduces the software framework---\keyterm{Qiskit}---through which most of this work is done in practice.
+
+\textsep

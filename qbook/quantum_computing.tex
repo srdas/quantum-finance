@@ -1,0 +1,104 @@
+\chapter{A Map of Quantum Computing}
+
+\chapterSubhead{Postulates, gates, circuits, and where the speed comes from}
+
+Quantum computing is a small set of physical ideas dressed in the formalism of linear algebra. Once you accept that states are unit vectors, evolution is unitary, and measurement collapses, the rest of the discipline---qubits, circuits, algorithms---is largely bookkeeping. This chapter lays out that bookkeeping at survey level, so the reader has a map of the territory before we work through each region in detail. The exposition draws on the canonical treatment of \citet{nielsen_quantum_2010}, and on the historical motivations of \citet{feynman_simulating_1982} and \citet{deutsch_quantum_1985}.
+
+%------------------------------------------------------------------
+\section{The four postulates, said plainly}
+%------------------------------------------------------------------
+
+Quantum mechanics has many possible formulations; for computation we need only four working postulates.
+
+\begin{enumerate}
+\item \textbf{State space.} The state of an isolated quantum system is a unit vector in a complex Hilbert space $\mathcal{H}$ (Section~\ref{sec:hilbert}).
+\item \textbf{Evolution.} The state of a closed quantum system evolves by a unitary transformation $|\psi'\rangle = U|\psi\rangle$, where $U^\dagger U = I$ (Section~\ref{sec:unitary-ops}).
+\item \textbf{Measurement.} A measurement is described by a collection of operators $\{M_m\}$ acting on $\mathcal{H}$, satisfying $\sum_m M_m^\dagger M_m = I$. The probability of outcome $m$ is $\langle\psi|M_m^\dagger M_m|\psi\rangle$; conditional on observing $m$, the post-measurement state is $M_m|\psi\rangle/\sqrt{\langle\psi|M_m^\dagger M_m|\psi\rangle}$.
+\item \textbf{Composition.} The state space of a composite system is the tensor product of the component state spaces.
+\end{enumerate}
+
+The last postulate is what makes the state space exponentially large. Two qubits live in $\mathbb{C}^2\otimes\mathbb{C}^2 = \mathbb{C}^4$, three qubits in $\mathbb{C}^8$, and so on. The whole discipline of quantum computing is the study of how to do useful work inside this enormous space while only being able to read out a single classical bit-string at the end.
+
+%------------------------------------------------------------------
+\section{Qubits, gates, and circuits}
+%------------------------------------------------------------------
+
+A \keyterm{qubit} is a quantum system with a two-dimensional state space, conventionally with computational basis $\{|0\rangle, |1\rangle\}$. A general qubit state is
+\[
+  |\psi\rangle = \alpha|0\rangle + \beta|1\rangle, \qquad |\alpha|^2 + |\beta|^2 = 1.
+\]
+A \keyterm{quantum gate} acting on $n$ qubits is a unitary $U \in \mathbb{C}^{2^n\times 2^n}$. The single-qubit Pauli gates and the Hadamard gate were already introduced in Sections \ref{sec:hermitian-ops} and \ref{sec:unitary-ops}. The two-qubit \keyterm{CNOT} (controlled-NOT) flips the target qubit if and only if the control is $|1\rangle$:
+\[
+  \mathrm{CNOT} = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \end{pmatrix}.
+\]
+A celebrated result of \citet{barenco_elementary_1995} establishes that single-qubit gates together with CNOT form a \keyterm{universal gate set}: any $n$-qubit unitary can be decomposed (to arbitrary precision) into a finite sequence drawn from this set. The architectural implication is profound: a quantum computer need only implement a handful of gate types reliably to be programmable for any computation.
+
+A \keyterm{quantum circuit} is a sequence of gates applied to a register of qubits, typically followed by measurement. We read circuits left-to-right, like classical wiring diagrams---but with the understanding that ``wires'' carry quantum states evolving by tensor-product unitaries, not classical bits.
+
+\begin{example}
+The simplest non-trivial quantum circuit takes a single qubit in state $|0\rangle$, applies a Hadamard gate, and measures. The Hadamard produces $H|0\rangle = \frac{1}{\sqrt 2}(|0\rangle+|1\rangle)$, and measurement returns $0$ or $1$ each with probability $\tfrac12$. This is a perfect random bit generator---something a classical computer cannot produce without external entropy.
+\end{example}
+
+%------------------------------------------------------------------
+\section{Where does the speed come from?}
+%------------------------------------------------------------------
+
+This is the question every reader asks, and the honest answer has three parts.
+
+\textbf{Superposition} gives a quantum register access to $2^n$ amplitudes at once. But superposition alone is not enough---a uniform superposition is equivalent in measurement statistics to drawing a random bit-string, no faster than a classical random sampler.
+
+\textbf{Interference} is what allows correct answers to be amplified and wrong answers to cancel. Quantum amplitudes can be negative or complex, so two computational paths arriving at the same answer with opposite phases destroy each other. Algorithms are choreographies of constructive and destructive interference, designed to concentrate amplitude on the desired outcome before measurement.
+
+\textbf{Entanglement} encodes correlations that have no classical analogue, allowing certain joint computations to proceed without classical communication overhead. Without entanglement, an $n$-qubit register decomposes as a product of single-qubit states, and quantum mechanics offers nothing exponential over a collection of independent classical random variables.
+
+\begin{remark}
+A useful slogan: \emph{superposition gives the parallelism, entanglement gives the structure, interference gives the answer}. Drop any one of the three and the speedup disappears. The chapters that follow on each pillar develop the details.
+\end{remark}
+
+The deep theorem behind all of this is that quantum computation can be simulated classically with exponential overhead in the number of qubits, and not less. This is the formal content of the \keyterm{Church--Turing--Deutsch} principle introduced by \citet{deutsch_quantum_1985}: every physically realizable computation can be efficiently simulated by a universal quantum computer, while not every quantum computation can be efficiently simulated classically.
+
+%------------------------------------------------------------------
+\section{The algorithmic landscape}
+%------------------------------------------------------------------
+
+Of the few dozen quantum algorithms developed over four decades, a small handful matter most for our purposes. We list them here as a road map; later chapters and the introductory survey treat each in depth.
+
+\begin{itemize}
+\item \textbf{Shor's algorithm} \citep{shor_polynomial_1997} factors integers in polynomial time, breaking RSA and ECC if run on a sufficiently large fault-tolerant quantum computer. It is the headline existential threat to current public-key infrastructure (Chapter on Shor's algorithm).
+\item \textbf{Grover's algorithm} \citep{grover_fast_1996} searches an unsorted space of $N$ items in $O(\sqrt N)$ queries to an oracle. It generalizes to amplitude amplification and is the seed of several quantum Monte Carlo techniques used in option pricing \citep{stamatopoulos_option_2020}.
+\item \textbf{Quantum amplitude estimation} provides a quadratic speedup over classical Monte Carlo for expectation values. It is the algorithmic core of quantum risk and derivative pricing \citep{egger_quantum_2020,matsakos_quantum_2024}.
+\item \textbf{HHL} \citep{harrow_quantum_2009} solves systems of linear equations $Ax=b$ in time polylogarithmic in the matrix dimension, under technical conditions on $A$ and on data loading. It underlies several quantum machine-learning subroutines.
+\item \textbf{Variational quantum algorithms} (VQE, QAOA) \citep{cerezo_variational_2021,farhi_quantum_2014,peruzzo_variational_2014} use a classical optimizer to tune a parameterized quantum circuit, looking for ground states of Hamiltonians that encode optimization or chemistry problems. These are the workhorses of NISQ-era applications, including portfolio optimization.
+\item \textbf{Quantum simulation}---the original motivation \citep{feynman_simulating_1982}---uses a quantum computer to model physical systems whose Hilbert spaces are too large to simulate classically.
+\end{itemize}
+
+Quantum machine learning sits across many of these categories \citep{biamonte_quantum_2017}. The picture to keep in mind is that quantum computing offers a small toolbox of \emph{primitives}---search, expectation estimation, eigenvalue finding, linear-system solving---and that financial applications are largely about composing those primitives over a hybrid classical-quantum stack.
+
+%------------------------------------------------------------------
+\section{The hardware reality check}
+%------------------------------------------------------------------
+
+A description of quantum computing that does not mention hardware is misleading. Real quantum computers are noisy, finite, and slow. Single-qubit gates take nanoseconds to microseconds, with error rates near $0.1\%$. Two-qubit gates are an order of magnitude noisier. Coherence times---how long a qubit can hold an arbitrary state before relaxing---are measured in tens to hundreds of microseconds for current superconducting hardware. A circuit that takes longer than the coherence time will deliver garbage \citep{preskill_quantum_2018}.
+
+The implication for algorithms is severe. Shor's algorithm for a 2048-bit RSA key would require millions of logical qubits and trillions of gates with error rate close to $10^{-15}$---far beyond any current device \citep{nielsen_quantum_2010}. The path forward involves \keyterm{quantum error correction} (Chapter on Error Correction), which encodes one logical qubit in many physical qubits and uses the redundancy to detect and correct errors below a threshold rate. Surface codes \citep{fowler_surface_2012,kitaev_fault-tolerant_2003} are the leading approach.
+
+For the next several years, we will not have fault-tolerant devices. What we have is the NISQ era \citep{preskill_quantum_2018}---Noisy Intermediate-Scale Quantum hardware, treated in detail in its own chapter. NISQ devices are useful for testing algorithm structures, demonstrating quantum effects, and exploring hybrid workflows on small instances. They are not yet useful for transformative production-scale finance.
+
+%------------------------------------------------------------------
+\section{What this book covers, and in what order}
+%------------------------------------------------------------------
+
+The remainder of the book moves outward from foundations to applications:
+
+\begin{enumerate}
+\item Hilbert space and the bra--ket notation, the language in which everything else is written.
+\item Qubits, superposition, entanglement, and interference---the four conceptual pillars.
+\item The Schr\"odinger equation, which governs unitary evolution and underlies hardware modelling.
+\item Hardware platforms, decoherence, error correction, and the NISQ constraint.
+\item Qiskit, the software framework that bridges algorithm and hardware.
+\item RSA, elliptic-curve cryptography, and Shor's algorithm---the negative side of the quantum advantage, with direct implications for financial security.
+\end{enumerate}
+
+Throughout, we keep the financial perspective in view. The mathematics of quantum mechanics is intricate but not exotic; what makes it powerful for finance is the alignment between its primitives (sampling, expectation, search, eigenvalue finding) and the bottlenecks of computational finance (Monte Carlo, optimization, machine learning). The opening chapter laid out that landscape; the remaining chapters build the machinery to engage with it.
+
+\textsep

@@ -1,0 +1,116 @@
+\chapter{Where Now?}
+
+\chapterSubhead{Hopes, fears, and a working agenda for quantum finance}
+
+A book is a snapshot. The reader who closes this one in 2026 will, by 2030, be working in a different quantum-finance landscape than the one we have just described. New hardware milestones will land, new algorithmic ideas will percolate, the post-quantum cryptography migration will be partway through. This concluding chapter tries to do two things: lay out a working agenda for the practitioner, researcher, or student wondering what to do next; and acknowledge openly the hopes and fears that surround this discipline. Both matter. Neither belongs in isolation.
+
+%------------------------------------------------------------------
+\section{What we know, and where the limits are}
+%------------------------------------------------------------------
+
+After 17 chapters, a few statements have crystallised.
+
+\textbf{The mathematics is settled.} Quantum mechanics, as a computational model, is mature. Hilbert space, unitary evolution, the Born rule---these are not in dispute. Algorithms with provable speedups (Shor, Grover, quantum amplitude estimation, HHL under conditions) are well-characterised. The theoretical case for quantum advantage on specific financial bottlenecks is solid \citep{egger_quantum_2020,herman_quantum_2023,gong_quantum_2026-1}.
+
+\textbf{The hardware is improving, slowly.} NISQ devices have grown from tens to thousands of physical qubits over a decade. Gate fidelities have improved by an order of magnitude. The transition to fault-tolerant computation has begun in the form of small logical-qubit demonstrations. Vendor roadmaps point to hundreds of logical qubits within five to ten years, with the cryptographically relevant scale---millions of physical qubits---a longer reach \citep{ibm_quantum_2023,preskill_quantum_2018}.
+
+\textbf{The financial use cases are real but bounded.} Quantum advantages in derivative pricing \citep{stamatopoulos_option_2020,chen_quantum_2025}, portfolio optimization \citep{morapakula_end--end_2026,thomassin_quantum_2025}, risk \citep{matsakos_quantum_2024,dri_towards_2022}, and machine learning \citep{ciceri_enhanced_2025} are credible at the algorithmic level, sometimes demonstrable at the hardware level. None of them constitute production-scale industrial advantage today.
+
+\textbf{The cryptographic threat is real and immediate.} Shor's algorithm on a sufficient quantum computer breaks RSA and ECC. The hardware is not yet there. The harvest-now--decrypt-later attack on confidential financial data is operational today. Post-quantum migration is therefore underway, regardless of any optimization or pricing upside \citep{auer_quantum_2024,nist_fips203_2024}.
+
+These four statements are, in my reading, the durable conclusions of the field. The rest is execution.
+
+%------------------------------------------------------------------
+\section{An agenda for the next five years}
+%------------------------------------------------------------------
+
+For different audiences, the most productive next steps differ.
+
+\textbf{For the finance practitioner.}
+\begin{itemize}
+  \item Inventory cryptographic dependencies in your firm's stack. RSA, ECC, ECDSA usage in TLS, signing, settlement, identity, archives.
+  \item Begin hybrid post-quantum deployments for high-value, long-confidentiality data. NIST's ML-KEM and ML-DSA are the standards to target.
+  \item Run small-scale pilot studies with quantum hardware vendors (IBM, IonQ, Quantinuum, QuEra) on a representative optimization or pricing problem. The goal is intuition, not production.
+  \item Build internal expertise. One or two people learning Qiskit and reading the primary literature is far more valuable than waiting for a quantum solution to be ``ready.''
+\end{itemize}
+
+\textbf{For the researcher.}
+\begin{itemize}
+  \item Bridge the input problem: efficient quantum data loading from classical financial data sets remains an open and consequential bottleneck.
+  \item Develop hardware-aware variational ansatz designs for portfolio and risk problems, taking real connectivity and noise into account \citep{cerezo_variational_2021}.
+  \item Pursue error-mitigated quantum amplitude estimation at scales just beyond classical reach---following the template of \citet{kim_evidence_2023}.
+  \item Study quantum-inspired classical algorithms \citep{chou_quantum-inspired_2026}; they capture some of the upside without hardware risk and can deliver value today.
+\end{itemize}
+
+\textbf{For the student.}
+\begin{itemize}
+  \item Read the foundational papers, not just the surveys. Shor 1994, Grover 1996, Deutsch--Jozsa, the original Bell paper, the original RSA paper. The clarity of those papers is itself instructive.
+  \item Implement a quantum amplitude estimation circuit in Qiskit from scratch. It will teach you more than any review paper.
+  \item Take a serious classical finance course in parallel. Quantum advantage in finance only matters relative to a well-understood classical baseline; without the baseline, you cannot tell what is advance and what is hype.
+  \item Stay close to the hardware. Devices change quickly; intuitions about what is possible should change with them.
+\end{itemize}
+
+\textbf{For the policymaker.}
+\begin{itemize}
+  \item Treat post-quantum migration as critical infrastructure. The financial system's cryptographic transition will not happen voluntarily on the timeline that adversaries' quantum capabilities may dictate.
+  \item Support open benchmarking. Application-level benchmarks measured on real hardware are what distinguish progress from press release, and the public-good case for funding them is strong.
+  \item Track the export and dual-use implications of quantum capability. A cryptographically relevant quantum computer is a strategic asset.
+\end{itemize}
+
+%------------------------------------------------------------------
+\section{The hopes}
+%------------------------------------------------------------------
+
+Quantum computing genuinely offers things that classical computing cannot. The honest hopes for quantum finance are these.
+
+\textbf{Quadratic speedup on Monte Carlo, at scale.} If amplitude estimation can be run on a fault-tolerant quantum computer with enough qubits and short enough cycle time, the financial industry's Monte Carlo bill---which today consumes substantial fractions of the compute budgets at major banks---could be cut substantially. Pricing of exotic derivatives, value-at-risk on large portfolios, regulatory stress testing: all would benefit. The advantage is not exponential; it is quadratic. But on workloads measured in compute-years, quadratic matters.
+
+\textbf{Portfolio optimization with realistic constraints.} Markowitz mean--variance optimization is easy classically. Markowitz with cardinality constraints, transaction-cost penalties, regulatory bounds, dynamic rebalancing, and risk-budget overlays is hard, and current methods rely on relaxations or heuristics. A fault-tolerant quantum optimizer that handles such combinatorial structures natively could produce better portfolios at the institutional scale. Hybrid approaches \citep{morapakula_end--end_2026} are early evidence in this direction.
+
+\textbf{Quantum-enhanced machine learning.} The most interesting and least-understood frontier. \citet{ciceri_enhanced_2025}'s bond-trading result, suggesting that quantum hardware noise itself can improve generalization, is the kind of surprise that points to genuinely new territory. If this generalises, ML on quantum-transformed financial features could give modest but real edge in prediction tasks where modest edge translates into significant profit.
+
+\textbf{Modelling truly quantum financial structure.} Speculative but worth saying. Some researchers \citep{schaden_quantum_2002} argue that quantum formalism is not just a computational tool but a more faithful model of certain market phenomena---non-commuting observables capturing trader behaviour, path integrals capturing price dynamics. If even a small fraction of this proves productive, quantum computing in finance would be more than a faster classical engine; it would be a new modelling language.
+
+\textbf{Security beyond computational hardness.} Quantum key distribution and entanglement-based protocols offer information-theoretic security, not just computational security. For the most sensitive financial communications---inter-central-bank settlement, sovereign-debt operations---this is a meaningful upgrade, and one whose deployment is technically feasible now via quantum-network testbeds.
+
+These hopes are not guarantees. They are directions where the structural case for advantage is strong and where, if hardware delivers, the financial impact would be substantial.
+
+%------------------------------------------------------------------
+\section{The fears}
+%------------------------------------------------------------------
+
+A book that lists only the upside is not honest. The fears are equally real.
+
+\textbf{The cryptographic transition fails or stalls.} Post-quantum migration is technically tractable but operationally enormous. If the financial sector underestimates the timeline---if regulators delay, vendors lag, or legacy systems prove unmigratable---we may arrive at the era of cryptographically relevant quantum computers with critical infrastructure still vulnerable. The harvest-now--decrypt-later threat compounds this: data encrypted today with RSA or ECC may be decryptable in a decade, and the damage retroactive.
+
+\textbf{Quantum advantage on production-scale financial problems may take much longer than vendor roadmaps suggest.} The path from current NISQ hardware to fault-tolerant systems large enough to factor RSA-2048 or run amplitude estimation at industrial scale involves several still-unsolved engineering problems: cryogenic control electronics, low-noise interconnects, magic-state distillation overhead, classical co-processing latency. Any of these could slip by years. A decade of hype followed by underwhelming delivery would damage the field's credibility and divert resources from problems that classical methods could have solved.
+
+\textbf{Concentration of quantum capability.} Quantum hardware is built and operated by a small number of vendors and nation-states. If cryptographically relevant capability materialises asymmetrically---available to some actors but not others---the implications for financial markets are severe. A single firm with a working factoring engine could decrypt competitors' communications, forge digital signatures, and manipulate markets at scale. The non-proliferation problem here is harder than for many other strategic technologies because the relevant artefact is software running on rare hardware, not a physical object.
+
+\textbf{Quantum-washing.} A version of greenwashing for quantum. Firms claiming quantum advantage on problems where classical methods would do as well, or running ``quantum'' algorithms that are actually quantum-inspired classical ones. Researchers chasing publishable demos on toy instances rather than honest scaling studies. Investors deploying capital on the basis of incremental hardware press releases. This pattern is already visible and is likely to accelerate as more hype-cycle dollars flow into the field. The discipline of asking ``what would the classical baseline produce?'' is the only protection.
+
+\textbf{The fundamental physics may not cooperate.} A more existential concern. Several proposed paths to fault-tolerant quantum computing rest on assumptions about noise correlations, materials properties, and the absence of unknown decoherence channels that may not hold at scale. If the noise turns out to be more correlated than assumed, or if some new physics intervenes at large qubit numbers, the threshold theorem's promises may be harder to redeem than current optimism suggests. This is unlikely but not impossible.
+
+\textbf{Quantum finance crowds out better questions.} The optimization, pricing, and machine-learning problems quantum computing might accelerate are not necessarily the most important problems in finance. Climate-related financial risk, systemic resilience to non-stationarity, equitable access to credit and capital---these are first-order problems for which quantum computing has nothing to say. A research culture too captivated by quantum's appeal could spend a generation of talent on second-order problems.
+
+%------------------------------------------------------------------
+\section{A balanced posture}
+%------------------------------------------------------------------
+
+The right posture toward quantum computing in finance is neither evangelism nor dismissal. It is engaged scepticism: take the technology seriously enough to learn it, run pilots, train people, migrate cryptography on the timeline that the threat model demands; remain sceptical enough to compare against classical baselines, to distinguish demonstration from production, and to track the field's claims against its delivery.
+
+The mature quantum-finance team in 2030 will look different from today's. It will include cryptographers running the post-quantum transition, quantum-algorithm researchers wired into the academic literature, classical quants benchmarking quantum candidates against state-of-the-art alternatives, and software engineers operating hybrid classical-quantum workflows on cloud infrastructure. The team will treat quantum hardware as one accelerator among several---GPUs, TPUs, FPGAs, quantum---chosen for the problem at hand on technical merits rather than novelty.
+
+That is the team this book has tried to equip. The mathematics, physics, algorithms, hardware realities, and cryptographic implications are all in scope; the financial applications motivate the choices; the open questions are flagged honestly rather than papered over. The remaining work is the actual work---running the algorithms, migrating the cryptography, building the intuition, comparing the baselines.
+
+%------------------------------------------------------------------
+\section{Closing}
+%------------------------------------------------------------------
+
+The most exciting thing about quantum computing for finance is that we genuinely do not know how the next decade will unfold. We have credible algorithms, improving hardware, an industry willing to invest, and a cryptographic deadline that focuses minds. We also have real engineering obstacles, a long history of overpromising, and a tendency for hype to outpace delivery. Both forces are operating simultaneously, and the outcome will be shaped by the technical and operational choices made over the next several years.
+
+If this book has done its job, the reader leaves with three things: enough mathematics to read the primary literature; enough physics and hardware intuition to evaluate claims of advantage; and enough financial context to know which problems are worth attacking. The rest---which problems you attack, on which hardware, with which baselines, on what timeline---is the work itself.
+
+Go do it. And when the inevitable updates to this book are written, they will tell the story of what you, collectively, made of the moment.
+
+\textsep
