@@ -6,58 +6,47 @@
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
 \bibitem[noa()]{noauthor_quantum_nodate-1}
-Quantum {Portfolio} {Optimizer} - {A} {Qiskit} {Function} by {Global} {Data}
-  {Quantum}.
+Quantum {Portfolio} {Optimizer} - {A} {Qiskit} {Function} by {Global} {Data} {Quantum}.
 
 \bibitem[Aharonov and Ben-Or(2008)]{aharonov_fault-tolerant_2008}
 D.~Aharonov and M.~Ben-Or.
 \newblock Fault-Tolerant Quantum Computation with Constant Error Rate.
-\newblock \textit{SIAM Journal on Computing}, 38\penalty0 (4):\penalty0
-  1207--1282, 2008.
+\newblock \textit{SIAM Journal on Computing}, 38\penalty0 (4):\penalty0 1207--1282, 2008.
 \newblock \doi{10.1137/S0097539799359385}.
 
-\bibitem[Arute et~al.(2019)Arute, Arya, Babbush, Bacon, Bardin, Barends,
-  Biswas, Boixo, Brandao, Buell, et~al.]{arute_quantum_2019}
+\bibitem[Arute et~al.(2019)Arute, Arya, Babbush, Bacon, Bardin, Barends, Biswas, Boixo, Brandao, Buell, et~al.]{arute_quantum_2019}
 F.~Arute, K.~Arya, R.~Babbush, et~al.
 \newblock Quantum Supremacy Using a Programmable Superconducting Processor.
 \newblock \textit{Nature}, 574\penalty0 (7779):\penalty0 505--510, 2019.
 \newblock \doi{10.1038/s41586-019-1666-5}.
 
-\bibitem[Aspect et~al.(1982)Aspect, Dalibard, and
-  Roger]{aspect_experimental_1982}
+\bibitem[Aspect et~al.(1982)Aspect, Dalibard, and Roger]{aspect_experimental_1982}
 A.~Aspect, J.~Dalibard, and G.~Roger.
-\newblock Experimental Test of Bell's Inequalities Using Time-Varying
-  Analyzers.
-\newblock \textit{Physical Review Letters}, 49\penalty0 (25):\penalty0
-  1804--1807, 1982.
+\newblock Experimental Test of Bell's Inequalities Using Time-Varying Analyzers.
+\newblock \textit{Physical Review Letters}, 49\penalty0 (25):\penalty0 1804--1807, 1982.
 \newblock \doi{10.1103/PhysRevLett.49.1804}.
 
-\bibitem[Auer et~al.(2024)Auer, Dupont, Gambacorta, Park, Takahashi, and
-  Valko]{auer_quantum_2024}
+\bibitem[Auer et~al.(2024)Auer, Dupont, Gambacorta, Park, Takahashi, and Valko]{auer_quantum_2024}
 R.~Auer, A.~Dupont, L.~Gambacorta, et~al.
 \newblock Quantum computing and the financial system: opportunities and risks.
 \newblock \textit{BIS Papers}, 2024.
 
-\bibitem[Barenco et~al.(1995)Barenco, Bennett, Cleve, DiVincenzo, Margolus,
-  Shor, Sleator, Smolin, and Weinfurter]{barenco_elementary_1995}
+\bibitem[Barenco et~al.(1995)Barenco, Bennett, Cleve, DiVincenzo, Margolus, Shor, Sleator, Smolin, and Weinfurter]{barenco_elementary_1995}
 A.~Barenco, C.~H. Bennett, R.~Cleve, et~al.
 \newblock Elementary Gates for Quantum Computation.
-\newblock \textit{Physical Review A}, 52\penalty0 (5):\penalty0 3457--3467,
-  1995.
+\newblock \textit{Physical Review A}, 52\penalty0 (5):\penalty0 3457--3467, 1995.
 \newblock \doi{10.1103/PhysRevA.52.3457}.
 
 \bibitem[Bell(1964)]{bell_einstein_1964}
 J.~S. Bell.
 \newblock On the Einstein Podolsky Rosen Paradox.
-\newblock \textit{Physics Physique Fizika}, 1\penalty0 (3):\penalty0 195--200,
-  1964.
+\newblock \textit{Physics Physique Fizika}, 1\penalty0 (3):\penalty0 195--200, 1964.
 \newblock \doi{10.1103/PhysicsPhysiqueFizika.1.195}.
 
 \bibitem[Bennett(1973)]{bennett_logical_1973}
 C.~H. Bennett.
 \newblock Logical Reversibility of Computation.
-\newblock \textit{IBM Journal of Research and Development}, 17\penalty0
-  (6):\penalty0 525--532, 1973.
+\newblock \textit{IBM Journal of Research and Development}, 17\penalty0 (6):\penalty0 525--532, 1973.
 \newblock \doi{10.1147/rd.176.0525}.
 
 \bibitem[Bennett and Brassard(2014)]{bennett_quantum_2014}
@@ -65,40 +54,30 @@ C.~H. Bennett and G.~Brassard.
 \newblock Quantum Cryptography: Public Key Distribution and Coin Tossing.
 \newblock \textit{Theoretical Computer Science}, 560:\penalty0 7--11, 2014.
 \newblock \doi{10.1016/j.tcs.2014.05.025}.
-\newblock Originally in Proc. IEEE Conf. on Computers, Systems, and Signal
-  Processing (Bangalore, 1984).
+\newblock Originally in Proc. IEEE Conf. on Computers, Systems, and Signal Processing (Bangalore, 1984).
 
-\bibitem[Biamonte et~al.(2017)Biamonte, Wittek, Pancotti, Rebentrost, Wiebe,
-  and Lloyd]{biamonte_quantum_2017}
+\bibitem[Biamonte et~al.(2017)Biamonte, Wittek, Pancotti, Rebentrost, Wiebe, and Lloyd]{biamonte_quantum_2017}
 J.~Biamonte, P.~Wittek, N.~Pancotti, et~al.
 \newblock Quantum machine learning.
-\newblock \textit{Nature}, 549\penalty0 (7671):\penalty0 195--202, September
-  2017.
+\newblock \textit{Nature}, 549\penalty0 (7671):\penalty0 195--202, September 2017.
 \newblock ISSN 1476-4687.
 \newblock \doi{10.1038/nature23474}.
-\newblock Bandiera\_abtest: a Cg\_type: Nature Research Journals Number: 7671
-  Primary\_atype: Reviews Subject\_term: Computer science;Quantum
-  information;Quantum simulation Subject\_term\_id:
-  computer-science;quantum-information;quantum-simulation.
+\newblock Bandiera\_abtest: a Cg\_type: Nature Research Journals Number: 7671 Primary\_atype: Reviews Subject\_term: Computer science;Quantum information;Quantum simulation Subject\_term\_id: computer-science;quantum-information;quantum-simulation.
 
-\bibitem[Blanchet et~al.(2025)Blanchet, Squillante, Szegedy, and
-  Wang]{blanchet_connecting_2025}
+\bibitem[Blanchet et~al.(2025)Blanchet, Squillante, Szegedy, and Wang]{blanchet_connecting_2025}
 J.~Blanchet, M.~S. Squillante, M.~Szegedy, and G.~Wang.
-\newblock Connecting {Quantum} {Computing} with {Classical} {Stochastic}
-  {Simulation}, September 2025.
+\newblock Connecting {Quantum} {Computing} with {Classical} {Stochastic} {Simulation}, September 2025.
 \newblock arXiv:2509.18614 [quant-ph].
 
 \bibitem[Born(1926)]{born_zur_1926}
 M.~Born.
 \newblock Zur Quantenmechanik der Sto{\ss}vorg\"ange.
-\newblock \textit{Zeitschrift f\"ur Physik}, 37\penalty0 (12):\penalty0
-  863--867, 1926.
+\newblock \textit{Zeitschrift f\"ur Physik}, 37\penalty0 (12):\penalty0 863--867, 1926.
 \newblock \doi{10.1007/BF01397477}.
 
 \bibitem[Bunescu and Vartei(2024)]{bunescu_modern_2024}
 L.~Bunescu and A.~M. Vartei.
-\newblock Modern finance through quantum computing—{A} systematic literature
-  review.
+\newblock Modern finance through quantum computing—{A} systematic literature review.
 \newblock \textit{PLOS ONE}, 19\penalty0 (7):\penalty0 e0304317, July 2024.
 \newblock ISSN 1932-6203.
 \newblock \doi{10.1371/journal.pone.0304317}.
@@ -106,64 +85,48 @@ L.~Bunescu and A.~M. Vartei.
 \bibitem[Calderbank and Shor(1996)]{calderbank_good_1996}
 A.~R. Calderbank and P.~W. Shor.
 \newblock Good Quantum Error-Correcting Codes Exist.
-\newblock \textit{Physical Review A}, 54\penalty0 (2):\penalty0 1098--1105,
-  1996.
+\newblock \textit{Physical Review A}, 54\penalty0 (2):\penalty0 1098--1105, 1996.
 \newblock \doi{10.1103/PhysRevA.54.1098}.
 
-\bibitem[Cerezo et~al.(2021)Cerezo, Arrasmith, Babbush, Benjamin, Endo, Fujii,
-  McClean, Mitarai, Yuan, Cincio, and Coles]{cerezo_variational_2021}
+\bibitem[Cerezo et~al.(2021)Cerezo, Arrasmith, Babbush, Benjamin, Endo, Fujii, McClean, Mitarai, Yuan, Cincio, and Coles]{cerezo_variational_2021}
 M.~Cerezo, A.~Arrasmith, R.~Babbush, et~al.
 \newblock Variational Quantum Algorithms.
-\newblock \textit{Nature Reviews Physics}, 3\penalty0 (9):\penalty0 625--644,
-  2021.
+\newblock \textit{Nature Reviews Physics}, 3\penalty0 (9):\penalty0 625--644, 2021.
 \newblock \doi{10.1038/s42254-021-00348-9}.
 
 \bibitem[Chen et~al.(2025)Chen, Li, and Neufeld]{chen_quantum_2025}
 J.~Chen, Y.~Li, and A.~Neufeld.
-\newblock Quantum {Monte} {Carlo} algorithm for solving {Black}-{Scholes}
-  {PDEs} for high-dimensional option pricing in finance and its complexity
-  analysis, November 2025.
+\newblock Quantum {Monte} {Carlo} algorithm for solving {Black}-{Scholes} {PDEs} for high-dimensional option pricing in finance and its complexity analysis, November 2025.
 \newblock arXiv:2301.09241 [quant-ph].
 
-\bibitem[Chou et~al.(2026)Chou, Lai, Jiang, Kuo, and
-  Kung]{chou_quantum-inspired_2026}
+\bibitem[Chou et~al.(2026)Chou, Lai, Jiang, Kuo, and Kung]{chou_quantum-inspired_2026}
 Y.~H. Chou, Y.~T. Lai, Y.~C. Jiang, et~al.
-\newblock Quantum-inspired {Financial} {Optimization} for {Dynamic} {G7}
-  {Portfolio} {Management} [{Feature}].
-\newblock \textit{IEEE Nanotechnology Magazine}, 20\penalty0 (1):\penalty0
-  22--31, 2026.
+\newblock Quantum-inspired {Financial} {Optimization} for {Dynamic} {G7} {Portfolio} {Management} [{Feature}].
+\newblock \textit{IEEE Nanotechnology Magazine}, 20\penalty0 (1):\penalty0 22--31, 2026.
 \newblock ISSN 1932-4510.
 \newblock \doi{10.1109/MNANO.2025.3638485}.
 
-\bibitem[Ciceri et~al.(2025)Ciceri, Cottrell, Freeland, Fry, Hirai, Intallura,
-  Kang, Lee, Mitra, Ohno, Pemmaraju, Proissl, Quanz, Rajan, Shimada, and
-  Yograj]{ciceri_enhanced_2025}
+\bibitem[Ciceri et~al.(2025)Ciceri, Cottrell, Freeland, Fry, Hirai, Intallura, Kang, Lee, Mitra, Ohno, Pemmaraju, Proissl, Quanz, Rajan, Shimada, and Yograj]{ciceri_enhanced_2025}
 A.~Ciceri, A.~Cottrell, J.~Freeland, et~al.
-\newblock Enhanced fill probability estimates in institutional algorithmic bond
-  trading using statistical learning algorithms with quantum computers,
-  September 2025.
+\newblock Enhanced fill probability estimates in institutional algorithmic bond trading using statistical learning algorithms with quantum computers, September 2025.
 \newblock arXiv:2509.17715 [quant-ph] version: 1.
 
 \bibitem[Cirac and Zoller(1995)]{cirac_quantum_1995}
 J.~I. Cirac and P.~Zoller.
 \newblock Quantum Computations with Cold Trapped Ions.
-\newblock \textit{Physical Review Letters}, 74\penalty0 (20):\penalty0
-  4091--4094, 1995.
+\newblock \textit{Physical Review Letters}, 74\penalty0 (20):\penalty0 4091--4094, 1995.
 \newblock \doi{10.1103/PhysRevLett.74.4091}.
 
 \bibitem[Deutsch(1985)]{deutsch_quantum_1985}
 D.~Deutsch.
-\newblock Quantum Theory, the Church--Turing Principle and the Universal
-  Quantum Computer.
-\newblock \textit{Proceedings of the Royal Society of London. A}, 400\penalty0
-  (1818):\penalty0 97--117, 1985.
+\newblock Quantum Theory, the Church--Turing Principle and the Universal Quantum Computer.
+\newblock \textit{Proceedings of the Royal Society of London. A}, 400\penalty0 (1818):\penalty0 97--117, 1985.
 \newblock \doi{10.1098/rspa.1985.0070}.
 
 \bibitem[Diffie and Hellman(1976)]{diffie_new_1976}
 W.~Diffie and M.~E. Hellman.
 \newblock New Directions in Cryptography.
-\newblock \textit{IEEE Transactions on Information Theory}, 22\penalty0
-  (6):\penalty0 644--654, 1976.
+\newblock \textit{IEEE Transactions on Information Theory}, 22\penalty0 (6):\penalty0 644--654, 1976.
 \newblock \doi{10.1109/TIT.1976.1055638}.
 
 \bibitem[Dirac(1958)]{dirac_principles_1958}
@@ -174,34 +137,28 @@ P.~A.~M. Dirac.
 \bibitem[DiVincenzo(2000)]{divincenzo_physical_2000}
 D.~P. DiVincenzo.
 \newblock The Physical Implementation of Quantum Computation.
-\newblock \textit{Fortschritte der Physik}, 48\penalty0 (9-11):\penalty0
-  771--783, 2000.
+\newblock \textit{Fortschritte der Physik}, 48\penalty0 (9-11):\penalty0 771--783, 2000.
 \newblock \doi{10.1002/1521-3978(200009)48:9/11<771::AID-PROP771>3.0.CO;2-E}.
 
 \bibitem[Dri et~al.(2022)Dri, Giusto, Aita, and Montrucchio]{dri_towards_2022}
 E.~Dri, E.~Giusto, A.~Aita, and B.~Montrucchio.
 \newblock Towards practical {Quantum} {Credit} {Risk} {Analysis}.
-\newblock \textit{Journal of Physics: Conference Series}, 2416\penalty0
-  (1):\penalty0 012002, December 2022.
+\newblock \textit{Journal of Physics: Conference Series}, 2416\penalty0 (1):\penalty0 012002, December 2022.
 \newblock ISSN 1742-6588, 1742-6596.
 \newblock \doi{10.1088/1742-6596/2416/1/012002}.
 \newblock arXiv:2212.07125 [cs].
 
-\bibitem[Egger et~al.(2020)Egger, Gambella, Marecek, McFaddin, Mevissen,
-  Raymond, Simonetto, Woerner, and Yndurain]{egger_quantum_2020}
+\bibitem[Egger et~al.(2020)Egger, Gambella, Marecek, McFaddin, Mevissen, Raymond, Simonetto, Woerner, and Yndurain]{egger_quantum_2020}
 D.~J. Egger, C.~Gambella, J.~Marecek, et~al.
-\newblock Quantum {Computing} for {Finance}: {State} of the {Art} and {Future}
-  {Prospects}.
-\newblock \textit{IEEE Transactions on Quantum Engineering}, 1:\penalty0 1--24,
-  2020.
+\newblock Quantum {Computing} for {Finance}: {State} of the {Art} and {Future} {Prospects}.
+\newblock \textit{IEEE Transactions on Quantum Engineering}, 1:\penalty0 1--24, 2020.
 \newblock ISSN 2689-1808.
 \newblock \doi{10.1109/TQE.2020.3030314}.
 \newblock arXiv:2006.14510 [quant-ph].
 
 \bibitem[Einstein et~al.(1935)Einstein, Podolsky, and Rosen]{einstein_can_1935}
 A.~Einstein, B.~Podolsky, and N.~Rosen.
-\newblock Can Quantum-Mechanical Description of Physical Reality Be Considered
-  Complete?
+\newblock Can Quantum-Mechanical Description of Physical Reality Be Considered Complete?
 \newblock \textit{Physical Review}, 47\penalty0 (10):\penalty0 777--780, 1935.
 \newblock \doi{10.1103/PhysRev.47.777}.
 
@@ -212,48 +169,39 @@ E.~Farhi, J.~Goldstone, and S.~Gutmann.
 \bibitem[Feynman(1982)]{feynman_simulating_1982}
 R.~P. Feynman.
 \newblock Simulating Physics with Computers.
-\newblock \textit{International Journal of Theoretical Physics}, 21\penalty0
-  (6--7):\penalty0 467--488, 1982.
+\newblock \textit{International Journal of Theoretical Physics}, 21\penalty0 (6--7):\penalty0 467--488, 1982.
 \newblock \doi{10.1007/BF02650179}.
 
-\bibitem[Fowler et~al.(2012)Fowler, Mariantoni, Martinis, and
-  Cleland]{fowler_surface_2012}
+\bibitem[Fowler et~al.(2012)Fowler, Mariantoni, Martinis, and Cleland]{fowler_surface_2012}
 A.~G. Fowler, M.~Mariantoni, J.~M. Martinis, and A.~N. Cleland.
 \newblock Surface Codes: Towards Practical Large-Scale Quantum Computation.
 \newblock \textit{Physical Review A}, 86\penalty0 (3):\penalty0 032324, 2012.
 \newblock \doi{10.1103/PhysRevA.86.032324}.
 
-\bibitem[Gong et~al.(2026)Gong, Sedai, Schroeder, and
-  Medda]{gong_quantum_2026-1}
+\bibitem[Gong et~al.(2026)Gong, Sedai, Schroeder, and Medda]{gong_quantum_2026-1}
 H.~Gong, A.~Sedai, T.~Schroeder, and F.~Medda.
-\newblock Quantum {Computing} for {Financial} {Transformation}: {A} {Review} of
-  {Optimisation}, {Pricing}, {Risk}, {Machine} {Learning}, and {Post}-{Quantum}
-  {Security}, April 2026.
+\newblock Quantum {Computing} for {Financial} {Transformation}: {A} {Review} of {Optimisation}, {Pricing}, {Risk}, {Machine} {Learning}, and {Post}-{Quantum} {Security}, April 2026.
 \newblock arXiv:2604.08180 [q-fin].
 
 \bibitem[Grover(1996)]{grover_fast_1996}
 L.~K. Grover.
 \newblock A Fast Quantum Mechanical Algorithm for Database Search.
-\newblock In \textit{Proceedings of the Twenty-Eighth Annual ACM Symposium on
-  Theory of Computing (STOC '96)}, pages 212--219, 1996.
+\newblock In \textit{Proceedings of the Twenty-Eighth Annual ACM Symposium on Theory of Computing (STOC '96)}, pages 212--219, 1996.
 \newblock \doi{10.1145/237814.237866}.
 
 \bibitem[Harrow et~al.(2009)Harrow, Hassidim, and Lloyd]{harrow_quantum_2009}
 A.~W. Harrow, A.~Hassidim, and S.~Lloyd.
 \newblock Quantum Algorithm for Linear Systems of Equations.
-\newblock \textit{Physical Review Letters}, 103\penalty0 (15):\penalty0 150502,
-  2009.
+\newblock \textit{Physical Review Letters}, 103\penalty0 (15):\penalty0 150502, 2009.
 \newblock \doi{10.1103/PhysRevLett.103.150502}.
 
-\bibitem[Herman et~al.(2022)Herman, Googin, Liu, Galda, Safro, Sun, Pistoia,
-  and Alexeev]{herman_survey_2022}
+\bibitem[Herman et~al.(2022)Herman, Googin, Liu, Galda, Safro, Sun, Pistoia, and Alexeev]{herman_survey_2022}
 D.~Herman, C.~Googin, X.~Liu, et~al.
 \newblock A {Survey} of {Quantum} {Computing} for {Finance}.
 \newblock January 2022.
 \newblock \_eprint: 2201.02773.
 
-\bibitem[Herman et~al.(2023)Herman, Googin, Liu, Sun, Galda, Safro, Pistoia,
-  and Alexeev]{herman_quantum_2023}
+\bibitem[Herman et~al.(2023)Herman, Googin, Liu, Sun, Galda, Safro, Pistoia, and Alexeev]{herman_quantum_2023}
 D.~Herman, C.~Googin, X.~Liu, et~al.
 \newblock Quantum computing for finance.
 \newblock \textit{Nature Reviews Physics}, 5\penalty0 (8), July 2023.
@@ -262,10 +210,7 @@ D.~Herman, C.~Googin, X.~Liu, et~al.
 
 \bibitem[Huang()]{huang_nus-frontiers--fintech-and-quantum-computing-2022part_nodate}
 J.~Huang.
-\newblock {NUS}-{Frontiers}-in-{Fintech}-and-{Quantum}-{Computing}-2022/{Part}
-  2 {Quantum} {Finance}/{Part} 2 {Quantum} {Finance} - {Hands}-on.ipynb at main
-  ·
-  {HuangJunye}/{NUS}-{Frontiers}-in-{Fintech}-and-{Quantum}-{Computing}-2022.
+\newblock {NUS}-{Frontiers}-in-{Fintech}-and-{Quantum}-{Computing}-2022/{Part} 2 {Quantum} {Finance}/{Part} 2 {Quantum} {Finance} - {Hands}-on.ipynb at main · {HuangJunye}/{NUS}-{Frontiers}-in-{Fintech}-and-{Quantum}-{Computing}-2022.
 
 \bibitem[{IBM Quantum}(2023)]{ibm_quantum_2023}
 {IBM Quantum}.
@@ -278,8 +223,7 @@ B.~E. Kane.
 \newblock \textit{Nature}, 393\penalty0 (6681):\penalty0 133--137, 1998.
 \newblock \doi{10.1038/30156}.
 
-\bibitem[Kim et~al.(2023)Kim, Eddins, Anand, Wei, van~den Berg, Rosenblatt,
-  Nayfeh, Wu, Zaletel, Temme, and Kandala]{kim_evidence_2023}
+\bibitem[Kim et~al.(2023)Kim, Eddins, Anand, Wei, van~den Berg, Rosenblatt, Nayfeh, Wu, Zaletel, Temme, and Kandala]{kim_evidence_2023}
 Y.~Kim, A.~Eddins, S.~Anand, et~al.
 \newblock Evidence for the utility of quantum computing before fault tolerance.
 \newblock \textit{Nature}, 618\penalty0 (7965):\penalty0 500--505, 2023.
@@ -294,12 +238,10 @@ A.~Y. Kitaev.
 \bibitem[Koblitz(1987)]{koblitz_elliptic_1987}
 N.~Koblitz.
 \newblock Elliptic Curve Cryptosystems.
-\newblock \textit{Mathematics of Computation}, 48\penalty0 (177):\penalty0
-  203--209, 1987.
+\newblock \textit{Mathematics of Computation}, 48\penalty0 (177):\penalty0 203--209, 1987.
 \newblock \doi{10.1090/S0025-5718-1987-0866109-5}.
 
-\bibitem[Koch et~al.(2007)Koch, Yu, Gambetta, Houck, Schuster, Majer, Blais,
-  Devoret, Girvin, and Schoelkopf]{koch_charge-insensitive_2007}
+\bibitem[Koch et~al.(2007)Koch, Yu, Gambetta, Houck, Schuster, Majer, Blais, Devoret, Girvin, and Schoelkopf]{koch_charge-insensitive_2007}
 J.~Koch, T.~M. Yu, J.~Gambetta, et~al.
 \newblock Charge-Insensitive Qubit Design Derived from the Cooper Pair Box.
 \newblock \textit{Physical Review A}, 76\penalty0 (4):\penalty0 042319, 2007.
@@ -308,12 +250,10 @@ J.~Koch, T.~M. Yu, J.~Gambetta, et~al.
 \bibitem[Landauer(1961)]{landauer_irreversibility_1961}
 R.~Landauer.
 \newblock Irreversibility and Heat Generation in the Computing Process.
-\newblock \textit{IBM Journal of Research and Development}, 5\penalty0
-  (3):\penalty0 183--191, 1961.
+\newblock \textit{IBM Journal of Research and Development}, 5\penalty0 (3):\penalty0 183--191, 1961.
 \newblock \doi{10.1147/rd.53.0183}.
 
-\bibitem[Lenstra et~al.(1993)Lenstra, Lenstra, Manasse, and
-  Pollard]{lenstra_factoring_1993}
+\bibitem[Lenstra et~al.(1993)Lenstra, Lenstra, Manasse, and Pollard]{lenstra_factoring_1993}
 A.~K. Lenstra, H.~W. Lenstra, M.~S. Manasse, and J.~M. Pollard.
 \newblock The Number Field Sieve.
 \newblock pages 11--42, 1993.
@@ -325,49 +265,39 @@ D.~Loss and D.~P. DiVincenzo.
 \newblock \textit{Physical Review A}, 57\penalty0 (1):\penalty0 120--126, 1998.
 \newblock \doi{10.1103/PhysRevA.57.120}.
 
-\bibitem[Martin et~al.(2021)Martin, Candelas, Rodriguez-Rozas,
-  Martín-Guerrero, Chen, Lamata, Orus, Solano, and Sanz]{martin_toward_2021}
+\bibitem[Martin et~al.(2021)Martin, Candelas, Rodriguez-Rozas, Martín-Guerrero, Chen, Lamata, Orus, Solano, and Sanz]{martin_toward_2021}
 A.~Martin, B.~Candelas, A.~Rodriguez-Rozas, et~al.
 \newblock Toward pricing financial derivatives with an {IBM} quantum computer.
-\newblock \textit{Physical Review Research}, 3\penalty0 (1):\penalty0 013167,
-  February 2021.
+\newblock \textit{Physical Review Research}, 3\penalty0 (1):\penalty0 013167, February 2021.
 \newblock \doi{10.1103/PhysRevResearch.3.013167}.
 
 \bibitem[Matsakos and Nield(2024)]{matsakos_quantum_2024}
 T.~Matsakos and S.~Nield.
-\newblock Quantum {Monte} {Carlo} simulations for financial risk analytics:
-  scenario generation for equity, rate, and credit risk factors.
+\newblock Quantum {Monte} {Carlo} simulations for financial risk analytics: scenario generation for equity, rate, and credit risk factors.
 \newblock \textit{Quantum}, 8:\penalty0 1306, April 2024.
 \newblock \doi{10.22331/q-2024-04-04-1306}.
 
 \bibitem[Miller(1986)]{miller_use_1986}
 V.~S. Miller.
 \newblock Use of Elliptic Curves in Cryptography.
-\newblock In \textit{Advances in Cryptology --- CRYPTO '85 Proceedings}, pages
-  417--426. Springer, 1986.
+\newblock In \textit{Advances in Cryptology --- CRYPTO '85 Proceedings}, pages 417--426. Springer, 1986.
 \newblock \doi{10.1007/3-540-39799-X_31}.
 
-\bibitem[Morapakula et~al.(2026)Morapakula, Deshpande, Yata, Ubale, Wad, and
-  Ikeda]{morapakula_end--end_2026}
+\bibitem[Morapakula et~al.(2026)Morapakula, Deshpande, Yata, Ubale, Wad, and Ikeda]{morapakula_end--end_2026}
 S.~N. Morapakula, S.~Deshpande, R.~Yata, et~al.
-\newblock End-to-{End} {Portfolio} {Optimization} with {Hybrid} {Quantum}
-  {Annealing}.
-\newblock \textit{Advanced Quantum Technologies}, 9\penalty0 (4):\penalty0
-  e00753, 2026.
+\newblock End-to-{End} {Portfolio} {Optimization} with {Hybrid} {Quantum} {Annealing}.
+\newblock \textit{Advanced Quantum Technologies}, 9\penalty0 (4):\penalty0 e00753, 2026.
 \newblock \doi{https://doi.org/10.1002/qute.202500753}.
-\newblock \_eprint:
-  https://advanced.onlinelibrary.wiley.com/doi/pdf/10.1002/qute.202500753.
+\newblock \_eprint: https://advanced.onlinelibrary.wiley.com/doi/pdf/10.1002/qute.202500753.
 
-\bibitem[{National Institute of Standards and
-  Technology}(2024)]{nist_fips203_2024}
+\bibitem[{National Institute of Standards and Technology}(2024)]{nist_fips203_2024}
 {National Institute of Standards and Technology}.
 \newblock Module-Lattice-Based Key-Encapsulation Mechanism Standard.
 \newblock NIST FIPS 203, 2024.
 
 \bibitem[Nielsen and Chuang(2010)]{nielsen_quantum_2010}
 M.~A. Nielsen and I.~L. Chuang.
-\newblock \textit{Quantum Computation and Quantum Information: 10th Anniversary
-  Edition}.
+\newblock \textit{Quantum Computation and Quantum Information: 10th Anniversary Edition}.
 \newblock Cambridge University Press, 2010.
 \newblock ISBN 978-1-107-00217-3.
 
@@ -378,15 +308,12 @@ R.~Orús, S.~Mugel, and E.~Lizaso.
 \newblock ISSN 24054283.
 \newblock \doi{10.1016/j.revip.2019.100028}.
 
-\bibitem[Pathak et~al.(2025)Pathak, Tarakeshwar, Ali, Devendrababu, and
-  Ganesan]{pathak_evolution_2025}
+\bibitem[Pathak et~al.(2025)Pathak, Tarakeshwar, Ali, Devendrababu, and Ganesan]{pathak_evolution_2025}
 P.~Pathak, K.~Tarakeshwar, S.~S. Ali, et~al.
-\newblock The {Evolution} of {IBM}'s {Quantum} {Information} {Software} {Kit}
-  ({Qiskit}): {A} {Review} of its {Applications}, August 2025.
+\newblock The {Evolution} of {IBM}'s {Quantum} {Information} {Software} {Kit} ({Qiskit}): {A} {Review} of its {Applications}, August 2025.
 \newblock arXiv:2508.12245 [quant-ph].
 
-\bibitem[Peruzzo et~al.(2014)Peruzzo, McClean, Shadbolt, Yung, Zhou, Love,
-  Aspuru-Guzik, and O'Brien]{peruzzo_variational_2014}
+\bibitem[Peruzzo et~al.(2014)Peruzzo, McClean, Shadbolt, Yung, Zhou, Love, Aspuru-Guzik, and O'Brien]{peruzzo_variational_2014}
 A.~Peruzzo, J.~McClean, P.~Shadbolt, et~al.
 \newblock A Variational Eigenvalue Solver on a Photonic Quantum Processor.
 \newblock \textit{Nature Communications}, 5\penalty0 (1):\penalty0 4213, 2014.
@@ -395,8 +322,7 @@ A.~Peruzzo, J.~McClean, P.~Shadbolt, et~al.
 \bibitem[Pollard(1975)]{pollard_monte_1975}
 J.~M. Pollard.
 \newblock A Monte Carlo Method for Factorization.
-\newblock \textit{BIT Numerical Mathematics}, 15\penalty0 (3):\penalty0
-  331--334, 1975.
+\newblock \textit{BIT Numerical Mathematics}, 15\penalty0 (3):\penalty0 331--334, 1975.
 \newblock \doi{10.1007/BF01933667}.
 
 \bibitem[Preskill(2018)]{preskill_quantum_2018}
@@ -409,22 +335,18 @@ J.~Preskill.
 
 \bibitem[Rivest et~al.(1978)Rivest, Shamir, and Adleman]{rivest_method_1978}
 R.~L. Rivest, A.~Shamir, and L.~Adleman.
-\newblock A Method for Obtaining Digital Signatures and Public-Key
-  Cryptosystems.
-\newblock \textit{Communications of the ACM}, 21\penalty0 (2):\penalty0
-  120--126, 1978.
+\newblock A Method for Obtaining Digital Signatures and Public-Key Cryptosystems.
+\newblock \textit{Communications of the ACM}, 21\penalty0 (2):\penalty0 120--126, 1978.
 \newblock \doi{10.1145/359340.359342}.
 
 \bibitem[Samal(2024)]{samal_quantum_2024}
 B.~V. Samal.
-\newblock Quantum {Computing} for {Finance}: {In}-{Depth} {Overview} and
-  {Bayesian} {Prospects}, October 2024.
+\newblock Quantum {Computing} for {Finance}: {In}-{Depth} {Overview} and {Bayesian} {Prospects}, October 2024.
 
 \bibitem[Schaden(2002)]{schaden_quantum_2002}
 M.~Schaden.
 \newblock Quantum finance.
-\newblock \textit{Physica A: Statistical Mechanics and its Applications},
-  316\penalty0 (1):\penalty0 511--538, December 2002.
+\newblock \textit{Physica A: Statistical Mechanics and its Applications}, 316\penalty0 (1):\penalty0 511--538, December 2002.
 \newblock ISSN 0378-4371.
 \newblock \doi{10.1016/S0378-4371(02)01200-1}.
 
@@ -437,15 +359,13 @@ E.~Schr\"odinger.
 \bibitem[Shannon(1948)]{shannon_mathematical_1948}
 C.~E. Shannon.
 \newblock A Mathematical Theory of Communication.
-\newblock \textit{Bell System Technical Journal}, 27\penalty0 (3):\penalty0
-  379--423, 1948.
+\newblock \textit{Bell System Technical Journal}, 27\penalty0 (3):\penalty0 379--423, 1948.
 \newblock \doi{10.1002/j.1538-7305.1948.tb01338.x}.
 
 \bibitem[Shor(1995)]{shor_scheme_1995}
 P.~W. Shor.
 \newblock Scheme for Reducing Decoherence in Quantum Computer Memory.
-\newblock \textit{Physical Review A}, 52\penalty0 (4):\penalty0 R2493--R2496,
-  1995.
+\newblock \textit{Physical Review A}, 52\penalty0 (4):\penalty0 R2493--R2496, 1995.
 \newblock \doi{10.1103/PhysRevA.52.R2493}.
 
 \bibitem[Shor(1996)]{shor_fault-tolerant_1996}
@@ -456,24 +376,19 @@ P.~W. Shor.
 
 \bibitem[Shor(1997)]{shor_polynomial_1997}
 P.~W. Shor.
-\newblock Polynomial-Time Algorithms for Prime Factorization and Discrete
-  Logarithms on a Quantum Computer.
-\newblock \textit{SIAM Journal on Computing}, 26\penalty0 (5):\penalty0
-  1484--1509, 1997.
+\newblock Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer.
+\newblock \textit{SIAM Journal on Computing}, 26\penalty0 (5):\penalty0 1484--1509, 1997.
 \newblock \doi{10.1137/S0097539795293172}.
 
 \bibitem[Soller()]{soller_quantum_nodate-1}
 H.~Soller.
-\newblock Quantum computing in finance: {Redefining} banking {\textbar}
-  {McKinsey}.
+\newblock Quantum computing in finance: {Redefining} banking {\textbar} {McKinsey}.
 
 \bibitem[Soller et~al.()Soller, Smit, and Heid]{soller_quantum_nodate}
 H.~Soller, S.~Smit, and A.~Heid.
-\newblock Quantum computing business applications and benefits {\textbar}
-  {McKinsey}.
+\newblock Quantum computing business applications and benefits {\textbar} {McKinsey}.
 
-\bibitem[Stamatopoulos et~al.(2020)Stamatopoulos, Egger, Sun, Zoufal, Iten,
-  Shen, and Woerner]{stamatopoulos_option_2020}
+\bibitem[Stamatopoulos et~al.(2020)Stamatopoulos, Egger, Sun, Zoufal, Iten, Shen, and Woerner]{stamatopoulos_option_2020}
 N.~Stamatopoulos, D.~J. Egger, Y.~Sun, et~al.
 \newblock Option {Pricing} using {Quantum} {Computers}.
 \newblock \textit{Quantum}, 4:\penalty0 291, July 2020.
@@ -482,65 +397,51 @@ N.~Stamatopoulos, D.~J. Egger, Y.~Sun, et~al.
 \bibitem[Steane(1996)]{steane_error_1996}
 A.~M. Steane.
 \newblock Error Correcting Codes in Quantum Theory.
-\newblock \textit{Physical Review Letters}, 77\penalty0 (5):\penalty0 793--797,
-  1996.
+\newblock \textit{Physical Review Letters}, 77\penalty0 (5):\penalty0 793--797, 1996.
 \newblock \doi{10.1103/PhysRevLett.77.793}.
 
 \bibitem[Temme et~al.(2017)Temme, Bravyi, and Gambetta]{temme_error_2017}
 K.~Temme, S.~Bravyi, and J.~M. Gambetta.
 \newblock Error Mitigation for Short-Depth Quantum Circuits.
-\newblock \textit{Physical Review Letters}, 119\penalty0 (18):\penalty0 180509,
-  2017.
+\newblock \textit{Physical Review Letters}, 119\penalty0 (18):\penalty0 180509, 2017.
 \newblock \doi{10.1103/PhysRevLett.119.180509}.
 
-\bibitem[Thomassin et~al.(2025)Thomassin, Guerard, Djebali, and
-  Lambert]{thomassin_quantum_2025}
+\bibitem[Thomassin et~al.(2025)Thomassin, Guerard, Djebali, and Lambert]{thomassin_quantum_2025}
 P.~Thomassin, G.~Guerard, S.~Djebali, and V.~M. Lambert.
-\newblock A {Quantum} {Model} for {Constrained} {Markowitz} {Modern}
-  {Portfolio} {Using} {Slack} {Variables} to {Process} {Mixed}-{Binary}
-  {Optimization} under {QAOA}.
-\newblock \textit{Quantum Machine Intelligence}, 7\penalty0 (2):\penalty0 102,
-  December 2025.
+\newblock A {Quantum} {Model} for {Constrained} {Markowitz} {Modern} {Portfolio} {Using} {Slack} {Variables} to {Process} {Mixed}-{Binary} {Optimization} under {QAOA}.
+\newblock \textit{Quantum Machine Intelligence}, 7\penalty0 (2):\penalty0 102, December 2025.
 \newblock ISSN 2524-4906, 2524-4914.
 \newblock \doi{10.1007/s42484-025-00330-z}.
 \newblock arXiv:2601.03278 [math].
 
-\bibitem[Vandersypen et~al.(2001)Vandersypen, Steffen, Breyta, Yannoni,
-  Sherwood, and Chuang]{vandersypen_experimental_2001}
+\bibitem[Vandersypen et~al.(2001)Vandersypen, Steffen, Breyta, Yannoni, Sherwood, and Chuang]{vandersypen_experimental_2001}
 L.~M.~K. Vandersypen, M.~Steffen, G.~Breyta, et~al.
-\newblock Experimental Realization of Shor's Quantum Factoring Algorithm Using
-  Nuclear Magnetic Resonance.
+\newblock Experimental Realization of Shor's Quantum Factoring Algorithm Using Nuclear Magnetic Resonance.
 \newblock \textit{Nature}, 414\penalty0 (6866):\penalty0 883--887, 2001.
 \newblock \doi{10.1038/414883a}.
 
-\bibitem[Zaman et~al.(2024)Zaman, Marchisio, Kashif, and
-  Shafique]{zaman_po-qa_2024}
+\bibitem[Zaman et~al.(2024)Zaman, Marchisio, Kashif, and Shafique]{zaman_po-qa_2024}
 K.~Zaman, A.~Marchisio, M.~Kashif, and M.~Shafique.
-\newblock {PO}-{QA}: {A} {Framework} for {Portfolio} {Optimization} using
-  {Quantum} {Algorithms}, July 2024.
+\newblock {PO}-{QA}: {A} {Framework} for {Portfolio} {Optimization} using {Quantum} {Algorithms}, July 2024.
 \newblock arXiv:2407.19857 [quant-ph].
 
 \bibitem[Zecevic(2022)]{zecevic_quantum_2022}
 A.~Zecevic.
-\newblock \textit{Quantum and {Parallel} {Computing}: {A} {Tale} of {Two}
-  {Paradigms}}.
+\newblock \textit{Quantum and {Parallel} {Computing}: {A} {Tale} of {Two} {Paradigms}}.
 \newblock Independently published, 2022.
 \newblock ISBN 979-8-7885-0405-6.
 
 \bibitem[Zhou(2026)]{zhou_quantum_2026}
 J.~Zhou.
-\newblock Quantum {Finance}: {Exploring} the {Implications} of {Quantum}
-  {Computing} on {Financial} {Models}.
-\newblock \textit{Computational Economics}, 67\penalty0 (2):\penalty0
-  1043--1072, February 2026.
+\newblock Quantum {Finance}: {Exploring} the {Implications} of {Quantum} {Computing} on {Financial} {Models}.
+\newblock \textit{Computational Economics}, 67\penalty0 (2):\penalty0 1043--1072, February 2026.
 \newblock ISSN 1572-9974.
 \newblock \doi{10.1007/s10614-025-10894-4}.
 
 \bibitem[Zurek(2003)]{zurek_decoherence_2003}
 W.~H. Zurek.
 \newblock Decoherence, Einselection, and the Quantum Origins of the Classical.
-\newblock \textit{Reviews of Modern Physics}, 75\penalty0 (3):\penalty0
-  715--775, 2003.
+\newblock \textit{Reviews of Modern Physics}, 75\penalty0 (3):\penalty0 715--775, 2003.
 \newblock \doi{10.1103/RevModPhys.75.715}.
 
 \end{thebibliography}
