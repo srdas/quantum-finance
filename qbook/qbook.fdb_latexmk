@@ -1,21 +1,21 @@
 # Fdb version 4
-["bibtex qbook"] 1779080841.3794 "qbook.aux" "qbook.bbl" "qbook" 1779120591.48427 0
+["bibtex qbook"] 1779080841.3794 "qbook.aux" "qbook.bbl" "qbook" 1779223971.09253 0
   "./Quantum.bib" 1779080773.98288 54660 089a79529e6b96c1a576ee8c14c9eabc ""
   "./Quantum2.bib" 1779080773.98421 15266 50f0e8bde7fec0a2f2b1b2ff3766eaf0 ""
   "./plainnatmodified.bst" 1778830900.77826 27132 d71571a0fd1ec08c950311da1e06a42e ""
-  "qbook.aux" 1779120590.97003 57938 83814aa9f2a374c9ed38ffdf4aef10a6 "pdflatex"
+  "qbook.aux" 1779223970.48279 57938 83814aa9f2a374c9ed38ffdf4aef10a6 "pdflatex"
   (generated)
   "qbook.bbl"
   "qbook.blg"
   (rewritten before read)
-["makeindex qbook.idx"] 1779040771 "qbook.idx" "qbook.ind" "qbook" 1779120591.4834 0
-  "qbook.idx" 1779120590.82922 6905 5cdaf98f224a8d0e196c8ca04bf60dec "pdflatex"
+["makeindex qbook.idx"] 1779040771 "qbook.idx" "qbook.ind" "qbook" 1779223971.08895 0
+  "qbook.idx" 1779223970.35608 6905 5cdaf98f224a8d0e196c8ca04bf60dec "pdflatex"
   (generated)
   "qbook.ilg"
   "qbook.ind"
   (rewritten before read)
-["pdflatex"] 1779120588.3517 "/Users/sanjivda/CODE/quantum-finance/qbook/qbook.tex" "qbook.pdf" "qbook" 1779120591.48505 0
-  "/Users/sanjivda/CODE/quantum-finance/qbook/qbook.tex" 1779120588.10997 4670 8649a6498e43e0b6767f14b5d1d26eb0 ""
+["pdflatex"] 1779223967.67871 "/Users/sanjivda/CODE/quantum-finance/qbook/qbook.tex" "qbook.pdf" "qbook" 1779223971.09393 0
+  "/Users/sanjivda/CODE/quantum-finance/qbook/qbook.tex" 1779223967.41767 4748 033ff0c5f4417c3a280ea25d2690b5b2 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/libertine/lbtn_dhi6qf.enc" 1558472472 2914 3d1e3c4123f03ab27df5767d5039d109 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/libertine/lbtn_hj4mhx.enc" 1490131464 3054 2e6125dc18a1bec951174c2ecee703d1 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/libertine/lbtn_mx3chd.enc" 1490131464 3057 2f14f1ecfbef401b977e47f02374cd95 ""
@@ -371,14 +371,14 @@
   "layout.tex" 1779080773.99922 17939 7644cb925c63b89c5e7add94fcea54ce ""
   "math.tex" 1779080774.00034 27453 5b1e6360a5de9ae953346dc63f579edd ""
   "nisq.tex" 1779080774.00127 12276 9714c4187ff2797efc2fbc938e218477 ""
-  "qbook.aux" 1779120590.97003 57938 83814aa9f2a374c9ed38ffdf4aef10a6 "pdflatex"
+  "qbook.aux" 1779223970.48279 57938 83814aa9f2a374c9ed38ffdf4aef10a6 "pdflatex"
   "qbook.bbl" 1779080841.55399 22483 001b310b4aaa4375ecdcc926296182c8 "bibtex qbook"
-  "qbook.brf" 1779120590.97585 12260 9a7156611662b6f2454ae7d4f9f7d23c "pdflatex"
-  "qbook.ind" 1779120590.95087 6286 18bde6180d8fdbb20c5f4944d7ae61ee "makeindex qbook.idx"
-  "qbook.lof" 1779120590.97701 360 c813ce7030be006f5b3cf38c9fb94ce9 "pdflatex"
-  "qbook.out" 1779120590.97478 42479 52e4574527b906217532a03c6110bddd "pdflatex"
-  "qbook.tex" 1779120588.10997 4670 8649a6498e43e0b6767f14b5d1d26eb0 ""
-  "qbook.toc" 1779120590.97698 18439 0d39dbe38225118270f7879646941e40 "pdflatex"
+  "qbook.brf" 1779223970.48816 12260 9a7156611662b6f2454ae7d4f9f7d23c "pdflatex"
+  "qbook.ind" 1779223970.46533 6286 18bde6180d8fdbb20c5f4944d7ae61ee "makeindex qbook.idx"
+  "qbook.lof" 1779223970.48906 360 c813ce7030be006f5b3cf38c9fb94ce9 "pdflatex"
+  "qbook.out" 1779223970.48724 42479 52e4574527b906217532a03c6110bddd "pdflatex"
+  "qbook.tex" 1779223967.41767 4748 033ff0c5f4417c3a280ea25d2690b5b2 ""
+  "qbook.toc" 1779223970.48903 18439 0d39dbe38225118270f7879646941e40 "pdflatex"
   "qiskit.tex" 1779080774.04573 13437 8b9e17e5f3fb5ae38d867142c4d5adba ""
   "quantum_computing.tex" 1779080774.04675 11789 3f2b719f4b60391c872ba3e2cfb254db ""
   "quantum_hardware.tex" 1779080774.04823 13034 3845bf06372eacd32b71ee42a3c5c19d ""

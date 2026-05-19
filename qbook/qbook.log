@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.22)  18 MAY 2026 09:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.22)  19 MAY 2026 13:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1321,14 +1321,14 @@ Package pgfplots notification 'compat/show suggested version=true': document has
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TOsF/m/n' will be
 (Font)              scaled to size 20.74pt on input line 59.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TOsF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 82.
+(Font)              scaled to size 9.0pt on input line 84.
 [1
 
 {/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/libertine/lbtn_v2xmgd.enc}]
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TOsF/m/it' will be
-(Font)              scaled to size 10.95pt on input line 95.
+(Font)              scaled to size 10.95pt on input line 97.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TOsF/m/it' will be
-(Font)              scaled to size 24.88pt on input line 95.
+(Font)              scaled to size 24.88pt on input line 97.
  (./qbook.toc
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TOsF/b/n' will be
 (Font)              scaled to size 10.95pt on input line 1.
@@ -1777,7 +1777,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  122i,12n,124p,1122b,794s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2026/texmf-dist/fonts/type1/public/libertine/LinBiolinumTI.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/libertine/LinLibertineMT.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/libertine/LinLibertineMTO.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/libertine/LinLibertineT.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/libertine/LinLibertineTB.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/libertine/LinLibertineTI.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/stix/stix-mathscr.pfb>
-Output written on qbook.pdf (239 pages, 1059183 bytes).
+Output written on qbook.pdf (239 pages, 1059281 bytes).
 PDF statistics:
  3323 PDF objects out of 3580 (max. 8388607)
  3010 compressed objects within 31 object streams
